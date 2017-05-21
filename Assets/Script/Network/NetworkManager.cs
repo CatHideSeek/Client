@@ -221,7 +221,11 @@ public class NetworkManager : MonoBehaviour
         enterRoom.userList.Add(user);
 
         if (name == playerData.my.name)
+        {
             user.isPlayer = true;
+            playerData.my.name = name;
+            playerData.my.socketID = socketID;
+        }
 
         GameObject g = Instantiate(GameManager.instance.playerObject);
         g.GetComponent<PlayerController>().SetUser(user);
@@ -377,8 +381,6 @@ public class NetworkManager : MonoBehaviour
         json.AddField("y", pos.y);
         json.AddField("z", pos.z);
 
-        print("sendPos");
-
         socket.Emit("move", json);
     }
 
@@ -420,8 +422,6 @@ public class NetworkManager : MonoBehaviour
         json.AddField("y", rot.y);
         json.AddField("z", rot.z);
         json.AddField("w", rot.w);
-
-        print("sendRot");
 
         socket.Emit("rotate", json);
     }

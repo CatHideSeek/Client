@@ -101,7 +101,6 @@ public class PlayerController : MonoBehaviour
 
         CheckPosition();
         CheckRotation();
-
     }
 
     public void CheckPosition() {
