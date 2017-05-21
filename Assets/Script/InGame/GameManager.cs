@@ -10,9 +10,13 @@ public class GameManager : MonoBehaviour {
     public float currentTime = 150f;
 
     public bool isPlay = false;
+    public bool isPortalSet = false;
     public bool isEnd = false;
 
-    public GameObject player;
+    public GameObject playerObject, portalObject;
+    public Transform map;
+
+    public PortalController portal;
 
     void Awake() {
         instance = this;
@@ -33,7 +37,12 @@ public class GameManager : MonoBehaviour {
 
     void Timer() {
         currentTime -= Time.deltaTime;
-        if (isEnd == false && currentTime < 0)
+        if (!isPortalSet && currentTime < 75f) {
+            //GameObject g = Instantiate(portal,map);
+            portalObject.SetActive(true);
+        }
+
+        if (!isEnd && currentTime < 0)
         {
             isEnd = true;
             currentTime = 0;

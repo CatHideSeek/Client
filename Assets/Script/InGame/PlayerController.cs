@@ -160,6 +160,17 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    void OnTriggerStay(Collider col) {
+        if (Input.GetKeyDown(KeyCode.Space) && col.CompareTag("Portal")) {
+            if (GameManager.instance.portal.isOpen) {
+                print("탈출");
+            }
+            else {
+                print("열쇠를 사용하여 오픈");
+            }
+        }
+    }
+
     void OnTriggerExit(Collider col) {
         if (col.CompareTag("Hide"))
         {

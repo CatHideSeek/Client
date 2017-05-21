@@ -32,7 +32,7 @@ public class NetworkManager : MonoBehaviour
     /// 입장한 방 정보
     /// </summary>
     [SerializeField]
-    Room enterRoom;
+    Room enterRoom = new Room();
 
     void Awake()
     {
@@ -61,18 +61,18 @@ public class NetworkManager : MonoBehaviour
         socket.On("roomList", OnRoomList);
         socket.On("userList", OnUserList);
 
-        socket.On("roomCreate", OnRoomCreate);
-        socket.On("roomJoin", OnRoomJoin);
-        socket.On("roomStart", OnRoomStart);
-        socket.On("roomDelet", OnRoomDelet);
+        socket.On("lobbyCreate", OnRoomCreate);
+        socket.On("lobbyJoin", OnRoomJoin);
+        socket.On("lobbyStart", OnRoomStart);
+        socket.On("lobbyDelet", OnRoomDelet);
 
         
-        socket.On("enter", OnEnter);
-        socket.On("join", OnJoin);
-        socket.On("ready", OnReady);
-        socket.On("start", OnStart);
-        socket.On("exit", OnExit);
-        socket.On("out", OnOut);
+        socket.On("roomEnter", OnEnter);
+        socket.On("roomJoin", OnJoin);
+        socket.On("roomReady", OnReady);
+        socket.On("roomStart", OnStart);
+        socket.On("roomExit", OnExit);
+        socket.On("roomOut", OnOut);
         #endregion
 
         #region ReceivePlayerData
@@ -86,24 +86,24 @@ public class NetworkManager : MonoBehaviour
         #endregion
 
         #region ReceiveInGameData
-        socket.On("portal", OnPortal);
-        socket.On("open", OnOpen);
-        socket.On("close", OnClose);
+        socket.On("portalCreate", OnPortal);
+        socket.On("portalOpen", OnOpen);
+        socket.On("portalClose", OnClose);
         #endregion
 
         #region etc
         socket.On("chat", OnChat);
         #endregion
-
-        enterRoom = new Room();
-
+        
         StartCoroutine("test");
     }
 
     IEnumerator test()
     {
         yield return new WaitForSeconds(0.5f);
-        SendJoin(enterRoom);
+        SendEnter(enterRoom.id + enterRoom.name);
+        yield return new WaitForSeconds(0.5f);
+        SendJoin();
     }
 
     #region RoomMethod
@@ -185,7 +185,7 @@ public class NetworkManager : MonoBehaviour
         json.AddField("roomName", name);
         json.AddField("maxPlayers", maxPlayers);
 
-        socket.Emit("create", json);
+        socket.Emit("roomCreate", json);
     }
 
     public void OnEnter(SocketIOEvent e)
@@ -196,7 +196,7 @@ public class NetworkManager : MonoBehaviour
         bool.TryParse(json.GetField("isHost").str, out playerData.my.isHost);
 
         //입장한 방 세팅
-        enterRoom = FindRoom(name);
+        //enterRoom = FindRoom(name);
         //씬 이동
         //씬 ~ 이 ~ 동 ~ 코 ~ 드 ~
 
@@ -206,8 +206,8 @@ public class NetworkManager : MonoBehaviour
     {
         JSONObject json = new JSONObject(JSONObject.Type.OBJECT);
         json.AddField("roomName", name);
-
-        socket.Emit("enter", json);
+        print(name);
+        socket.Emit("roomEnter", json);
     }
 
     public void OnJoin(SocketIOEvent e)
@@ -223,13 +223,14 @@ public class NetworkManager : MonoBehaviour
         if (name == playerData.my.name)
             user.isPlayer = true;
 
-        GameObject g = Instantiate(GameManager.instance.player);
+        GameObject g = Instantiate(GameManager.instance.playerObject);
         g.GetComponent<PlayerController>().SetUser(user);
         g.name = user.name;
 
+        print("asd");
     }
 
-    public void SendJoin(Room room)
+    public void SendJoin()
     {
         JSONObject json = new JSONObject(JSONObject.Type.OBJECT);
 
@@ -239,24 +240,28 @@ public class NetworkManager : MonoBehaviour
         json.AddField("isHost", playerData.my.isHost);
         json.AddField("characterKind", playerData.my.characterKind);
 
-        socket.Emit("join", json);
+        socket.Emit("roomJoin", json);
     }
 
     public void OnUserList(SocketIOEvent e)
     {
         LitJson.JsonData json = LitJson.JsonMapper.ToObject(e.data.ToString());
 
+        print(json["userList"].Count);
+
         for (int i = 0; i < json["userList"].Count; ++i)
         {
             User user = new User();
-
+            
             user.socketID = json["userList"][i]["socketID"].ToString();
             user.name = json["userList"][i]["name"].ToString();
+
+            print(enterRoom);
 
             if (playerData.my.name != user.name)
             {
                 enterRoom.userList.Add(user);
-                GameObject g = Instantiate(GameManager.instance.player);
+                GameObject g = Instantiate(GameManager.instance.playerObject);
                 g.GetComponent<PlayerController>().SetUser(user);
                 g.name = user.name;
             }
@@ -283,7 +288,7 @@ public class NetworkManager : MonoBehaviour
 
         json.AddField("isReady", isReady);
 
-        socket.Emit("ready", json);
+        socket.Emit("roomReady", json);
 
     }
 
@@ -303,7 +308,7 @@ public class NetworkManager : MonoBehaviour
 
         json.AddField("a", 0);
 
-        socket.Emit("start", json);
+        socket.Emit("roomStart", json);
 
     }
 
@@ -328,7 +333,7 @@ public class NetworkManager : MonoBehaviour
 
         json.AddField("a", 0);
 
-        socket.Emit("exit", json);
+        socket.Emit("roomExit", json);
 
     }
     #endregion
@@ -568,7 +573,7 @@ public class NetworkManager : MonoBehaviour
         json.AddField("y", pos.y);
         json.AddField("z", pos.z);
 
-        socket.Emit("portal", json);
+        socket.Emit("portalCreate", json);
     }
 
     public void OnOpen(SocketIOEvent e)
@@ -584,7 +589,7 @@ public class NetworkManager : MonoBehaviour
         JSONObject json = new JSONObject(JSONObject.Type.OBJECT);
         json.AddField("name", name);
 
-        socket.Emit("open", json);
+        socket.Emit("portalOpen", json);
     }
 
     public void OnClose(SocketIOEvent e)
@@ -599,7 +604,7 @@ public class NetworkManager : MonoBehaviour
         JSONObject json = new JSONObject(JSONObject.Type.OBJECT);
         json.AddField("a", 0);
 
-        socket.Emit("close", json);
+        socket.Emit("portalClose", json);
 
     }
 

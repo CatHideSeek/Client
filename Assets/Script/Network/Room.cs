@@ -21,6 +21,7 @@ public class Room
         this.id = 0;
         this.name = "Test";
         this.maxPlayers = 2;
+        this.userList = new List<User>();
     }
 
     public Room(int id, string name, int fullPlayer)
@@ -28,6 +29,7 @@ public class Room
         this.id = id;
         this.name = name;
         this.maxPlayers = fullPlayer;
+        this.userList = new List<User>();
     }
 
     public User FindUserByName(string name)
