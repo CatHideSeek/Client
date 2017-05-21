@@ -103,7 +103,8 @@ public class PlayerController : MonoBehaviour
         CheckRotation();
     }
 
-    public void CheckPosition() {
+    public void CheckPosition()
+    {
         //이동 하였는지 체크 합니다.
         if (oldPos != tr.position)
         {
@@ -113,7 +114,8 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    public void CheckRotation() {
+    public void CheckRotation()
+    {
         //회전 하였는지 체크합니다.
         if (oldRot != tr.rotation)
         {
@@ -153,24 +155,43 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    void OnTriggerEnter(Collider col) {
-        if (col.CompareTag("Hide")) {
+    void OnTriggerEnter(Collider col)
+    {
+        if (col.CompareTag("Hide"))
+        {
             renderer.material.color = new Color(renderer.material.color.r, renderer.material.color.g, renderer.material.color.b, 0f); //0투명 ~ 1 불투명
         }
     }
 
-    void OnTriggerStay(Collider col) {
-        if (Input.GetKeyDown(KeyCode.Space) && col.CompareTag("Portal")) {
-            if (GameManager.instance.portal.isOpen) {
-                print("탈출");
+    void OnTriggerStay(Collider col)
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            if (col.CompareTag("Portal"))
+            {
+                if (GameManager.instance.portal.isOpen)
+                {
+                    print("탈출");
+                }
+                else
+                {
+                    print("열쇠를 사용하여 오픈");
+                }
             }
-            else {
-                print("열쇠를 사용하여 오픈");
+            else if (col.CompareTag("Item"))
+            {
+                ItemController item = col.GetComponent<ItemController>();
+                if(!item.GetDestroy())
+                {
+                    print("아이템 획득");
+                    col.GetComponent<ItemController>().SetDestroy();
+                }
             }
         }
     }
 
-    void OnTriggerExit(Collider col) {
+    void OnTriggerExit(Collider col)
+    {
         if (col.CompareTag("Hide"))
         {
             renderer.material.color = new Color(renderer.material.color.r, renderer.material.color.g, renderer.material.color.b, 1f); //0투명 ~ 1 불투명
