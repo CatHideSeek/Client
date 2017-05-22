@@ -32,7 +32,7 @@ public class NetworkManager : MonoBehaviour
     /// 입장한 방 정보
     /// </summary>
     [SerializeField]
-    Room enterRoom = new Room();
+    public Room enterRoom = new Room();
 
     void Awake()
     {
@@ -156,8 +156,7 @@ public class NetworkManager : MonoBehaviour
     public void OnRoomJoin(SocketIOEvent e)
     {
         JSONObject json = e.data;
-
-        print("room join lobby");
+        
 
         string name = json.GetField("roomName").str;
         Room r = FindRoom(name);
@@ -197,7 +196,6 @@ public class NetworkManager : MonoBehaviour
         string name = json.GetField("roomName").str;
 
         bool.TryParse(json.GetField("isHost").str, out playerData.my.isHost);
-        print("on enter is work");
 
         //입장한 방 세팅
         //enterRoom = FindRoom(name);
@@ -210,28 +208,22 @@ public class NetworkManager : MonoBehaviour
     {
         JSONObject json = new JSONObject(JSONObject.Type.OBJECT);
         json.AddField("roomName", name);
-        print(name);
         socket.Emit("roomEnter", json);
     }
 
     public void OnJoin(SocketIOEvent e)
     {
-        print("on join is work");
 
         JSONObject json = e.data;
-
-        print("json success");
+        
 
         string name = json.GetField("name").str;
         string socketID = json.GetField("socketID").str;
-
-        print("parse is work");
-
+        
         User user = new User(name, socketID);
 
         enterRoom.userList.Add(user);
-
-        print("add is work");
+        
 
         if (name == playerData.my.name)
         {
@@ -239,21 +231,19 @@ public class NetworkManager : MonoBehaviour
             playerData.my.name = name;
             playerData.my.socketID = socketID;
         }
-
-        print("if check work");
+        
 
         GameObject g = Instantiate(GameManager.instance.playerObject);
         g.GetComponent<PlayerController>().SetUser(user);
         g.name = user.name;
-
-        print("object is work");
+        
     }
 
     public void SendJoin()
     {
         JSONObject json = new JSONObject(JSONObject.Type.OBJECT);
 
-        playerData.my.name = Random.Range(1, 100) + " name";
+        playerData.my.name = "User"+Random.Range(1, 100);
 
         json.AddField("name", playerData.my.name);
         json.AddField("isHost", playerData.my.isHost);
@@ -264,11 +254,9 @@ public class NetworkManager : MonoBehaviour
 
     public void OnUserList(SocketIOEvent e)
     {
-        Debug.Log("on UserList");
 
         LitJson.JsonData json = LitJson.JsonMapper.ToObject(e.data.ToString());
-
-        print("asd" + json["userList"].Count);
+        
 
         for (int i = 0; i < json["userList"].Count; ++i)
         {
@@ -276,8 +264,7 @@ public class NetworkManager : MonoBehaviour
 
             user.socketID = json["userList"][i]["socketID"].ToString();
             user.name = json["userList"][i]["name"].ToString();
-
-            print(enterRoom);
+            
 
             if (playerData.my.name != user.name)
             {
@@ -292,15 +279,19 @@ public class NetworkManager : MonoBehaviour
     public void OnReady(SocketIOEvent e)
     {
         JSONObject json = e.data;
-        bool isReady;
-        bool.TryParse(json.GetField("isReady").str, out isReady);
 
+        print(json);
+        
+        print("ready");
         User user = enterRoom.FindUserBySocketID(json.GetField("socketID").str);
         if (user != null)
         {
-            user.isReady = isReady;
-            int.TryParse(json.GetField("readyPlayers").str, out enterRoom.readyPlayers);
+            print(user.name);
+            user.isReady = json.GetField("isReady").b;
+            enterRoom.readyPlayers = (int)json.GetField("readyPlayers").f;
         }
+        else
+            print("user is null");
     }
 
     public void SendReady(bool isReady)
@@ -323,7 +314,7 @@ public class NetworkManager : MonoBehaviour
         print("game is play");
     }
 
-    public void SendStart(bool isReady)
+    public void SendStart()
     {
         JSONObject json = new JSONObject(JSONObject.Type.OBJECT);
 
@@ -375,8 +366,7 @@ public class NetworkManager : MonoBehaviour
         float z = json.GetField("z").f;
 
         User u = enterRoom.FindUserByName(name);
-
-        print("move");
+       
 
         if (u != null)
         {
@@ -416,8 +406,7 @@ public class NetworkManager : MonoBehaviour
         float w = json.GetField("w").f;
 
         User u = enterRoom.FindUserByName(name);
-
-        print("rotate");
+        
 
         if (u != null)
         {

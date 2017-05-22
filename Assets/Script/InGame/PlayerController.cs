@@ -18,12 +18,14 @@ public class PlayerController : MonoBehaviour
 
     private float h, v;
 
-    public float movSpeed = 10f, rotSpeed = 5f;
+    public float movSpeed = 5f, rotSpeed = 10f;
 
 
     Vector3 oldPos, currentPos;
     Quaternion oldRot, currentRot;
 
+    [SerializeField]
+    float clampTime = 50f;
 
     void Awake()
     {
@@ -39,12 +41,6 @@ public class PlayerController : MonoBehaviour
         //회전 초기값 지정
         currentRot = tr.rotation;
         oldRot = currentRot;
-    }
-
-    // Use this for initialization
-    void Start()
-    {
-
     }
 
     // Update is called once per frame
@@ -65,6 +61,17 @@ public class PlayerController : MonoBehaviour
             Move();
         else if (h == 0 && v == 0)
             ri.velocity = new Vector3(0, ri.velocity.y, 0);
+
+        if (!user.isPlayer && oldPos != tr.position)
+        {
+            tr.position = Vector3.Lerp(tr.position, currentPos, Time.deltaTime * clampTime);
+        }
+
+        if (!user.isPlayer && oldRot != tr.rotation)
+        {
+            tr.rotation = Quaternion.Lerp(tr.rotation, currentRot, Time.deltaTime * clampTime);
+        }
+
     }
 
     /// <summary>
@@ -76,7 +83,29 @@ public class PlayerController : MonoBehaviour
         user = u;
         u.controller = this;
         if (user.isPlayer)
+        {
             CameraController.instance.target = tr;
+            PlayerDataManager.instance.my.controller = this;
+        }
+        UIInGame.instance.MakeNameLabel(tr,user.name);
+    }
+
+    /// <summary>
+    /// 유저 타입을 변경 합니다. 타입에 따른 이동속도가 재 지정됩니다.
+    /// </summary>
+    public void UpdateUserType()
+    {
+        if (user.isBoss)
+        {
+            movSpeed = 7.5f;
+        }
+        else if (user.isBossChild)
+        {
+            movSpeed = 6.25f;
+        }
+        else {
+            movSpeed = 5;
+        }
     }
 
     /// <summary>
@@ -103,6 +132,9 @@ public class PlayerController : MonoBehaviour
         CheckRotation();
     }
 
+    /// <summary>
+    /// 이동 여부를 체크 하여 패킷을 전송합니다.
+    /// </summary>
     public void CheckPosition()
     {
         //이동 하였는지 체크 합니다.
@@ -114,6 +146,9 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// 회전 여부를 체크 하여 패킷을 전송합니다.
+    /// </summary>
     public void CheckRotation()
     {
         //회전 하였는지 체크합니다.
@@ -135,7 +170,6 @@ public class PlayerController : MonoBehaviour
         //이동 하였는지 체크 합니다.
         if (oldPos != currentPos)
         {
-            tr.position = currentPos;
             oldPos = currentPos;
         }
     }
@@ -151,7 +185,6 @@ public class PlayerController : MonoBehaviour
         if (oldRot != currentRot)
         {
             oldRot = currentRot;
-            tr.rotation = oldRot;
         }
     }
 
@@ -181,7 +214,7 @@ public class PlayerController : MonoBehaviour
             else if (col.CompareTag("Item"))
             {
                 ItemController item = col.GetComponent<ItemController>();
-                if(!item.GetDestroy())
+                if (!item.GetDestroy())
                 {
                     print("아이템 획득");
                     col.GetComponent<ItemController>().SetDestroy();
