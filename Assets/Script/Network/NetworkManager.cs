@@ -66,7 +66,7 @@ public class NetworkManager : MonoBehaviour
         socket.On("lobbyStart", OnRoomStart);
         socket.On("lobbyDelet", OnRoomDelet);
 
-        
+
         socket.On("roomEnter", OnEnter);
         socket.On("roomJoin", OnJoin);
         socket.On("roomReady", OnReady);
@@ -94,7 +94,7 @@ public class NetworkManager : MonoBehaviour
         #region etc
         socket.On("chat", OnChat);
         #endregion
-        
+
         StartCoroutine("test");
     }
 
@@ -156,6 +156,9 @@ public class NetworkManager : MonoBehaviour
     public void OnRoomJoin(SocketIOEvent e)
     {
         JSONObject json = e.data;
+
+        print("room join lobby");
+
         string name = json.GetField("roomName").str;
         Room r = FindRoom(name);
         if (r != null)
@@ -194,6 +197,7 @@ public class NetworkManager : MonoBehaviour
         string name = json.GetField("roomName").str;
 
         bool.TryParse(json.GetField("isHost").str, out playerData.my.isHost);
+        print("on enter is work");
 
         //입장한 방 세팅
         //enterRoom = FindRoom(name);
@@ -212,13 +216,22 @@ public class NetworkManager : MonoBehaviour
 
     public void OnJoin(SocketIOEvent e)
     {
+        print("on join is work");
+
         JSONObject json = e.data;
+
+        print("json success");
+
         string name = json.GetField("name").str;
         string socketID = json.GetField("socketID").str;
+
+        print("parse is work");
 
         User user = new User(name, socketID);
 
         enterRoom.userList.Add(user);
+
+        print("add is work");
 
         if (name == playerData.my.name)
         {
@@ -227,11 +240,13 @@ public class NetworkManager : MonoBehaviour
             playerData.my.socketID = socketID;
         }
 
+        print("if check work");
+
         GameObject g = Instantiate(GameManager.instance.playerObject);
         g.GetComponent<PlayerController>().SetUser(user);
         g.name = user.name;
 
-        print("asd");
+        print("object is work");
     }
 
     public void SendJoin()
@@ -249,14 +264,16 @@ public class NetworkManager : MonoBehaviour
 
     public void OnUserList(SocketIOEvent e)
     {
+        Debug.Log("on UserList");
+
         LitJson.JsonData json = LitJson.JsonMapper.ToObject(e.data.ToString());
 
-        print(json["userList"].Count);
+        print("asd" + json["userList"].Count);
 
         for (int i = 0; i < json["userList"].Count; ++i)
         {
             User user = new User();
-            
+
             user.socketID = json["userList"][i]["socketID"].ToString();
             user.name = json["userList"][i]["name"].ToString();
 
@@ -444,7 +461,8 @@ public class NetworkManager : MonoBehaviour
         {
             u.states.Add((User.State)state);
         }
-        else {
+        else
+        {
             u.states.Clear();
             u.states.Add(User.State.Normal);
         }

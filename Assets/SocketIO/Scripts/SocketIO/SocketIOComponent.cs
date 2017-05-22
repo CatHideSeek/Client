@@ -26,8 +26,7 @@
  */
 
 #endregion
-
-#define SOCKET_IO_DEBUG			// Uncomment this for debug
+//#define SOCKET_IO_DEBUG			// Uncomment this for debug
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -141,8 +140,10 @@ namespace SocketIO
 			if(wsConnected != ws.IsConnected){
 				wsConnected = ws.IsConnected;
 				if(wsConnected){
+                    print("연결성공");
 					EmitEvent("connect");
 				} else {
+                    print("연결해제");
 					EmitEvent("disconnect");
 				}
 			}
