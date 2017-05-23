@@ -209,6 +209,7 @@ public class PlayerController : MonoBehaviour
                 else
                 {
                     print("열쇠를 사용하여 오픈");
+                    NetworkManager.instance.SendOpen(user.name);
                 }
             }
             else if (col.CompareTag("Item"))

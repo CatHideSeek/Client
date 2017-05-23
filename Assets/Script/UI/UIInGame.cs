@@ -13,7 +13,6 @@ public class UIInGame : MonoBehaviour
     public GameObject nameLabel;
 
 
-
     void Awake()
     {
         instance = this;

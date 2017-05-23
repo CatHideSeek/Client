@@ -44,7 +44,6 @@ public class NetworkManager : MonoBehaviour
         }
         else
             Destroy(this.gameObject);
-
     }
 
     //Socket 이벤트를 받으러면 On함수들을 Start 에서 선언해야 됩니다.
@@ -352,10 +351,6 @@ public class NetworkManager : MonoBehaviour
 
     #region PlayerControllMethod
 
-    /// <summary>
-    /// 서버에서 받은 좌표를 세팅합니다.
-    /// </summary>
-    /// <param name="e"></param>
     public void OnPosition(SocketIOEvent e)
     {
         JSONObject json = e.data;
@@ -391,10 +386,6 @@ public class NetworkManager : MonoBehaviour
         socket.Emit("move", json);
     }
 
-    /// <summary>
-    /// 서버에서 받은 좌표를 세팅합니다.
-    /// </summary>
-    /// <param name="e"></param>
     public void OnRotation(SocketIOEvent e)
     {
         JSONObject json = e.data;
@@ -457,6 +448,10 @@ public class NetworkManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// 유저의 상태를 알립니다.
+    /// </summary>
+    /// <param name="state"></param>
     public void SendState(int state)
     {
         JSONObject json = new JSONObject(JSONObject.Type.OBJECT);
@@ -480,7 +475,11 @@ public class NetworkManager : MonoBehaviour
             int.TryParse(json.GetField("part").str, out u.keyCount);
         }
     }
-
+    
+    /// <summary>
+    /// 열쇠 조각의 획득을 알립니다.
+    /// </summary>
+    /// <param name="count"></param>
     public void SendGetKeyPart(int count)
     {
         JSONObject json = new JSONObject(JSONObject.Type.OBJECT);
@@ -504,6 +503,10 @@ public class NetworkManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// 열쇠의 완성을 알립니다.
+    /// </summary>
+    /// <param name="have"></param>
     public void SendGetKey(bool have)
     {
         JSONObject json = new JSONObject(JSONObject.Type.OBJECT);
@@ -528,6 +531,10 @@ public class NetworkManager : MonoBehaviour
 
     }
 
+    /// <summary>
+    /// 숙주 술래를 알립니다.
+    /// </summary>
+    /// <param name="name"></param>
     public void SendRootTag(string name)
     {
         JSONObject json = new JSONObject(JSONObject.Type.OBJECT);
@@ -552,6 +559,11 @@ public class NetworkManager : MonoBehaviour
 
     }
 
+    /// <summary>
+    /// 술래에게 태그당함을 알립니다.
+    /// </summary>
+    /// <param name="name"></param>
+    /// <param name="other"></param>
     public void SendChildTag(string name, string other)
     {
         JSONObject json = new JSONObject(JSONObject.Type.OBJECT);
@@ -561,6 +573,7 @@ public class NetworkManager : MonoBehaviour
         socket.Emit("childTag", json);
 
     }
+
 
     public void OnPortal(SocketIOEvent e)
     {
@@ -573,6 +586,10 @@ public class NetworkManager : MonoBehaviour
 
     }
 
+    /// <summary>
+    /// 포탈을 생성합니다.
+    /// </summary>
+    /// <param name="pos"></param>
     public void SendPortal(Vector3 pos)
     {
         JSONObject json = new JSONObject(JSONObject.Type.OBJECT);
@@ -589,8 +606,15 @@ public class NetworkManager : MonoBehaviour
         string name = json.GetField("name").str;
         //포탈 오픈!
 
+        print("포탈이 열렸어요. 탈출을 시도 하세요.");
+        GameManager.instance.portal.isOpen = true;
+
     }
 
+    /// <summary>
+    /// 포탈을 엽니다.
+    /// </summary>
+    /// <param name="name">유저 이름</param>
     public void SendOpen(string name)
     {
         JSONObject json = new JSONObject(JSONObject.Type.OBJECT);
@@ -599,6 +623,7 @@ public class NetworkManager : MonoBehaviour
         socket.Emit("portalOpen", json);
     }
 
+
     public void OnClose(SocketIOEvent e)
     {
         JSONObject json = e.data;
@@ -606,6 +631,9 @@ public class NetworkManager : MonoBehaviour
 
     }
 
+    /// <summary>
+    /// 포탈을 닫습니다.
+    /// </summary>
     public void SendClose()
     {
         JSONObject json = new JSONObject(JSONObject.Type.OBJECT);
@@ -625,6 +653,12 @@ public class NetworkManager : MonoBehaviour
         int.TryParse(json.GetField("where").str, out where);
     }
 
+    /// <summary>
+    /// 채팅을 보냅니다.
+    /// </summary>
+    /// <param name="name">유저 이름</param>
+    /// <param name="message">메세지</param>
+    /// <param name="where">어디에서 보내는가?</param>
     public void SendChat(string name, string message, int where)
     {
         JSONObject json = new JSONObject(JSONObject.Type.OBJECT);
