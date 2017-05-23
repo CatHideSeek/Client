@@ -45,7 +45,7 @@ public class User
     /// <summary>
     /// 열쇠조각 소유 수
     /// </summary>
-    public int keyCount;
+    public int keyCount=0;
     /// <summary>
     /// 고양이 종류
     /// </summary>
