@@ -22,7 +22,9 @@ public class PlayerDataManager : MonoBehaviour {
             Destroy(this.gameObject);
     }
 
-
-
-
+    public void EatKey()
+    {
+        my.keyCount++;
+        print("열쇠 소지갯수: " + my.keyCount);
+    }
 }

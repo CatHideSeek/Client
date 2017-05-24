@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ItemController : MonoBehaviour
+public class Item : MonoBehaviour
 {
     public float flySpeed = 2f, rotSpeed = 180f, traSpeed=4f, upSpeed=2f;
 
@@ -35,8 +35,11 @@ public class ItemController : MonoBehaviour
         }
     }
 
+    protected virtual void Eaten(){}
+
     public void SetDestroy()
     {
+        Eaten();
         destroy=true;
         flySpeed = 0;
         rotSpeed = 0;

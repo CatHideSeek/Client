@@ -41,6 +41,7 @@ public class PlayerController : MonoBehaviour
         //회전 초기값 지정
         currentRot = tr.rotation;
         oldRot = currentRot;
+        user.isPlayer = true;
     }
 
     // Update is called once per frame
@@ -73,6 +74,8 @@ public class PlayerController : MonoBehaviour
         }
 
     }
+
+    
 
     /// <summary>
     /// 유저 데이터를 세팅합니다.
@@ -193,6 +196,16 @@ public class PlayerController : MonoBehaviour
         if (col.CompareTag("Hide"))
         {
             renderer.material.color = new Color(renderer.material.color.r, renderer.material.color.g, renderer.material.color.b, 0f); //0투명 ~ 1 불투명
+            col.GetComponent<Bush>().SetOpacity();
+        }
+        else if(col.CompareTag("Item"))
+        {
+            Item item = col.GetComponent<Item>();
+            if (!item.GetDestroy())
+            {
+                print("아이템 획득");
+                item.SetDestroy();
+            }
         }
     }
 
@@ -202,7 +215,7 @@ public class PlayerController : MonoBehaviour
         {
             if (col.CompareTag("Portal"))
             {
-                if (GameManager.instance.portal.isOpen)
+                if (GameManager.instance.portal.isOpen&&PlayerDataManager.instance.my.keyCount>=4)
                 {
                     print("탈출");
                 }
@@ -212,6 +225,7 @@ public class PlayerController : MonoBehaviour
                     NetworkManager.instance.SendOpen(user.name);
                 }
             }
+<<<<<<< HEAD
             else if (col.CompareTag("Item"))
             {
                 ItemController item = col.GetComponent<ItemController>();
@@ -221,6 +235,8 @@ public class PlayerController : MonoBehaviour
                     col.GetComponent<ItemController>().SetDestroy();
                 }
             }
+=======
+>>>>>>> re
         }
     }
 
@@ -229,6 +245,7 @@ public class PlayerController : MonoBehaviour
         if (col.CompareTag("Hide"))
         {
             renderer.material.color = new Color(renderer.material.color.r, renderer.material.color.g, renderer.material.color.b, 1f); //0투명 ~ 1 불투명
+            col.GetComponent<Bush>().SetOpacity(false);
         }
     }
 

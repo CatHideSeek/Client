@@ -14,6 +14,7 @@ public class PortalController : MonoBehaviour {
         if (!isOpen)
         {
             isOpen = true;
+            gameObject.SetActive(true);
         }
             
     }
@@ -21,6 +22,7 @@ public class PortalController : MonoBehaviour {
     public void Close() {
         if (isOpen) {
             isOpen = false;
+            gameObject.SetActive(false);
         }
     }
 
