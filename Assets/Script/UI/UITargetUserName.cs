@@ -16,6 +16,7 @@ public class UITargetUserName : MonoBehaviour
     void Awake()
     {
         tr = GetComponent<RectTransform>();
+        tr.SetAsFirstSibling();
     }
 
     public void SetTarget(Transform targetTr,string name)

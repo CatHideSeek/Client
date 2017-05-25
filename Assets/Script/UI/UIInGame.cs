@@ -12,6 +12,9 @@ public class UIInGame : MonoBehaviour
     public Transform canvas;
     public GameObject nameLabel;
 
+    public GameObject notice;
+    public Text noticeText;
+    public float noticeTime = 2f;
 
     void Awake()
     {
@@ -21,6 +24,14 @@ public class UIInGame : MonoBehaviour
     public void UpdateTimerText(string time)
     {
         timer.text = time;
+    }
+
+    public void TestEnter() {
+        NetworkManager.instance.TestEnterRoom();
+    }
+
+    public void SetHost() {
+        PlayerDataManager.instance.my.isHost = true;
     }
 
     //테스트 용 레디 버튼입니다. 언젠가 지워질꺼에요.
@@ -37,10 +48,29 @@ public class UIInGame : MonoBehaviour
         NetworkManager.instance.SendReady(true);
     }
 
-    public void MakeNameLabel(Transform tr, string name) {
+    /// <summary>
+    /// 공지 메세지를 출력합니다.
+    /// </summary>
+    /// <param name="message">메세지</param>
+    public void ViewNotice(string message) {
+        noticeText.text = message;
+        StartCoroutine("WaitNotice");
+    }
+
+      
+    public GameObject MakeNameLabel(Transform tr, string name) {
         GameObject g = Instantiate(nameLabel, canvas);
 
         g.GetComponent<UITargetUserName>().SetTarget(tr,name);
+
+        return g;
+    }
+
+
+    IEnumerator WaitNotice() {
+        notice.SetActive(true);
+        yield return new WaitForSeconds(noticeTime);
+        notice.SetActive(false);
     }
 
 }

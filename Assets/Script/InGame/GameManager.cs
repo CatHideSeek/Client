@@ -7,11 +7,8 @@ public class GameManager : MonoBehaviour {
 
     public static GameManager instance;
 
-<<<<<<< HEAD
     public float currentTime = 120f, portalOpenTime = 60f;
-=======
-    public float currentTime = 120f;
->>>>>>> re
+
 
     public bool isPlay = false;
     public bool isPortalSet = false;
@@ -50,31 +47,24 @@ public class GameManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if (isPlay)
+        if (isPlay && !isEnd)
             Timer();
-<<<<<<< HEAD
-       
-=======
-        else if(Input.GetKeyDown(KeyCode.Space))
+        else if(!isPlay && PlayerDataManager.instance.my.isHost && Input.GetKeyDown(KeyCode.Space))
         {
-            StartGame();
+            NetworkManager.instance.enterRoom.SetFirstBoss();
+            NetworkManager.instance.SendStart();
         }
->>>>>>> re
+
 	}
 
     void Timer() {
         currentTime -= Time.deltaTime;
-<<<<<<< HEAD
 
         ui.UpdateTimerText(string.Format("{0:D2} : {1:D2}",(int)currentTime/60, (int)currentTime%60));
 
 
         //포탈 생성 조건
         if (!isPortalSet && currentTime < portalOpenTime) {
-=======
-        if (!isPortalSet && currentTime < 60f) {
-            //GameObject g = Instantiate(portal,map);
->>>>>>> re
             portalObject.SetActive(true);
             isPortalSet = true;
         }
@@ -85,8 +75,9 @@ public class GameManager : MonoBehaviour {
             isEnd = true;
             currentTime = 0;
         }
-        print("currentTime: " + currentTime);
     }
+
+    
 
 
 }

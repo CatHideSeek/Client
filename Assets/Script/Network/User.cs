@@ -74,6 +74,7 @@ public class User
     {
         this.name = name;
         this.socketID = socketID;
+        this.isPlayer = false;
     }
 
     public enum State
@@ -95,6 +96,22 @@ public class User
             }
         }
         return -1;
+    }
+
+    public void EatKey()
+    {
+        keyCount++;
+    }
+
+    public void SetHaveKey() {
+        isKeyHave = true;
+    }
+
+    public bool CheckTag() {
+        if (isBoss || isBossChild)
+            return true;
+        else
+            return false;
     }
 
 }

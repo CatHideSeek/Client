@@ -8,21 +8,22 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 public class PlayerController : MonoBehaviour
 {
-
     public User user;
 
     Transform tr;
     Rigidbody ri;
     Renderer renderer;
 
+    public TagController tagController;
 
     private float h, v;
 
     public float movSpeed = 5f, rotSpeed = 10f;
 
-
     Vector3 oldPos, currentPos;
     Quaternion oldRot, currentRot;
+
+    GameObject nameLabel;
 
     [SerializeField]
     float clampTime = 50f;
@@ -75,7 +76,7 @@ public class PlayerController : MonoBehaviour
 
     }
 
-    
+
 
     /// <summary>
     /// 유저 데이터를 세팅합니다.
@@ -83,14 +84,25 @@ public class PlayerController : MonoBehaviour
     /// <param name="u">User 정보</param>
     public void SetUser(User u)
     {
-        user = u;
         u.controller = this;
-        if (user.isPlayer)
+
+        if (u.isPlayer)
         {
             CameraController.instance.target = tr;
-            PlayerDataManager.instance.my.controller = this;
         }
-        UIInGame.instance.MakeNameLabel(tr,user.name);
+
+        user = u;
+
+        nameLabel = UIInGame.instance.MakeNameLabel(tr, user.name);
+    }
+
+    /// <summary>
+    /// 유저 삭제를 진행합니다.
+    /// </summary>
+    public void DeletUser()
+    {
+        Destroy(nameLabel);
+        Destroy(this.gameObject);
     }
 
     /// <summary>
@@ -106,7 +118,8 @@ public class PlayerController : MonoBehaviour
         {
             movSpeed = 6.25f;
         }
-        else {
+        else
+        {
             movSpeed = 5;
         }
     }
@@ -195,10 +208,12 @@ public class PlayerController : MonoBehaviour
     {
         if (col.CompareTag("Hide"))
         {
-            renderer.material.color = new Color(renderer.material.color.r, renderer.material.color.g, renderer.material.color.b, 0f); //0투명 ~ 1 불투명
-            col.GetComponent<Bush>().SetOpacity();
+            if (!user.isPlayer)
+                renderer.material.color = new Color(renderer.material.color.r, renderer.material.color.g, renderer.material.color.b, 0f); //0투명 ~ 1 불투명
+            else
+                col.GetComponent<Bush>().SetOpacity();
         }
-        else if(col.CompareTag("Item"))
+        else if (col.CompareTag("Item"))
         {
             Item item = col.GetComponent<Item>();
             if (!item.GetDestroy())
@@ -211,32 +226,31 @@ public class PlayerController : MonoBehaviour
 
     void OnTriggerStay(Collider col)
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (user.isPlayer && Input.GetKeyDown(KeyCode.Space))
         {
             if (col.CompareTag("Portal"))
             {
-                if (GameManager.instance.portal.isOpen&&PlayerDataManager.instance.my.keyCount>=4)
+                if (GameManager.instance.portal.isOpen)
                 {
                     print("탈출");
                 }
-                else
+                else if(user.isKeyHave)
                 {
                     print("열쇠를 사용하여 오픈");
                     NetworkManager.instance.SendOpen(user.name);
                 }
             }
-<<<<<<< HEAD
             else if (col.CompareTag("Item"))
             {
+                /*
                 ItemController item = col.GetComponent<ItemController>();
                 if (!item.GetDestroy())
                 {
                     print("아이템 획득");
                     col.GetComponent<ItemController>().SetDestroy();
                 }
+                */
             }
-=======
->>>>>>> re
         }
     }
 
@@ -244,8 +258,10 @@ public class PlayerController : MonoBehaviour
     {
         if (col.CompareTag("Hide"))
         {
-            renderer.material.color = new Color(renderer.material.color.r, renderer.material.color.g, renderer.material.color.b, 1f); //0투명 ~ 1 불투명
-            col.GetComponent<Bush>().SetOpacity(false);
+            if (!user.isPlayer)
+                renderer.material.color = new Color(renderer.material.color.r, renderer.material.color.g, renderer.material.color.b, 1f); //0투명 ~ 1 불투명
+            else
+                col.GetComponent<Bush>().SetOpacity(false);
         }
     }
 

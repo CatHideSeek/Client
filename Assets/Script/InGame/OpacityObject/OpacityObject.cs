@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class OpacityObject : MonoBehaviour {
+    [SerializeField]
     float opaSpeed = 2f;
+
     bool opacity=false;
     Material mat;
 
@@ -18,14 +20,14 @@ public class OpacityObject : MonoBehaviour {
         Color c = mat.color;
         if(opacity)
         {
-            c.a = 0.5f;
+            c.a = Mathf.Lerp(c.a, 0.5f,Time.deltaTime * opaSpeed);
             mat.color = c;
             if (!checkOpacity())
                 opacity = false;
         }
         else if(c.a<1)
         {
-            c.a = 1;
+            c.a = Mathf.Lerp(c.a, 1f, Time.deltaTime * opaSpeed);
             mat.color = c;
         }
 	}

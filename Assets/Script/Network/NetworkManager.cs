@@ -94,8 +94,13 @@ public class NetworkManager : MonoBehaviour
         socket.On("chat", OnChat);
         #endregion
 
+        
+    }
+
+    public void TestEnterRoom() {
         StartCoroutine("test");
     }
+
 
     IEnumerator test()
     {
@@ -127,6 +132,9 @@ public class NetworkManager : MonoBehaviour
 
     }
 
+    /// <summary>
+    /// 서버에게 방 리스트를 요청합니다.
+    /// </summary>
     public void SendRoomList()
     {
         JSONObject json = new JSONObject(JSONObject.Type.OBJECT);
@@ -155,7 +163,7 @@ public class NetworkManager : MonoBehaviour
     public void OnRoomJoin(SocketIOEvent e)
     {
         JSONObject json = e.data;
-        
+
 
         string name = json.GetField("roomName").str;
         Room r = FindRoom(name);
@@ -179,6 +187,11 @@ public class NetworkManager : MonoBehaviour
         DeletRoom(name);
     }
 
+    /// <summary>
+    /// 서버로 방 생성을 전송합니다.
+    /// </summary>
+    /// <param name="name">방 이름</param>
+    /// <param name="maxPlayers">최대 입장 가능 수</param>
     public void SendCreate(string name, int maxPlayers)
     {
         JSONObject json = new JSONObject(JSONObject.Type.OBJECT);
@@ -194,7 +207,7 @@ public class NetworkManager : MonoBehaviour
         JSONObject json = e.data;
         string name = json.GetField("roomName").str;
 
-        bool.TryParse(json.GetField("isHost").str, out playerData.my.isHost);
+        //bool.TryParse(json.GetField("isHost").str, out playerData.my.isHost);
 
         //입장한 방 세팅
         //enterRoom = FindRoom(name);
@@ -202,7 +215,11 @@ public class NetworkManager : MonoBehaviour
         //씬 ~ 이 ~ 동 ~ 코 ~ 드 ~
 
     }
-
+    
+    /// <summary>
+    /// 서버로 방 입장 시도를 보냅니다.
+    /// </summary>
+    /// <param name="name">방 이름</param>
     public void SendEnter(string name)
     {
         JSONObject json = new JSONObject(JSONObject.Type.OBJECT);
@@ -214,36 +231,42 @@ public class NetworkManager : MonoBehaviour
     {
 
         JSONObject json = e.data;
-        
+
 
         string name = json.GetField("name").str;
         string socketID = json.GetField("socketID").str;
-        
-        User user = new User(name, socketID);
+        bool isHost = json.GetField("isHost").b;
 
-        enterRoom.userList.Add(user);
-        
+        print("host is "+isHost);
+
+        User user = new User(name, socketID);
+        user.isHost = isHost;
+
+        enterRoom.AddUser(user);
 
         if (name == playerData.my.name)
         {
+            playerData.my = user;
             user.isPlayer = true;
-            playerData.my.name = name;
-            playerData.my.socketID = socketID;
         }
-        
 
         GameObject g = Instantiate(GameManager.instance.playerObject);
         g.GetComponent<PlayerController>().SetUser(user);
         g.name = user.name;
-        
+
+        UIInGame.instance.ViewNotice(user.name+"이 참가하였습니다.");
+
     }
 
+    /// <summary>
+    /// 서버로 방 입장에 성공했음을 보냅니다.
+    /// </summary>
     public void SendJoin()
     {
         JSONObject json = new JSONObject(JSONObject.Type.OBJECT);
 
-        playerData.my.name = "User"+Random.Range(1, 100);
-
+        playerData.my.name = "User" + Random.Range(1, 100);
+        
         json.AddField("name", playerData.my.name);
         json.AddField("isHost", playerData.my.isHost);
         json.AddField("characterKind", playerData.my.characterKind);
@@ -255,19 +278,21 @@ public class NetworkManager : MonoBehaviour
     {
 
         LitJson.JsonData json = LitJson.JsonMapper.ToObject(e.data.ToString());
-        
+
 
         for (int i = 0; i < json["userList"].Count; ++i)
         {
-            User user = new User();
-
-            user.socketID = json["userList"][i]["socketID"].ToString();
-            user.name = json["userList"][i]["name"].ToString();
+            string socketID = json["userList"][i]["socketID"].ToString();
+            string name = json["userList"][i]["name"].ToString();
             
-
-            if (playerData.my.name != user.name)
+            if (playerData.my.name != name)
             {
-                enterRoom.userList.Add(user);
+                print(playerData.my.name + " / " + name);
+
+                User user = new User(name, socketID);
+
+                enterRoom.AddUser(user);
+
                 GameObject g = Instantiate(GameManager.instance.playerObject);
                 g.GetComponent<PlayerController>().SetUser(user);
                 g.name = user.name;
@@ -280,7 +305,7 @@ public class NetworkManager : MonoBehaviour
         JSONObject json = e.data;
 
         print(json);
-        
+
         print("ready");
         User user = enterRoom.FindUserBySocketID(json.GetField("socketID").str);
         if (user != null)
@@ -293,6 +318,10 @@ public class NetworkManager : MonoBehaviour
             print("user is null");
     }
 
+    /// <summary>
+    /// 서버로 자신의 게임 준비 상태를 보냅니다.
+    /// </summary>
+    /// <param name="isReady">준비 상태인가?</param>
     public void SendReady(bool isReady)
     {
         JSONObject json = new JSONObject(JSONObject.Type.OBJECT);
@@ -300,7 +329,6 @@ public class NetworkManager : MonoBehaviour
         json.AddField("isReady", isReady);
 
         socket.Emit("roomReady", json);
-
     }
 
     public void OnStart(SocketIOEvent e)
@@ -308,11 +336,14 @@ public class NetworkManager : MonoBehaviour
         JSONObject json = e.data;
 
         //게임 시작 함수~
-        GameManager.instance.isPlay = true;
+        GameManager.instance.StartGame();
 
         print("game is play");
     }
 
+    /// <summary>
+    /// 서버로 게임 시작을 보냅니다.
+    /// </summary>
     public void SendStart()
     {
         JSONObject json = new JSONObject(JSONObject.Type.OBJECT);
@@ -320,7 +351,6 @@ public class NetworkManager : MonoBehaviour
         json.AddField("a", 0);
 
         socket.Emit("roomStart", json);
-
     }
 
 
@@ -338,6 +368,9 @@ public class NetworkManager : MonoBehaviour
         //씬 ~ 이 ~ 동 ~ 코 ~ 드 ~
     }
 
+    /// <summary>
+    /// 서버로 방 나가기를 보냅니다.
+    /// </summary>
     public void SendExit()
     {
         JSONObject json = new JSONObject(JSONObject.Type.OBJECT);
@@ -360,12 +393,12 @@ public class NetworkManager : MonoBehaviour
         float y = json.GetField("y").f;
         float z = json.GetField("z").f;
 
-        User u = enterRoom.FindUserByName(name);
-       
+        User user = enterRoom.FindUserByName(name);
 
-        if (u != null)
+
+        if (user != null)
         {
-            u.controller.SetPosition(new Vector3(x, y, z));
+            user.controller.SetPosition(new Vector3(x, y, z));
         }
 
     }
@@ -396,12 +429,12 @@ public class NetworkManager : MonoBehaviour
         float z = json.GetField("z").f;
         float w = json.GetField("w").f;
 
-        User u = enterRoom.FindUserByName(name);
-        
+        User user = enterRoom.FindUserByName(name);
 
-        if (u != null)
+
+        if (user != null)
         {
-            u.controller.SetRotation(new Quaternion(x, y, z, w));
+            user.controller.SetRotation(new Quaternion(x, y, z, w));
         }
 
     }
@@ -430,28 +463,28 @@ public class NetworkManager : MonoBehaviour
         int.TryParse(json.GetField("state").str, out state);
 
         string name = json.GetField("name").str;
-        User u = enterRoom.FindUserByName(name);
+        User user = enterRoom.FindUserByName(name);
 
         if (state < 0)
         {
-            int index = u.FindState(Mathf.Abs(state));
-            u.states.RemoveAt(index);
+            int index = user.FindState(Mathf.Abs(state));
+            user.states.RemoveAt(index);
         }
         else if (state > 0)
         {
-            u.states.Add((User.State)state);
+            user.states.Add((User.State)state);
         }
         else
         {
-            u.states.Clear();
-            u.states.Add(User.State.Normal);
+            user.states.Clear();
+            user.states.Add(User.State.Normal);
         }
     }
 
     /// <summary>
     /// 유저의 상태를 알립니다.
     /// </summary>
-    /// <param name="state"></param>
+    /// <param name="state">상태 Enum</param>
     public void SendState(int state)
     {
         JSONObject json = new JSONObject(JSONObject.Type.OBJECT);
@@ -468,18 +501,19 @@ public class NetworkManager : MonoBehaviour
 
         string name = json.GetField("name").str;
 
-        User u = enterRoom.FindUserByName(name);
+        User user = enterRoom.FindUserByName(name);
 
-        if (u != null)
+        if (user != null)
         {
-            int.TryParse(json.GetField("part").str, out u.keyCount);
+            user.keyCount = (int)json.GetField("part").f;
+            UIInGame.instance.ViewNotice(name+" (이)가 열쇠 조각을 얻었습니다.");
         }
     }
-    
+
     /// <summary>
     /// 열쇠 조각의 획득을 알립니다.
     /// </summary>
-    /// <param name="count"></param>
+    /// <param name="count">조각 수</param>
     public void SendGetKeyPart(int count)
     {
         JSONObject json = new JSONObject(JSONObject.Type.OBJECT);
@@ -495,18 +529,19 @@ public class NetworkManager : MonoBehaviour
 
         string name = json.GetField("name").str;
 
-        User u = enterRoom.FindUserByName(name);
+        User user = enterRoom.FindUserByName(name);
 
-        if (u != null)
+        if (user != null)
         {
-            bool.TryParse(json.GetField("have").str, out u.isKeyHave);
+            user.isKeyHave = json.GetField("have").b;
+            UIInGame.instance.ViewNotice(name + " (이)가 열쇠를 완성했습니다.");
         }
     }
 
     /// <summary>
     /// 열쇠의 완성을 알립니다.
     /// </summary>
-    /// <param name="have"></param>
+    /// <param name="have">완성했는가?</param>
     public void SendGetKey(bool have)
     {
         JSONObject json = new JSONObject(JSONObject.Type.OBJECT);
@@ -522,11 +557,13 @@ public class NetworkManager : MonoBehaviour
 
         string name = json.GetField("tager").str;
 
-        User u = enterRoom.FindUserByName(name);
+        User user = enterRoom.FindUserByName(name);
 
-        if (u != null)
+        if (user != null)
         {
-            u.isBoss = true;
+            user.isBoss = true;
+            enterRoom.UpdateBossPlayer(1);
+            UIInGame.instance.ViewNotice(name + " (이)가 첫 술래가 되었습니다.");
         }
 
     }
@@ -534,27 +571,29 @@ public class NetworkManager : MonoBehaviour
     /// <summary>
     /// 숙주 술래를 알립니다.
     /// </summary>
-    /// <param name="name"></param>
+    /// <param name="name">술래 이름</param>
     public void SendRootTag(string name)
     {
         JSONObject json = new JSONObject(JSONObject.Type.OBJECT);
         json.AddField("tager", name);
 
         socket.Emit("rootTag", json);
-
     }
 
     public void OnChildTag(SocketIOEvent e)
     {
         JSONObject json = e.data;
 
+        string tager = json.GetField("tager").str;
         string name = json.GetField("child").str;
 
-        User u = enterRoom.FindUserByName(name);
+        User user = enterRoom.FindUserByName(name);
 
-        if (u != null)
+        if (user != null)
         {
-            u.isBossChild = true;
+            user.isBossChild = true;
+            enterRoom.UpdateBossPlayer(1);
+            UIInGame.instance.ViewNotice(name + " (이)가 "+ tager +"에게 잡혔습니다.");
         }
 
     }
@@ -562,13 +601,14 @@ public class NetworkManager : MonoBehaviour
     /// <summary>
     /// 술래에게 태그당함을 알립니다.
     /// </summary>
-    /// <param name="name"></param>
-    /// <param name="other"></param>
+    /// <param name="name">술래 이름</param>
+    /// <param name="other">당한 사람 이름</param>
     public void SendChildTag(string name, string other)
     {
         JSONObject json = new JSONObject(JSONObject.Type.OBJECT);
         json.AddField("tager", name);
         json.AddField("child", other);
+        
 
         socket.Emit("childTag", json);
 
@@ -583,13 +623,13 @@ public class NetworkManager : MonoBehaviour
         float z = json.GetField("z").f;
         Vector3 pos = new Vector3(x, y, z);
         //포탈 오브젝트 생성
-
+        UIInGame.instance.ViewNotice("포탈이 생성되었습니다.");
     }
 
     /// <summary>
     /// 포탈을 생성합니다.
     /// </summary>
-    /// <param name="pos"></param>
+    /// <param name="pos">좌표</param>
     public void SendPortal(Vector3 pos)
     {
         JSONObject json = new JSONObject(JSONObject.Type.OBJECT);
@@ -606,7 +646,7 @@ public class NetworkManager : MonoBehaviour
         string name = json.GetField("name").str;
         //포탈 오픈!
 
-        print("포탈이 열렸어요. 탈출을 시도 하세요.");
+        UIInGame.instance.ViewNotice(name+" (이)가 포탈을 열었습니다. 어서 들어가세요!");
         GameManager.instance.portal.isOpen = true;
 
     }
@@ -628,7 +668,7 @@ public class NetworkManager : MonoBehaviour
     {
         JSONObject json = e.data;
         //포탈 닫힘!
-
+        UIInGame.instance.ViewNotice("포탈이 닫혔습니다. 마지막까지 살아남으세요.");
     }
 
     /// <summary>
