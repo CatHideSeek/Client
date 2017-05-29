@@ -2,13 +2,13 @@ Mono path[0] = 'C:/Users/영남/Documents/CatHideSeek/Client/test_Data/Managed'
 Mono path[1] = 'C:/Users/영남/Documents/CatHideSeek/Client/test_Data/Mono'
 Mono config path = 'C:/Users/영남/Documents/CatHideSeek/Client/test_Data/Mono/etc'
 PlayerConnection initialized from C:/Users/영남/Documents/CatHideSeek/Client/test_Data (debug = 0)
-PlayerConnection initialized network socket : 0.0.0.0 55173
-Multi-casting "[IP] 192.168.17.1 [Port] 55173 [Flags] 3 [Guid] 3313374911 [EditorId] 21224316 [Version] 1048832 [Id] WindowsPlayer(kyn-notebook) [Debug] 1" to [225.0.0.222:54997]...
-Waiting for connection from host on [0.0.0.0:55173]...
-Timed out. Continuing without host connection.
-Started listening to [0.0.0.0:55173]
-Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,defer=y,address=0.0.0.0:56911
-PlayerConnection already initialized - listening to [0.0.0.0:55173]
+PlayerConnection initialized network socket : 0.0.0.0 55378
+Multi-casting "[IP] 192.168.17.1 [Port] 55378 [Flags] 3 [Guid] 3048501640 [EditorId] 1649559708 [Version] 1048832 [Id] WindowsPlayer(kyn-notebook) [Debug] 1" to [225.0.0.222:54997]...
+Waiting for connection from host on [0.0.0.0:55378]...
+PlayerConnection accepted from [192.168.43.164] handle:0x350
+Started listening to [0.0.0.0:55378]
+Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,defer=y,address=0.0.0.0:56640
+PlayerConnection already initialized - listening to [0.0.0.0:55378]
 Player data archive not found at `C:/Users/영남/Documents/CatHideSeek/Client/test_Data/data.unity3d`, using local filesystemInitialize engine version: 5.6.1p1 (74c1f4917542)
 GfxDevice: creating device client; threaded=1
 Direct3D:
@@ -30,7 +30,7 @@ Platform assembly: C:\Users\영남\Documents\CatHideSeek\Client\test_Data\Manage
 Loading C:\Users\영남\Documents\CatHideSeek\Client\test_Data\Managed\UnityEngine.Analytics.dll into Unity Child Domain
 Platform assembly: C:\Users\영남\Documents\CatHideSeek\Client\test_Data\Managed\LitJson.dll (this message is harmless)
 Loading C:\Users\영남\Documents\CatHideSeek\Client\test_Data\Managed\LitJson.dll into Unity Child Domain
-- Completed reload, in  0.040 seconds
+- Completed reload, in  0.042 seconds
 Platform assembly: C:\Users\영남\Documents\CatHideSeek\Client\test_Data\Managed\System.Core.dll (this message is harmless)
 Platform assembly: C:\Users\영남\Documents\CatHideSeek\Client\test_Data\Managed\System.dll (this message is harmless)
 Platform assembly: C:\Users\영남\Documents\CatHideSeek\Client\test_Data\Managed\Mono.Security.dll (this message is harmless)
@@ -38,10 +38,10 @@ desktop: 2048x1152 60Hz; virtual: 2048x1152 at 0,0
 <RI> Initializing input.
 <RI> Input initialized.
 <RI> Initialized touch support.
-UnloadTime: 1.828651 ms
+UnloadTime: 1.378323 ms
 Setting up 2 worker threads for Enlighten.
-  Thread -> id: 2be4 -> priority: 1 
-  Thread -> id: c98 -> priority: 1 
+  Thread -> id: 1e50 -> priority: 1 
+  Thread -> id: 500 -> priority: 1 
 연결성공
 UnityEngine.DebugLogHandler:Internal_Log(LogType, String, Object)
 UnityEngine.DebugLogHandler:LogFormat(LogType, Object, String, Object[])
@@ -52,17 +52,53 @@ SocketIO.SocketIOComponent:Update() (at C:\Users\영남\Documents\CatHideSeek\Cl
  
 (Filename: C:/Users/영남/Documents/CatHideSeek/Client/Assets/SocketIO/Scripts/SocketIO/SocketIOComponent.cs Line: 143)
 
-User11 / User99
+host is True
 UnityEngine.DebugLogHandler:Internal_Log(LogType, String, Object)
 UnityEngine.DebugLogHandler:LogFormat(LogType, Object, String, Object[])
 UnityEngine.Logger:Log(LogType, Object)
 UnityEngine.Debug:Log(Object)
 UnityEngine.MonoBehaviour:print(Object)
-NetworkManager:OnUserList(SocketIOEvent) (at C:\Users\영남\Documents\CatHideSeek\Client\Assets\Script\Network\NetworkManager.cs:290)
+NetworkManager:OnJoin(SocketIOEvent) (at C:\Users\영남\Documents\CatHideSeek\Client\Assets\Script\Network\NetworkManager.cs:240)
 SocketIO.SocketIOComponent:EmitEvent(SocketIOEvent) (at C:\Users\영남\Documents\CatHideSeek\Client\Assets\SocketIO\Scripts\SocketIO\SocketIOComponent.cs:401)
 SocketIO.SocketIOComponent:Update() (at C:\Users\영남\Documents\CatHideSeek\Client\Assets\SocketIO\Scripts\SocketIO\SocketIOComponent.cs:130)
  
-(Filename: C:/Users/영남/Documents/CatHideSeek/Client/Assets/Script/Network/NetworkManager.cs Line: 290)
+(Filename: C:/Users/영남/Documents/CatHideSeek/Client/Assets/Script/Network/NetworkManager.cs Line: 240)
+
+host is False
+UnityEngine.DebugLogHandler:Internal_Log(LogType, String, Object)
+UnityEngine.DebugLogHandler:LogFormat(LogType, Object, String, Object[])
+UnityEngine.Logger:Log(LogType, Object)
+UnityEngine.Debug:Log(Object)
+UnityEngine.MonoBehaviour:print(Object)
+NetworkManager:OnJoin(SocketIOEvent) (at C:\Users\영남\Documents\CatHideSeek\Client\Assets\Script\Network\NetworkManager.cs:240)
+SocketIO.SocketIOComponent:EmitEvent(SocketIOEvent) (at C:\Users\영남\Documents\CatHideSeek\Client\Assets\SocketIO\Scripts\SocketIO\SocketIOComponent.cs:401)
+SocketIO.SocketIOComponent:Update() (at C:\Users\영남\Documents\CatHideSeek\Client\Assets\SocketIO\Scripts\SocketIO\SocketIOComponent.cs:130)
+ 
+(Filename: C:/Users/영남/Documents/CatHideSeek/Client/Assets/Script/Network/NetworkManager.cs Line: 240)
+
+host is False
+UnityEngine.DebugLogHandler:Internal_Log(LogType, String, Object)
+UnityEngine.DebugLogHandler:LogFormat(LogType, Object, String, Object[])
+UnityEngine.Logger:Log(LogType, Object)
+UnityEngine.Debug:Log(Object)
+UnityEngine.MonoBehaviour:print(Object)
+NetworkManager:OnJoin(SocketIOEvent) (at C:\Users\영남\Documents\CatHideSeek\Client\Assets\Script\Network\NetworkManager.cs:240)
+SocketIO.SocketIOComponent:EmitEvent(SocketIOEvent) (at C:\Users\영남\Documents\CatHideSeek\Client\Assets\SocketIO\Scripts\SocketIO\SocketIOComponent.cs:401)
+SocketIO.SocketIOComponent:Update() (at C:\Users\영남\Documents\CatHideSeek\Client\Assets\SocketIO\Scripts\SocketIO\SocketIOComponent.cs:130)
+ 
+(Filename: C:/Users/영남/Documents/CatHideSeek/Client/Assets/Script/Network/NetworkManager.cs Line: 240)
+
+host is False
+UnityEngine.DebugLogHandler:Internal_Log(LogType, String, Object)
+UnityEngine.DebugLogHandler:LogFormat(LogType, Object, String, Object[])
+UnityEngine.Logger:Log(LogType, Object)
+UnityEngine.Debug:Log(Object)
+UnityEngine.MonoBehaviour:print(Object)
+NetworkManager:OnJoin(SocketIOEvent) (at C:\Users\영남\Documents\CatHideSeek\Client\Assets\Script\Network\NetworkManager.cs:240)
+SocketIO.SocketIOComponent:EmitEvent(SocketIOEvent) (at C:\Users\영남\Documents\CatHideSeek\Client\Assets\SocketIO\Scripts\SocketIO\SocketIOComponent.cs:401)
+SocketIO.SocketIOComponent:Update() (at C:\Users\영남\Documents\CatHideSeek\Client\Assets\SocketIO\Scripts\SocketIO\SocketIOComponent.cs:130)
+ 
+(Filename: C:/Users/영남/Documents/CatHideSeek/Client/Assets/Script/Network/NetworkManager.cs Line: 240)
 
 host is False
 UnityEngine.DebugLogHandler:Internal_Log(LogType, String, Object)
@@ -99,29 +135,6 @@ SocketIO.SocketIOComponent:EmitEvent(SocketIOEvent) (at C:\Users\영남\Document
 SocketIO.SocketIOComponent:Update() (at C:\Users\영남\Documents\CatHideSeek\Client\Assets\SocketIO\Scripts\SocketIO\SocketIOComponent.cs:130)
  
 (Filename: C:/Users/영남/Documents/CatHideSeek/Client/Assets/Script/Network/NetworkManager.cs Line: 341)
-
-아이템 획득
-UnityEngine.DebugLogHandler:Internal_Log(LogType, String, Object)
-UnityEngine.DebugLogHandler:LogFormat(LogType, Object, String, Object[])
-UnityEngine.Logger:Log(LogType, Object)
-UnityEngine.Debug:Log(Object)
-UnityEngine.MonoBehaviour:print(Object)
-PlayerController:OnTriggerEnter(Collider) (at C:\Users\영남\Documents\CatHideSeek\Client\Assets\Script\InGame\PlayerController.cs:221)
- 
-(Filename: C:/Users/영남/Documents/CatHideSeek/Client/Assets/Script/InGame/PlayerController.cs Line: 221)
-
-열쇠 소지갯수: 0
-UnityEngine.DebugLogHandler:Internal_Log(LogType, String, Object)
-UnityEngine.DebugLogHandler:LogFormat(LogType, Object, String, Object[])
-UnityEngine.Logger:Log(LogType, Object)
-UnityEngine.Debug:Log(Object)
-UnityEngine.MonoBehaviour:print(Object)
-PlayerDataManager:EatKey() (at C:\Users\영남\Documents\CatHideSeek\Client\Assets\Script\Network\PlayerDataManager.cs:28)
-Key:Eaten() (at C:\Users\영남\Documents\CatHideSeek\Client\Assets\Script\InGame\Item\Key.cs:11)
-Item:SetDestroy() (at C:\Users\영남\Documents\CatHideSeek\Client\Assets\Script\InGame\Item\Item.cs:42)
-PlayerController:OnTriggerEnter(Collider) (at C:\Users\영남\Documents\CatHideSeek\Client\Assets\Script\InGame\PlayerController.cs:222)
- 
-(Filename: C:/Users/영남/Documents/CatHideSeek/Client/Assets/Script/Network/PlayerDataManager.cs Line: 28)
 
 태그 실행
 UnityEngine.DebugLogHandler:Internal_Log(LogType, String, Object)
@@ -161,3 +174,4 @@ SocketIO.SocketIOComponent:Update() (at C:\Users\영남\Documents\CatHideSeek\Cl
  
 (Filename: C:/Users/영남/Documents/CatHideSeek/Client/Assets/Script/Network/Room.cs Line: 162)
 
+Waiting for finish

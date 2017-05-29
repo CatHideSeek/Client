@@ -284,12 +284,16 @@ public class NetworkManager : MonoBehaviour
         {
             string socketID = json["userList"][i]["socketID"].ToString();
             string name = json["userList"][i]["name"].ToString();
-            
+            bool isHost = bool.Parse(json["userList"][i]["isHost"].ToString());
+
+            print(isHost +"asd //");
+
             if (playerData.my.name != name)
             {
                 print(playerData.my.name + " / " + name);
 
                 User user = new User(name, socketID);
+                user.isHost = isHost;
 
                 enterRoom.AddUser(user);
 

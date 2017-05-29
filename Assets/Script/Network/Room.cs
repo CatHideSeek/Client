@@ -51,7 +51,7 @@ public class Room
         this.maxPlayers = 2;
         this.userList = new List<User>();
     }
-    
+
     /// <summary>
     /// 방을 생성합니다.
     /// </summary>
@@ -104,7 +104,8 @@ public class Room
     /// 방 내 유저 리스트에 특정 유저를 추가 합니다.
     /// </summary>
     /// <param name="user"></param>
-    public void AddUser(User user) {
+    public void AddUser(User user)
+    {
         userList.Add(user);
         UpdateCountPlayer(1);
     }
@@ -134,8 +135,9 @@ public class Room
     /// <summary>
     /// 방 내 유저 리스트에서 숙주 술래가 되는 유저를 선택하고 전송합니다.
     /// </summary>
-    public void SetFirstBoss() {
-        int rand = Random.Range(0,countPlayers);
+    public void SetFirstBoss()
+    {
+        int rand = Random.Range(0, countPlayers);
         NetworkManager.instance.SendRootTag(userList[rand].name);
     }
 
@@ -143,7 +145,8 @@ public class Room
     /// 방 내 유저 수를 조정합니다.
     /// </summary>
     /// <param name="count">카운트 + / - </param>
-    public void UpdateCountPlayer(int count) {
+    public void UpdateCountPlayer(int count)
+    {
         countPlayers += count;
     }
 
