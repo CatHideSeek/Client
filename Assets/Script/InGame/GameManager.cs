@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
+
 public class GameManager : MonoBehaviour {
 
 
@@ -14,7 +16,11 @@ public class GameManager : MonoBehaviour {
     public bool isPortalSet = false;
     public bool isEnd = false;
 
+	public MapGenerator mapGenerator;
     public GameObject playerObject, portalObject;
+	public GameObject[] blockObject;
+	public Vector3 spawnPos=Vector3.zero;
+	public List<Block> blockList=new List<Block>();
     public Transform map;
 
     public PortalController portal;

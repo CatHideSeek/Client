@@ -28,6 +28,7 @@ public class UIInGame : MonoBehaviour
 
     public void TestEnter() {
         NetworkManager.instance.TestEnterRoom();
+		GameManager.instance.mapGenerator.InitMap ();
     }
 
     public void SetHost() {
