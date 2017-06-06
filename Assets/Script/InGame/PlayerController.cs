@@ -18,7 +18,7 @@ public class PlayerController : MonoBehaviour
 
     private float h, v;
 
-    public float movSpeed = 5f, rotSpeed = 10f;
+    public float movSpeed = 5f, rotSpeed = 10f, jumpPower = 6f;
 
     Vector3 oldPos, currentPos;
     Quaternion oldRot, currentRot;
@@ -53,6 +53,10 @@ public class PlayerController : MonoBehaviour
         {
             h = Input.GetAxis("Horizontal");
             v = Input.GetAxis("Vertical");
+
+            if (Input.GetKeyDown(KeyCode.Z)) {
+                Jump();
+            }
         }
 
     }
@@ -124,6 +128,10 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    void Jump() {
+        ri.velocity = new Vector3(ri.velocity.x, jumpPower, ri.velocity.z);
+    }
+
     /// <summary>
     /// 플레이어의 이동 함수
     /// </summary>
@@ -141,7 +149,7 @@ public class PlayerController : MonoBehaviour
 
         tr.rotation = Quaternion.Slerp(tr.rotation, Quaternion.LookRotation(targetDir), Time.deltaTime * rotSpeed);
 
-        ri.velocity = Vector3.zero;
+        ri.velocity = new Vector3(0, ri.velocity.y, 0);
         ri.AddForce(inputDir * movSpeed, ForceMode.VelocityChange);
 
         CheckPosition();

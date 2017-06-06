@@ -69,7 +69,7 @@ public class IslandGenerator : MonoBehaviour
 				Vector3 blockPos = transform.position + pos.ToVector3 (h);
 				int blockId = Random.Range (0, GameManager.instance.blockObject.Length);
 
-				Instantiate (GameManager.instance.blockObject[blockId], blockPos, Quaternion.identity);
+				Instantiate (GameManager.instance.blockObject[blockId], blockPos, Quaternion.Euler(-90,0,0));
 				GameManager.instance.blockList.Add (new Block (blockPos, blockId));
 			}
 		}

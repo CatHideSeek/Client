@@ -4,7 +4,8 @@ using UnityEngine;
 
 
 
-public class GameManager : MonoBehaviour {
+public class GameManager : MonoBehaviour
+{
 
 
     public static GameManager instance;
@@ -16,11 +17,11 @@ public class GameManager : MonoBehaviour {
     public bool isPortalSet = false;
     public bool isEnd = false;
 
-	public MapGenerator mapGenerator;
+    public MapGenerator mapGenerator;
     public GameObject playerObject, portalObject;
-	public GameObject[] blockObject;
-	public Vector3 spawnPos=Vector3.zero;
-	public List<Block> blockList=new List<Block>();
+    public GameObject[] blockObject;
+    public Vector3 spawnPos = Vector3.zero;
+    public List<Block> blockList = new List<Block>();
     public Transform map;
 
     public PortalController portal;
@@ -29,15 +30,18 @@ public class GameManager : MonoBehaviour {
 
     UIInGame ui;
 
-    void Awake() {
+    void Awake()
+    {
         instance = this;
     }
 
-    void Start() {
+    void Start()
+    {
         ui = UIInGame.instance;
     }
 
-    public void StartGame() {
+    public void StartGame()
+    {
         isPlay = true;
         SetKeySpawner();
     }
@@ -50,27 +54,31 @@ public class GameManager : MonoBehaviour {
             Instantiate(keySpawnerPrefab, randomPos, Quaternion.identity);
         }
     }
-	
-	// Update is called once per frame
-	void Update () {
+
+    // Update is called once per frame
+    void Update()
+    {
         if (isPlay && !isEnd)
             Timer();
-        else if(!isPlay && PlayerDataManager.instance.my.isHost && Input.GetKeyDown(KeyCode.Space))
+
+        else if (!isPlay && PlayerDataManager.instance.my.isHost && Input.GetKeyDown(KeyCode.Space))
         {
             NetworkManager.instance.enterRoom.SetFirstBoss();
             NetworkManager.instance.SendStart();
         }
 
-	}
+    }
 
-    void Timer() {
+    void Timer()
+    {
         currentTime -= Time.deltaTime;
 
-        ui.UpdateTimerText(string.Format("{0:D2} : {1:D2}",(int)currentTime/60, (int)currentTime%60));
+        ui.UpdateTimerText(string.Format("{0:D2} : {1:D2}", (int)currentTime / 60, (int)currentTime % 60));
 
 
         //포탈 생성 조건
-        if (!isPortalSet && currentTime < portalOpenTime) {
+        if (!isPortalSet && currentTime < portalOpenTime)
+        {
             portalObject.SetActive(true);
             isPortalSet = true;
         }
@@ -83,7 +91,7 @@ public class GameManager : MonoBehaviour {
         }
     }
 
-    
+
 
 
 }
