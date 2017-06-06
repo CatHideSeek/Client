@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class OpacityObject : MonoBehaviour {
     [SerializeField]
-    float opaSpeed = 2f;
+    float opaSpeed = 8f;
 
     bool opacity=false;
     Material mat;

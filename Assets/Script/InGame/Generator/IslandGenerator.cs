@@ -4,155 +4,215 @@ using UnityEngine;
 
 class BlockPos
 {
-	public int x, y;
+    public int x, y;
 
-	public BlockPos (int _x = 0, int _y = 0)
-	{
-		x = _x;
-		y = _y;
-	}
+    public BlockPos(int _x = 0, int _y = 0)
+    {
+        x = _x;
+        y = _y;
+    }
 
-	public Vector3 ToVector3 (int h)
-	{
-		return new Vector3 (x - 4, h, y - 4);
-	}
+    public Vector3 ToVector3(int h)
+    {
+        return new Vector3(x - 4, h, y - 4);
+    }
 
-	public static bool operator == (BlockPos pos1, BlockPos pos2)
-	{
-		if (System.Object.ReferenceEquals (pos1, pos2)) {
-			return true;
-		}
+    public static bool operator ==(BlockPos pos1, BlockPos pos2)
+    {
+        if (System.Object.ReferenceEquals(pos1, pos2))
+        {
+            return true;
+        }
 
-		if (((object)pos1 == null) || ((object)pos2 == null)) {
-			return false;
-		}
+        if (((object)pos1 == null) || ((object)pos2 == null))
+        {
+            return false;
+        }
 
 
-		return pos1.x == pos2.x && pos1.y == pos2.y;
-	}
+        return pos1.x == pos2.x && pos1.y == pos2.y;
+    }
 
-	public static bool operator != (BlockPos pos1, BlockPos pos2)
-	{
-		return !(pos1 == pos2);
-	}
+    public static bool operator !=(BlockPos pos1, BlockPos pos2)
+    {
+        return !(pos1 == pos2);
+    }
 }
 
 public class IslandGenerator : MonoBehaviour
 {
-	public static int maxFloor = 6;
-	public static int minTreeNum = 0;
-	public static int maxTreeNum = 3;
-	public static int minBushNum = 3;
-	public static int maxBushNum = 6;
+    public static int maxFloor = 6;
+    public static int minTreeNum = 0;
+    public static int maxTreeNum = 3;
+    public static int minBushNum = 3;
+    public static int maxBushNum = 6;
 
-	public GameObject treePrefab;
-	public GameObject bushPrefab;
+    public GameObject treePrefab;
+    public GameObject bushPrefab;
 
-	List<BlockPos>[] mapList = new List<BlockPos>[maxFloor];
-	List<BlockPos>[] topMapList = new List<BlockPos>[maxFloor];
-	//Leave top blocks only
+    List<BlockPos>[] mapList = new List<BlockPos>[maxFloor];
+    List<BlockPos>[] topMapList = new List<BlockPos>[maxFloor];
+    //Leave top blocks only
 
-	void Awake ()
-	{
-		//Init 'mapList' and 'topMapList', Call 'SetBlocks()'
-		for (int i = 0; i < maxFloor; i++) {
-			mapList [i] = new List<BlockPos> ();
-			topMapList [i] = new List<BlockPos> ();
-			SetBlocks (i, 6 - i, 6 - i);
-		}
+    List<GameObject> blocks = new List<GameObject>();
 
-		//Create blocks
-		for (int h = 0; h < maxFloor; h++) {
-			foreach (BlockPos pos in mapList[h]) {
-				if (transform.position + pos.ToVector3 (0) == Vector3.zero)
-					GameManager.instance.spawnPos.y = h+2;
-				Vector3 blockPos = transform.position + pos.ToVector3 (h);
-				int blockId = Random.Range (0, GameManager.instance.blockObject.Length);
+    void Awake()
+    {
+        //Init 'mapList' and 'topMapList', Call 'SetBlocks()'
+        for (int i = 0; i < maxFloor; i++)
+        {
+            mapList[i] = new List<BlockPos>();
+            topMapList[i] = new List<BlockPos>();
+            SetBlocks(i, 6 - i, 6 - i);
+        }
 
-				Instantiate (GameManager.instance.blockObject[blockId], blockPos, Quaternion.Euler(-90,0,0));
-				GameManager.instance.blockList.Add (new Block (blockPos, blockId));
-			}
-		}
+        //Create blocks
+        for (int h = 0; h < maxFloor; h++)
+        {
+            foreach (BlockPos pos in mapList[h])
+            {
+                if (transform.position + pos.ToVector3(0) == Vector3.zero)
+                    GameManager.instance.spawnPos.y = h + 2;
+                Vector3 blockPos = transform.position + pos.ToVector3(h);
+                int blockId = Random.Range(0, GameManager.instance.blockObject.Length);
 
-		CreateTrees (Random.Range (minTreeNum, maxTreeNum + 1));
-		CreateBushes (Random.Range (minBushNum, maxBushNum + 1));
-	}
+                GameObject g = Instantiate(GameManager.instance.blockObject[blockId], blockPos, Quaternion.Euler(-90, 0, 0));
+                g.transform.parent = transform;
+                blocks.Add(g);
+                GameManager.instance.blockList.Add(new Block(blockPos, blockId));
+            }
+        }
 
-	void SetBlocks (int floor, int min, int max)
-	{
-		if (floor > 0) {
-			for (int i = 0; i < Random.Range (floor, floor * 2 - (1 + floor / 2)); i++) {
-				//Set size with random
-				int size = Random.Range (min, max);
-				size += size - 1;
+        CreateTrees(Random.Range(minTreeNum, maxTreeNum + 1));
+        CreateBushes(Random.Range(minBushNum, maxBushNum + 1));
 
-				//Choose position with random in 'mapList'
-				BlockPos pos = mapList [floor - 1] [Random.Range (0, mapList [floor - 1].Count)];
-				if (floor == 1) {
-					pos = new BlockPos (4, 4);
-					size = 7;
-				}
+        //CombineBlocks();
 
-				//Set blocks
-				for (int y = pos.y - size / 2; y <= pos.y + size / 2; y++) {
-					for (int x = pos.x - size / 2; x <= pos.x + size / 2; x++) {
-						BlockPos blockPos = new BlockPos (x, y);
+    }
 
-						//Remove overlap blocks in 'topMapList'
-						for (int j = 0; j <= floor; j++) {
-							List<BlockPos> overlaps = topMapList [j].FindAll (delegate(BlockPos iter) {
-								return iter == blockPos;
-							});
-							foreach (BlockPos overlap in overlaps) {
-								if (overlap != null) {
-									topMapList [j].Remove (overlap);
-									if (j == floor) {
-										mapList [j].Remove (overlap);
-									}
-								}
-							}
+    void SetBlocks(int floor, int min, int max)
+    {
+        if (floor > 0)
+        {
+            for (int i = 0; i < Random.Range(floor, floor * 2 - (1 + floor / 2)); i++)
+            {
+                //Set size with random
+                int size = Random.Range(min, max);
+                size += size - 1;
 
-						}
+                //Choose position with random in 'mapList'
+                BlockPos pos = mapList[floor - 1][Random.Range(0, mapList[floor - 1].Count)];
+                if (floor == 1)
+                {
+                    pos = new BlockPos(4, 4);
+                    size = 7;
+                }
 
-						mapList [floor].Add (blockPos);
-						topMapList [floor].Add (blockPos);
-					}
-				}
-			}
-		} else {
-			//Set blocks
-			for (int y = 0; y < 9; y++) {
-				for (int x = 0; x < 9; x++) {
-					mapList [floor].Add (new BlockPos (x, y));
-					topMapList [floor].Add (new BlockPos (x, y));
-				}
-			}
-		}
-	}
+                //Set blocks
+                for (int y = pos.y - size / 2; y <= pos.y + size / 2; y++)
+                {
+                    for (int x = pos.x - size / 2; x <= pos.x + size / 2; x++)
+                    {
+                        BlockPos blockPos = new BlockPos(x, y);
 
-	void CreateTrees (int cnt)
-	{
-		//Create trees
-		for (int i = 0; i < cnt; i++) {
-			int h = Random.Range (4, 6);
-			if (topMapList [h].Count > 0) {
-				int r = Random.Range (0, topMapList [h].Count);
-				Instantiate (treePrefab, transform.position + topMapList [h] [r].ToVector3 (h + 1), Quaternion.identity);
-				topMapList [h].Remove (topMapList [h] [r]);//이미 생성된 곳은 중복을 방지하기 위해서 리스트에서 지워준다
-			}
-		}
-	}
+                        //Remove overlap blocks in 'topMapList'
+                        for (int j = 0; j <= floor; j++)
+                        {
+                            List<BlockPos> overlaps = topMapList[j].FindAll(delegate (BlockPos iter)
+                            {
+                                return iter == blockPos;
+                            });
+                            foreach (BlockPos overlap in overlaps)
+                            {
+                                if (overlap != null)
+                                {
+                                    topMapList[j].Remove(overlap);
+                                    if (j == floor)
+                                    {
+                                        mapList[j].Remove(overlap);
+                                    }
+                                }
+                            }
 
-	void CreateBushes (int cnt)
-	{
-		//Create bushes
-		for (int i = 0; i < cnt; i++) {
-			int h = Random.Range (0, 6);
-			if (topMapList [h].Count > 0) {
-				int r = Random.Range (0, topMapList [h].Count);
-				Instantiate (bushPrefab, transform.position + topMapList [h] [r].ToVector3 (h + 1), Quaternion.identity);
-				topMapList [h].Remove (topMapList [h] [r]);//이미 생성된 곳은 중복을 방지하기 위해서 리스트에서 지워준다
-			}
-		}
-	}
+                        }
+
+                        mapList[floor].Add(blockPos);
+                        topMapList[floor].Add(blockPos);
+                    }
+                }
+            }
+        }
+        else {
+            //Set blocks
+            for (int y = 0; y < 9; y++)
+            {
+                for (int x = 0; x < 9; x++)
+                {
+                    mapList[floor].Add(new BlockPos(x, y));
+                    topMapList[floor].Add(new BlockPos(x, y));
+                }
+            }
+        }
+    }
+
+    void CreateTrees(int cnt)
+    {
+        //Create trees
+        for (int i = 0; i < cnt; i++)
+        {
+            int h = Random.Range(4, 6);
+            if (topMapList[h].Count > 0)
+            {
+                int r = Random.Range(0, topMapList[h].Count);
+                GameObject g = Instantiate(treePrefab, transform.position + topMapList[h][r].ToVector3(h + 1), Quaternion.identity);
+                g.transform.parent = transform;
+                topMapList[h].Remove(topMapList[h][r]);//이미 생성된 곳은 중복을 방지하기 위해서 리스트에서 지워준다
+            }
+        }
+    }
+
+    void CreateBushes(int cnt)
+    {
+        //Create bushes
+        for (int i = 0; i < cnt; i++)
+        {
+            int h = Random.Range(0, 6);
+            if (topMapList[h].Count > 0)
+            {
+                int r = Random.Range(0, topMapList[h].Count);
+                GameObject g = Instantiate(bushPrefab, transform.position + topMapList[h][r].ToVector3(h + 1), Quaternion.Euler(-90, 0, 0));
+                g.transform.parent = transform;
+                topMapList[h].Remove(topMapList[h][r]);//이미 생성된 곳은 중복을 방지하기 위해서 리스트에서 지워준다
+            }
+        }
+    }
+
+
+    public void CombineBlocks()
+    {
+        gameObject.AddComponent<MeshFilter>();
+        gameObject.AddComponent<MeshRenderer>();
+
+        MeshFilter[] meshFilters = GetComponentsInChildren<MeshFilter>();
+        CombineInstance[] combine = new CombineInstance[meshFilters.Length];
+
+        MeshRenderer[] meshRenderer = GetComponentsInChildren<MeshRenderer>();  //자신의 및 모든 하위 물체 모든 MeshRenderer 구성 요소 가져오는 중
+        Material[] mats = new Material[meshRenderer.Length];                    //새 재질 볼 배열
+
+        for (int i = 0; i < meshFilters.Length; i++)
+        {
+            mats[i] = meshRenderer[i].sharedMaterial;                           //재질 볼 목록 가져오기
+
+            combine[i].mesh = meshFilters[i].sharedMesh;
+            combine[i].transform = meshFilters[i].transform.localToWorldMatrix;
+            meshFilters[i].gameObject.SetActive(false);
+        }
+
+        transform.GetComponent<MeshFilter>().mesh = new Mesh();
+        transform.GetComponent<MeshFilter>().mesh.CombineMeshes(combine, false);//mesh.CombineMeshes 위해 추가합니다 false 매개 변수, 표시 결코 합병 을 하나의 격자 아니라 한 키가 격자 목록
+
+        transform.GetComponent<MeshRenderer>().sharedMaterials = mats;          //합병 후 GameObject 위해 지정된 재질
+
+        transform.gameObject.SetActive(true);
+    }
 }

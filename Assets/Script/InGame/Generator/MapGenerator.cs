@@ -47,12 +47,19 @@ public class MapGenerator : MonoBehaviour
 				GameObject obj = Instantiate (bridgePrefab, transform.position + new Vector3 ((temp.x + currentPos.x) / 2, 0, (temp.y + currentPos.y) / 2) * 10, Quaternion.identity);
 				if (temp.y - currentPos.y != 0)
 					obj.transform.Rotate (new Vector3 (0, 90, 0));
+                obj.transform.parent = transform;
+                obj.name +=  " "+(i-1)+">>"+i;
+
 			} else
 				currentPos = temp;
 			GameObject islandGenerator = Instantiate (islandPrefab, transform.position + new Vector3 (temp.x, 0, temp.y) * 10, Quaternion.identity);
+            islandGenerator.transform.parent = transform;
+            islandGenerator.name += " " + i; 
 			islandList.Add (temp);
 			currentPos = temp;
 		}
+
+        transform.Rotate(new Vector3(0, 45, 0));
 	}
 
 	IslandPos SetIsland (IslandPos pos)

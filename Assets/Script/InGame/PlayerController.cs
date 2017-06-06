@@ -150,7 +150,7 @@ public class PlayerController : MonoBehaviour
         tr.rotation = Quaternion.Slerp(tr.rotation, Quaternion.LookRotation(targetDir), Time.deltaTime * rotSpeed);
 
         ri.velocity = new Vector3(0, ri.velocity.y, 0);
-        ri.AddForce(inputDir * movSpeed, ForceMode.VelocityChange);
+        ri.velocity = new Vector3(inputDir.x * movSpeed, ri.velocity.y, inputDir.z * movSpeed);
 
         CheckPosition();
         CheckRotation();
