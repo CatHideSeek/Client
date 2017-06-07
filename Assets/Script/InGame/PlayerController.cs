@@ -42,7 +42,6 @@ public class PlayerController : MonoBehaviour
         //회전 초기값 지정
         currentRot = tr.rotation;
         oldRot = currentRot;
-        user.isPlayer = true;
     }
 
     // Update is called once per frame

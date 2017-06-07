@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: 7a7543980b24d4143adbe26b35d6bfa3
+timeCreated: 1496794481
+licenseType: Free
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: TmonMonsoriOTF
+  fontNames:
+  - TmonMonsoriOTF
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

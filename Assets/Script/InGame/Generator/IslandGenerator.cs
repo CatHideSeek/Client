@@ -42,8 +42,8 @@ class BlockPos
 public class IslandGenerator : MonoBehaviour
 {
     public static int maxFloor = 6;
-    public static int minTreeNum = 0;
-    public static int maxTreeNum = 3;
+    public static int minTreeNum = 4;
+    public static int maxTreeNum = 12;
     public static int minBushNum = 3;
     public static int maxBushNum = 6;
 
@@ -54,7 +54,10 @@ public class IslandGenerator : MonoBehaviour
     List<BlockPos>[] topMapList = new List<BlockPos>[maxFloor];
     //Leave top blocks only
 
-    List<GameObject> blocks = new List<GameObject>();
+
+    public List<GameObject> blocks = new List<GameObject>();
+    public bool useMipMaps = true;
+    public TextureFormat textureFormat = TextureFormat.RGB24;
 
     void Awake()
     {
@@ -83,8 +86,11 @@ public class IslandGenerator : MonoBehaviour
             }
         }
 
+        Combine();
+
         CreateTrees(Random.Range(minTreeNum, maxTreeNum + 1));
         CreateBushes(Random.Range(minBushNum, maxBushNum + 1));
+
 
         //CombineBlocks();
 
@@ -142,7 +148,8 @@ public class IslandGenerator : MonoBehaviour
                 }
             }
         }
-        else {
+        else
+        {
             //Set blocks
             for (int y = 0; y < 9; y++)
             {
@@ -164,7 +171,7 @@ public class IslandGenerator : MonoBehaviour
             if (topMapList[h].Count > 0)
             {
                 int r = Random.Range(0, topMapList[h].Count);
-                GameObject g = Instantiate(treePrefab, transform.position + topMapList[h][r].ToVector3(h + 1), Quaternion.identity);
+                GameObject g = Instantiate(treePrefab, transform.position + topMapList[h][r].ToVector3(h + 1), Quaternion.Euler(-90, 0, 0));
                 g.transform.parent = transform;
                 topMapList[h].Remove(topMapList[h][r]);//이미 생성된 곳은 중복을 방지하기 위해서 리스트에서 지워준다
             }
@@ -187,32 +194,122 @@ public class IslandGenerator : MonoBehaviour
         }
     }
 
-
-    public void CombineBlocks()
+    private void Combine()
     {
-        gameObject.AddComponent<MeshFilter>();
-        gameObject.AddComponent<MeshRenderer>();
 
-        MeshFilter[] meshFilters = GetComponentsInChildren<MeshFilter>();
-        CombineInstance[] combine = new CombineInstance[meshFilters.Length];
+        int size;
+        int originalSize;
+        int pow2;
+        Texture2D combinedTexture;
+        Material material;
+        Texture2D texture;
+        Mesh mesh;
+        Hashtable textureAtlas = new Hashtable();
 
-        MeshRenderer[] meshRenderer = GetComponentsInChildren<MeshRenderer>();  //자신의 및 모든 하위 물체 모든 MeshRenderer 구성 요소 가져오는 중
-        Material[] mats = new Material[meshRenderer.Length];                    //새 재질 볼 배열
-
-        for (int i = 0; i < meshFilters.Length; i++)
+        if (blocks.Count > 1)
         {
-            mats[i] = meshRenderer[i].sharedMaterial;                           //재질 볼 목록 가져오기
+            originalSize = blocks[0].GetComponent<MeshRenderer>().material.mainTexture.width;
+            //pow2 = GetTextureSize(blocks);
+            pow2 = 4;
+            size = pow2 * originalSize;
+            combinedTexture = new Texture2D(size, size, textureFormat, useMipMaps);
 
-            combine[i].mesh = meshFilters[i].sharedMesh;
-            combine[i].transform = meshFilters[i].transform.localToWorldMatrix;
-            meshFilters[i].gameObject.SetActive(false);
+            for (int i = 0; i < blocks.Count; i++)
+            {
+                texture = (Texture2D)blocks[i].GetComponent<MeshRenderer>().material.mainTexture;
+                if (!textureAtlas.ContainsKey(texture))
+                {
+
+                    combinedTexture.SetPixels((int)((i % pow2) * originalSize), (int)((i / pow2) * originalSize), originalSize, originalSize, texture.GetPixels());
+                    textureAtlas.Add(texture, new Vector2(i % pow2, i / pow2));
+                }
+            }
+            combinedTexture.Apply();
+
+            material = new Material(Shader.Find("Mobile/Diffuse"));
+            material.mainTexture = combinedTexture;
+            
+            for (int i = 0; i < blocks.Count; i++)
+            {
+                mesh = blocks[i].GetComponent<MeshFilter>().mesh;
+                Vector2[] uv = new Vector2[mesh.uv.Length];
+                Vector2 offset;
+                if (textureAtlas.ContainsKey(blocks[i].GetComponent<MeshRenderer>().material.mainTexture))
+                {
+                    offset = (Vector2)textureAtlas[blocks[i].GetComponent<MeshRenderer>().material.mainTexture];
+                    for (int u = 0; u < mesh.uv.Length; u++)
+                    {
+                        uv[u] = mesh.uv[u] / (float)pow2;
+                        uv[u].x += ((float)offset.x) / (float)pow2;
+                        uv[u].y += ((float)offset.y) / (float)pow2;
+                    }
+                }
+                else
+                {
+                    //에러 예외
+                }
+
+                mesh.uv = uv;
+                blocks[i].GetComponent<MeshRenderer>().material = material;
+            }
+            
+
+            int staticCount = 0;
+            CombineInstance[] combine = new CombineInstance[blocks.Count];
+            for (int i = 0; i < blocks.Count; i++)
+            {
+                if (blocks[i].isStatic)
+                {
+                    staticCount++;
+                    combine[i].mesh = blocks[i].GetComponent<MeshFilter>().mesh;
+                    combine[i].transform = blocks[i].transform.localToWorldMatrix;
+                }
+            }
+            
+            if (staticCount > 1)
+            {
+                GameObject g = new GameObject("islandRender");
+                MeshFilter filter = g.AddComponent<MeshFilter>();
+                MeshRenderer renderer = g.AddComponent<MeshRenderer>();
+                filter.mesh = new Mesh();
+                filter.mesh.CombineMeshes(combine);
+                renderer.material = material;
+
+                //생성된 블럭을 삭제합니다.
+                for (int i = 0; i < blocks.Count; i++)
+                {
+                    if (blocks[i].isStatic)
+                    {
+                        Destroy(blocks[i]);
+                    }
+                }
+                g.transform.parent = transform;
+                g.AddComponent<MeshCollider>();
+            }
+
+            Resources.UnloadUnusedAssets();
         }
-
-        transform.GetComponent<MeshFilter>().mesh = new Mesh();
-        transform.GetComponent<MeshFilter>().mesh.CombineMeshes(combine, false);//mesh.CombineMeshes 위해 추가합니다 false 매개 변수, 표시 결코 합병 을 하나의 격자 아니라 한 키가 격자 목록
-
-        transform.GetComponent<MeshRenderer>().sharedMaterials = mats;          //합병 후 GameObject 위해 지정된 재질
-
-        transform.gameObject.SetActive(true);
     }
+
+
+    private int GetTextureSize(List<GameObject> o)
+    {
+        List<Texture> textures = new List<Texture>();
+        // 텍스쳐를 검색
+        for (int i = 0; i < o.Count; i++)
+        {
+            if (!textures.Contains(o[i].GetComponent<MeshRenderer>().material.mainTexture))
+            {
+                textures.Add(o[i].GetComponent<MeshRenderer>().material.mainTexture);
+            }
+        }
+        if (textures.Count == 1) return 1;
+        if (textures.Count < 5) return 2;
+        if (textures.Count < 17) return 4;
+        if (textures.Count < 65) return 8;
+        //아무것도 없는 경우
+        return 0;
+    }
+
+
 }
