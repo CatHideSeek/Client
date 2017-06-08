@@ -4,8 +4,5 @@ using UnityEngine;
 
 public class Bush : OpacityObject {
 
-    protected override bool checkOpacity()
-    {
-        return true;
-    }
+
 }

@@ -218,7 +218,7 @@ public class PlayerController : MonoBehaviour
             if (!user.isPlayer)
                 renderer.material.color = new Color(renderer.material.color.r, renderer.material.color.g, renderer.material.color.b, 0f); //0투명 ~ 1 불투명
             else
-                col.GetComponent<Bush>().SetOpacity();
+                col.GetComponent<OpacityObject>().SetOpacity();
         }
         else if (col.CompareTag("Item"))
         {
@@ -268,7 +268,7 @@ public class PlayerController : MonoBehaviour
             if (!user.isPlayer)
                 renderer.material.color = new Color(renderer.material.color.r, renderer.material.color.g, renderer.material.color.b, 1f); //0투명 ~ 1 불투명
             else
-                col.GetComponent<Bush>().SetOpacity(false);
+                col.GetComponent<OpacityObject>().SetOpacity(false);
         }
     }
 

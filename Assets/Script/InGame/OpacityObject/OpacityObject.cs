@@ -22,8 +22,6 @@ public class OpacityObject : MonoBehaviour {
         {
             c.a = Mathf.Lerp(c.a, 0.5f,Time.deltaTime * opaSpeed);
             mat.color = c;
-            if (!checkOpacity())
-                opacity = false;
         }
         else if(c.a<1)
         {
@@ -32,18 +30,9 @@ public class OpacityObject : MonoBehaviour {
         }
 	}
 
-    protected virtual bool checkOpacity()
-    {
-        foreach(RaycastHit hit in Camera.main.GetComponent<CameraController>().hits)
-        {
-            if (hit.transform.gameObject.Equals(gameObject))
-                return true;
-        }
-        return false;
-    }
-
     public void SetOpacity(bool _opacity=true)
     {
         opacity = _opacity;
     }
+
 }
