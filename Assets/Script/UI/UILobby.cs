@@ -11,10 +11,9 @@ public class UILobby : MonoBehaviour
 
     public static UILobby instance;
 
-    public Animator menuAni;
+    public Animator menuAni, rommListAni, roomListChatLogAni, roomListChatInputAni;
 
     public Text roomListText;
-    public Animator rommListAni;
 
     public GameObject roomSlot;
     public List<GameObject> roomSlotList;
@@ -79,12 +78,16 @@ public class UILobby : MonoBehaviour
         {
             RemoveRoomList();
             rommListAni.SetTrigger("Open");
+            roomListChatInputAni.SetTrigger("Open");
+            roomListChatLogAni.SetTrigger("Open");
             CreateRoomList();
             roomListText.text = "Close";
         }
         else
         {
             rommListAni.SetTrigger("Close");
+            roomListChatInputAni.SetTrigger("Close");
+            roomListChatLogAni.SetTrigger("Close");
             roomListText.text = "Open";
         }
     }

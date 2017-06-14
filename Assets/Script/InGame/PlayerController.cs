@@ -16,6 +16,7 @@ public class PlayerController : MonoBehaviour
 
     public TagController tagController;
 
+    [SerializeField]
     private float h, v;
 
     public float movSpeed = 5f, rotSpeed = 10f, jumpPower = 6f;
@@ -50,8 +51,11 @@ public class PlayerController : MonoBehaviour
 
         if (user.isPlayer)
         {
-            h = Input.GetAxis("Horizontal");
-            v = Input.GetAxis("Vertical");
+#if UNITY_EDITOR
+           // h = Input.GetAxis("Horizontal");
+           // v = Input.GetAxis("Vertical");
+#endif
+
 
             if (Input.GetKeyDown(KeyCode.Z)) {
                 Jump();
@@ -80,6 +84,10 @@ public class PlayerController : MonoBehaviour
     }
 
 
+    public void SetAxis(float _h,float _v) {
+        h = _h;
+        v = _v;
+    }
 
     /// <summary>
     /// 유저 데이터를 세팅합니다.
@@ -127,7 +135,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    void Jump() {
+    public void Jump() {
         ri.velocity = new Vector3(ri.velocity.x, jumpPower, ri.velocity.z);
     }
 

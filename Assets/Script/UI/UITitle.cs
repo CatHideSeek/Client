@@ -22,7 +22,7 @@ public class UITitle : MonoBehaviour {
 
 
     public void StartButton() {
-        
+        SceneManager.LoadScene("LobbyScene");
     }
 
     public void LoginButton() {
