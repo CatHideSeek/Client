@@ -20,7 +20,7 @@ public class OpacityObject : MonoBehaviour {
         Color c = mat.color;
         if(opacity)
         {
-            c.a = Mathf.Lerp(c.a, 0.5f,Time.deltaTime * opaSpeed);
+            c.a = Mathf.Lerp(c.a, 0.2f,Time.deltaTime * opaSpeed);
             mat.color = c;
         }
         else if(c.a<1)

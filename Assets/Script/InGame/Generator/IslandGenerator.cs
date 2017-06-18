@@ -46,9 +46,12 @@ public class IslandGenerator : MonoBehaviour
     public static int maxTreeNum = 12;
     public static int minBushNum = 3;
     public static int maxBushNum = 6;
+    public static int minKRockNum = 3;
+    public static int maxRockNum = 6;
 
     public GameObject treePrefab;
     public GameObject bushPrefab;
+    public GameObject rockPrefab;
 
     List<BlockPos>[] mapList = new List<BlockPos>[maxFloor];
     List<BlockPos>[] topMapList = new List<BlockPos>[maxFloor];
@@ -90,9 +93,8 @@ public class IslandGenerator : MonoBehaviour
 
         CreateTrees(Random.Range(minTreeNum, maxTreeNum + 1));
         CreateBushes(Random.Range(minBushNum, maxBushNum + 1));
-
-
-        //CombineBlocks();
+        CreateRocks(Random.Range(minKRockNum,  maxRockNum + 1));
+        
 
     }
 
@@ -188,6 +190,22 @@ public class IslandGenerator : MonoBehaviour
             {
                 int r = Random.Range(0, topMapList[h].Count);
                 GameObject g = Instantiate(bushPrefab, transform.position + topMapList[h][r].ToVector3(h + 1), Quaternion.Euler(-90, 0, 0));
+                g.transform.parent = transform;
+                topMapList[h].Remove(topMapList[h][r]);//이미 생성된 곳은 중복을 방지하기 위해서 리스트에서 지워준다
+            }
+        }
+    }
+
+    void CreateRocks(int cnt)
+    {
+        //Create bushes
+        for (int i = 0; i < cnt; i++)
+        {
+            int h = Random.Range(0, 6);
+            if (topMapList[h].Count > 0)
+            {
+                int r = Random.Range(0, topMapList[h].Count);
+                GameObject g = Instantiate(rockPrefab, transform.position + topMapList[h][r].ToVector3(h + 1), Quaternion.Euler(-90, 0, 0));
                 g.transform.parent = transform;
                 topMapList[h].Remove(topMapList[h][r]);//이미 생성된 곳은 중복을 방지하기 위해서 리스트에서 지워준다
             }
