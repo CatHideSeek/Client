@@ -4,22 +4,23 @@ using UnityEngine;
 
 class IslandPos
 {
-	public int x, y;
+	public int x, y,type;
 
-	public IslandPos (int _x = 0, int _y = 0)
+	public IslandPos (int _x = 0, int _y = 0, int _type=0)
 	{
 		x = _x;
 		y = _y;
+		type=_type;
 	}
 
 	public static IslandPos operator + (IslandPos pos1, IslandPos pos2)
 	{
-		return new IslandPos (pos1.x + pos2.x, pos1.y + pos2.y);
+		return new IslandPos (pos1.x + pos2.x, pos1.y + pos2.y,pos2.type);
 	}
 
 	public static IslandPos operator - (IslandPos pos1, IslandPos pos2)
 	{
-		return new IslandPos (pos1.x - pos2.x, pos1.y - pos2.y);
+		return new IslandPos (pos1.x - pos2.x, pos1.y - pos2.y,pos2.type);
 	}
 }
 
@@ -27,8 +28,9 @@ public class MapGenerator : MonoBehaviour
 {
 	public GameObject islandPrefab;
 	public GameObject bridgePrefab;
+	public int bridgeGab=10;
+	public int islandNum = 4;
 
-	static int islandNum = 4;
 	IslandPos currentPos = new IslandPos ();
 	List<IslandPos> islandList = new List<IslandPos> ();
 
@@ -47,16 +49,27 @@ public class MapGenerator : MonoBehaviour
 			else
 				temp = SetIsland (currentPos);
 			if (i > 0) {
-				GameObject obj = Instantiate (bridgePrefab, transform.position + new Vector3 ((temp.x + currentPos.x) / 2, 0, (temp.y + currentPos.y) / 2) * 10, Quaternion.identity);
-				if (temp.y - currentPos.y != 0)
-					obj.transform.Rotate (new Vector3 (0, 90, 0));
+				Vector3 bridgePos = transform.position + new Vector3 ((temp.x + currentPos.x) / 2, 0, (temp.y + currentPos.y) / 2) * bridgeGab ;
+				if (temp.type < 2) {
+					bridgePos.z -= IslandGenerator.instance.islandSize/2-1;
+				} else {
+					bridgePos.x += IslandGenerator.instance.islandSize/2-1;
+				}
+				GameObject obj = Instantiate (bridgePrefab, bridgePos, Quaternion.identity);
+                if (temp.y - currentPos.y != 0)
+                {
+                    obj.transform.Rotate(new Vector3(0, 90, 0));
+                    //GameManager.instance.blockList.Add(new Block(obj.transform.position, 6));
+                }
+                //else
+                    //GameManager.instance.blockList.Add(new Block(obj.transform.position, 7));
                 obj.transform.parent = transform;
                 obj.name +=  " "+(i-1)+">>"+i;
                 CombineBridge(obj);
 
 			} else
 				currentPos = temp;
-			GameObject islandGenerator = Instantiate (islandPrefab, transform.position + new Vector3 (temp.x, 0, temp.y) * 10, Quaternion.identity);
+			GameObject islandGenerator = Instantiate (islandPrefab, transform.position + new Vector3 (temp.x, 0, temp.y) * bridgeGab, Quaternion.identity);
             islandGenerator.transform.parent = transform;
             islandGenerator.name += " " + i; 
 			islandList.Add (temp);
@@ -70,10 +83,10 @@ public class MapGenerator : MonoBehaviour
 	{
 		IslandPos newPos;
 		List<IslandPos> list = new List<IslandPos> ();
-		list.Add (pos + new IslandPos (2, 0));
-		list.Add (pos + new IslandPos (-2, 0));
-		list.Add (pos + new IslandPos (0, 2));
-		list.Add (pos + new IslandPos (0, -2));
+		list.Add (pos + new IslandPos (2, 0,0));
+		list.Add (pos + new IslandPos (-2, 0,1));
+		list.Add (pos + new IslandPos (0, 2, 2));
+		list.Add (pos + new IslandPos (0, -2,3));
 
 		do {
 			newPos = list [Random.Range (0, list.Count)];

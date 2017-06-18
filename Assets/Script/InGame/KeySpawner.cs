@@ -10,6 +10,8 @@ public class KeySpawner : MonoBehaviour
 	
 	void Update ()
     {
+        if (!GameManager.instance.isPlay)
+            return;
         if (!created)
             spawnTime -= Time.deltaTime;
         if(spawnTime<=0)

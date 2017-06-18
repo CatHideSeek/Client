@@ -98,6 +98,16 @@ public class User
         return -1;
     }
 
+    public void PushState(State state)
+    {
+        states.Add((State)state);
+    }
+
+    public void PopState(State _state)
+    {
+        states.RemoveAll(delegate(State state){return state == _state;});
+    }
+
     public void EatKey()
     {
         keyCount++;
