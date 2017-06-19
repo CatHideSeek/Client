@@ -280,7 +280,8 @@ public class NetworkManager : MonoBehaviour
             float z = json.GetField("bz").f;
             int id = (int)json.GetField("bid").f;
 
-            Instantiate(GameManager.instance.blockObject[id], new Vector3(x, y, z), Quaternion.identity);
+            Instantiate(GameManager.instance.blockObject[id], new Vector3(x, y, z), GameManager.instance.blockObject[id].transform.rotation);
+            //오브젝트를 받아와서 배치함(id값은 0~3:땅, 4: 나무, 5: 수풀, 6~7: 다리, 8:키스포너)
         }
     }
 

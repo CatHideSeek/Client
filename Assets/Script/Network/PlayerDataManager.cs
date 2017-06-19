@@ -10,6 +10,9 @@ public class PlayerDataManager : MonoBehaviour {
     public static PlayerDataManager instance;
 
     public User my;
+    public int itemType = 0;//소지 아이템 종류(0: 없음, 1: 은신물약, 2: 덫)
+  
+    float hideTime=0;
 
     void Awake() {
         if (instance == null)
@@ -22,6 +25,26 @@ public class PlayerDataManager : MonoBehaviour {
             Destroy(this.gameObject);
     }
 
+    void Update()
+    {
+        if(hideTime>0)
+        {
+            hideTime -= Time.deltaTime;
+            if (hideTime <= 0)
+            {
+                Debug.Log("은신 해제");
+                my.PopState(User.State.Hide);
+            }
+        }
+    }
+
+    public void SetHide(float t)
+    {
+        Debug.Log("은신 시작");
+        my.PushState(User.State.Hide);
+        hideTime = t;
+    }
+
 
     public void EatKey()
     {
@@ -32,5 +55,10 @@ public class PlayerDataManager : MonoBehaviour {
             my.isKeyHave = true;
             NetworkManager.instance.SendGetKey(my.isKeyHave);
         }
+    }
+
+    public void EatItem(int id)
+    {
+        itemType = id;
     }
 }

@@ -25,7 +25,6 @@ public class GameManager : MonoBehaviour
     public Transform map;
 
     public PortalController portal;
-    public GameObject keySpawnerPrefab;
     public int keySpawnerNum;
 
     UIInGame ui;
@@ -43,16 +42,6 @@ public class GameManager : MonoBehaviour
     public void StartGame()
     {
         isPlay = true;
-        SetKeySpawner();
-    }
-
-    void SetKeySpawner()
-    {
-        for (int i = 0; i < keySpawnerNum; i++)
-        {
-            Vector3 randomPos = new Vector3(Random.Range(-20f, 20f), 0, Random.Range(-20f, 20f));
-            Instantiate(keySpawnerPrefab, randomPos, Quaternion.identity);
-        }
     }
 
     // Update is called once per frame

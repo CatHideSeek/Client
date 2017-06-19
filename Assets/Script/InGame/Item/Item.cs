@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Item : MonoBehaviour
 {
-    public float flySpeed = 2f, rotSpeed = 180f, traSpeed=4f, upSpeed=2f;
+    public float flySpeed = 2f, rotSpeed = 180f, traSpeed=2f, upSpeed=2f;
 
     float time = 0,originY;
     bool destroy=false;

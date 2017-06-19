@@ -14,7 +14,7 @@ class BlockPos
 
     public Vector3 ToVector3(int h)
     {
-        return new Vector3(x - 4, h, y - 4);
+		return new Vector3(x - IslandGenerator.instance.islandSize/2, h, y - IslandGenerator.instance.islandSize/2);
     }
 
     public static bool operator ==(BlockPos pos1, BlockPos pos2)
@@ -41,13 +41,16 @@ class BlockPos
 
 public class IslandGenerator : MonoBehaviour
 {
-    public static int maxFloor = 6;
-    public static int minTreeNum = 4;
-    public static int maxTreeNum = 12;
-    public static int minBushNum = 3;
-    public static int maxBushNum = 6;
-    public static int minKRockNum = 3;
-    public static int maxRockNum = 6;
+	public static IslandGenerator instance;
+    public static int maxFloor = 4;
+    public int minTreeNum = 3;
+    public int maxTreeNum = 6;
+    public int minBushNum = 3;
+    public int maxBushNum = 6;
+    public int minKRockNum = 3;
+    public int maxRockNum = 6;
+    public int islandSize=15;
+    public int keyNum=5;
 
     public GameObject treePrefab;
     public GameObject bushPrefab;
@@ -64,12 +67,13 @@ public class IslandGenerator : MonoBehaviour
 
     void Awake()
     {
+		instance = this;
         //Init 'mapList' and 'topMapList', Call 'SetBlocks()'
         for (int i = 0; i < maxFloor; i++)
         {
             mapList[i] = new List<BlockPos>();
             topMapList[i] = new List<BlockPos>();
-            SetBlocks(i, 6 - i, 6 - i);
+			SetBlocks(i);
         }
 
         //Create blocks
@@ -80,7 +84,7 @@ public class IslandGenerator : MonoBehaviour
                 if (transform.position + pos.ToVector3(0) == Vector3.zero)
                     GameManager.instance.spawnPos.y = h + 2;
                 Vector3 blockPos = transform.position + pos.ToVector3(h);
-                int blockId = Random.Range(0, GameManager.instance.blockObject.Length);
+                int blockId = Random.Range(0, 4);
 
                 GameObject g = Instantiate(GameManager.instance.blockObject[blockId], blockPos, Quaternion.Euler(-90, 0, 0));
                 g.transform.parent = transform;
@@ -94,26 +98,27 @@ public class IslandGenerator : MonoBehaviour
         CreateTrees(Random.Range(minTreeNum, maxTreeNum + 1));
         CreateBushes(Random.Range(minBushNum, maxBushNum + 1));
         CreateRocks(Random.Range(minKRockNum,  maxRockNum + 1));
-        
-
+        CreateKeys(keyNum);
     }
 
-    void SetBlocks(int floor, int min, int max)
+    void SetBlocks(int floor)
     {
         if (floor > 0)
         {
-            for (int i = 0; i < Random.Range(floor, floor * 2 - (1 + floor / 2)); i++)
+			for (int i = 0; i < floor; i++)
             {
                 //Set size with random
-                int size = Random.Range(min, max);
-                size += size - 1;
+				int size = islandSize-floor*(islandSize/(maxFloor-1));
 
                 //Choose position with random in 'mapList'
-                BlockPos pos = mapList[floor - 1][Random.Range(0, mapList[floor - 1].Count)];
+				BlockPos pos;
+				do{
+				pos = mapList[floor - 1][Random.Range(0, mapList[floor - 1].Count)];
+				}while(pos.y<islandSize/2||pos.x>islandSize/2);
                 if (floor == 1)
                 {
-                    pos = new BlockPos(4, 4);
-                    size = 7;
+					pos = new BlockPos(islandSize/2-2, islandSize/2+2);
+					size = islandSize;
                 }
 
                 //Set blocks
@@ -126,10 +131,7 @@ public class IslandGenerator : MonoBehaviour
                         //Remove overlap blocks in 'topMapList'
                         for (int j = 0; j <= floor; j++)
                         {
-                            List<BlockPos> overlaps = topMapList[j].FindAll(delegate (BlockPos iter)
-                            {
-                                return iter == blockPos;
-                            });
+                            List<BlockPos> overlaps = topMapList[j].FindAll(delegate (BlockPos iter){return iter == blockPos;});
                             foreach (BlockPos overlap in overlaps)
                             {
                                 if (overlap != null)
@@ -153,9 +155,9 @@ public class IslandGenerator : MonoBehaviour
         else
         {
             //Set blocks
-            for (int y = 0; y < 9; y++)
+			for (int y = 0; y < islandSize; y++)
             {
-                for (int x = 0; x < 9; x++)
+				for (int x = 0; x < islandSize; x++)
                 {
                     mapList[floor].Add(new BlockPos(x, y));
                     topMapList[floor].Add(new BlockPos(x, y));
@@ -164,34 +166,52 @@ public class IslandGenerator : MonoBehaviour
         }
     }
 
-    void CreateTrees(int cnt)
+    private void CreateTrees(int cnt)
     {
         //Create trees
         for (int i = 0; i < cnt; i++)
         {
-            int h = Random.Range(4, 6);
+			int h = Random.Range(0, maxFloor);
             if (topMapList[h].Count > 0)
             {
                 int r = Random.Range(0, topMapList[h].Count);
                 GameObject g = Instantiate(treePrefab, transform.position + topMapList[h][r].ToVector3(h + 1), Quaternion.Euler(-90, 0, 0));
                 g.transform.parent = transform;
                 topMapList[h].Remove(topMapList[h][r]);//이미 생성된 곳은 중복을 방지하기 위해서 리스트에서 지워준다
+                GameManager.instance.blockList.Add(new Block(g.transform.position, 4));
             }
         }
     }
 
-    void CreateBushes(int cnt)
+    private void CreateBushes(int cnt)
     {
         //Create bushes
         for (int i = 0; i < cnt; i++)
         {
-            int h = Random.Range(0, 6);
+			int h = Random.Range(0, maxFloor);
             if (topMapList[h].Count > 0)
             {
                 int r = Random.Range(0, topMapList[h].Count);
                 GameObject g = Instantiate(bushPrefab, transform.position + topMapList[h][r].ToVector3(h + 1), Quaternion.Euler(-90, 0, 0));
                 g.transform.parent = transform;
                 topMapList[h].Remove(topMapList[h][r]);//이미 생성된 곳은 중복을 방지하기 위해서 리스트에서 지워준다
+                GameManager.instance.blockList.Add(new Block(g.transform.position, 5));
+            }
+        }
+    }
+
+    private void CreateKeys(int cnt)
+    {
+        for (int i = 0; i < cnt; i++)
+        {
+            int h = Random.Range(0, maxFloor);
+            if (topMapList[h].Count > 0)
+            {
+                int r = Random.Range(0, topMapList[h].Count);
+                GameObject g = Instantiate(GameManager.instance.blockObject[8], transform.position + topMapList[h][r].ToVector3(h + 1), Quaternion.Euler(-90, 0, 0));
+                g.transform.parent = transform;
+                topMapList[h].Remove(topMapList[h][r]);//이미 생성된 곳은 중복을 방지하기 위해서 리스트에서 지워준다
+                GameManager.instance.blockList.Add(new Block(g.transform.position, 8));
             }
         }
     }

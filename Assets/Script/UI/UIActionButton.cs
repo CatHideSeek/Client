@@ -28,6 +28,17 @@ public class UIActionButton : MonoBehaviour {
 
     public void ItemButton() {
         print("item button works");
+        switch(PlayerDataManager.instance.itemType)
+        {
+            case 1:
+                PlayerDataManager.instance.SetHide(3);
+                break;
+            case 2:
+                break;
+            default:
+                break;
+        }
+        PlayerDataManager.instance.itemType = 0;
     }
 
 

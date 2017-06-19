@@ -19,7 +19,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private float h, v;
 
-    public float movSpeed = 5f, rotSpeed = 10f, jumpPower = 6f;
+    public float movSpeed = 5f, rotSpeed = 10f, jumpPower = 6f,opaSpeed=8f;
 
     Vector3 oldPos, currentPos;
     Quaternion oldRot, currentRot;
@@ -52,16 +52,29 @@ public class PlayerController : MonoBehaviour
         if (user.isPlayer)
         {
 #if UNITY_EDITOR
-           // h = Input.GetAxis("Horizontal");
-           // v = Input.GetAxis("Vertical");
+           //h = Input.GetAxis("Horizontal");
+           //v = Input.GetAxis("Vertical");
 #endif
 
 
             if (Input.GetKeyDown(KeyCode.Z)) {
                 Jump();
             }
+
+        //    Color c=renderer.material.color;
+        //if(user.FindState((int)User.State.Hide)>=0)
+        //{
+        //    c.a = Mathf.Lerp(c.a, 0.5f,Time.deltaTime * opaSpeed);
+        //    renderer.material.color = c;
+        //}
+        //else if(c.a<1)
+        //{
+        //    c.a = Mathf.Lerp(c.a, 1f, Time.deltaTime * opaSpeed);
+        //    renderer.material.color = c;
+        //}
         }
 
+        
     }
 
     void FixedUpdate()

@@ -41,16 +41,16 @@ public class UIJoyStick : MonoBehaviour , IPointerDownHandler, IDragHandler , IP
         if (stick == null)
             return;
 
-//#if UNITY_EDITOR
-//       touch = Input.mousePosition;
-//#else
+#if UNITY_EDITOR
+       touch = Input.mousePosition;
+#else
         for (int i = 0; i < Input.touchCount; i++) {
             if (Camera.main.ScreenToViewportPoint(Input.GetTouch(i).position).x < 0.5f)
             {
                 touch = Input.GetTouch(i).position;
             }
         }
-//#endif
+#endif
         Vector3 dir = (new Vector3(touch.x, touch.y, centerPos.z) - centerPos).normalized;
 
         float touchAreaRadius = Vector3.Distance(centerPos, new Vector3(touch.x, touch.y, centerPos.z));
