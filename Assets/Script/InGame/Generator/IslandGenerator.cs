@@ -200,6 +200,23 @@ public class IslandGenerator : MonoBehaviour
         }
     }
 
+    private void CreateRocks(int cnt)
+    {
+        //Create bushes
+        for (int i = 0; i < cnt; i++)
+        {
+            int h = Random.Range(0, maxFloor);
+            if (topMapList[h].Count > 0)
+            {
+                int r = Random.Range(0, topMapList[h].Count);
+                GameObject g = Instantiate(rockPrefab, transform.position + topMapList[h][r].ToVector3(h + 1), Quaternion.Euler(-90, 0, 0));
+                g.transform.parent = transform;
+                topMapList[h].Remove(topMapList[h][r]);//이미 생성된 곳은 중복을 방지하기 위해서 리스트에서 지워준다
+                GameManager.instance.blockList.Add(new Block(g.transform.position, 5));
+            }
+        }
+    }
+
     private void CreateKeys(int cnt)
     {
         for (int i = 0; i < cnt; i++)
@@ -216,21 +233,6 @@ public class IslandGenerator : MonoBehaviour
         }
     }
 
-    void CreateRocks(int cnt)
-    {
-        //Create bushes
-        for (int i = 0; i < cnt; i++)
-        {
-            int h = Random.Range(0, 6);
-            if (topMapList[h].Count > 0)
-            {
-                int r = Random.Range(0, topMapList[h].Count);
-                GameObject g = Instantiate(rockPrefab, transform.position + topMapList[h][r].ToVector3(h + 1), Quaternion.Euler(-90, 0, 0));
-                g.transform.parent = transform;
-                topMapList[h].Remove(topMapList[h][r]);//이미 생성된 곳은 중복을 방지하기 위해서 리스트에서 지워준다
-            }
-        }
-    }
 
     private void Combine()
     {
@@ -247,8 +249,7 @@ public class IslandGenerator : MonoBehaviour
         if (blocks.Count > 1)
         {
             originalSize = blocks[0].GetComponent<MeshRenderer>().material.mainTexture.width;
-            //pow2 = GetTextureSize(blocks);
-            pow2 = 4;
+            pow2 = GetTextureSize(blocks);
             size = pow2 * originalSize;
             combinedTexture = new Texture2D(size, size, textureFormat, useMipMaps);
 
