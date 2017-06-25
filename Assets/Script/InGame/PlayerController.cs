@@ -19,12 +19,16 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private float h, v;
 
-    public float movSpeed = 5f, rotSpeed = 10f, jumpPower = 6f,opaSpeed=8f;
+    public float movSpeed = 5f, rotSpeed = 10f, jumpPower = 6f, opaSpeed = 8f;
+    float oriMSpd, oriRSpd;
 
     Vector3 oldPos, currentPos;
     Quaternion oldRot, currentRot;
+    float hideAlpha=1;
 
     GameObject nameLabel;
+    GameObject model;
+    GameObject[] changeObjs;
 
     [SerializeField]
     float clampTime = 50f;
@@ -43,6 +47,15 @@ public class PlayerController : MonoBehaviour
         //회전 초기값 지정
         currentRot = tr.rotation;
         oldRot = currentRot;
+
+        oriMSpd = movSpeed;
+        oriRSpd = rotSpeed;
+
+        changeObjs = new GameObject[3];
+        model = transform.FindChild("Cat").gameObject;
+        changeObjs[0] = transform.Find("Tree").gameObject;
+        changeObjs[1] = transform.Find("Frost").gameObject;
+        changeObjs[2] = transform.FindChild("Rock").gameObject;
     }
 
     // Update is called once per frame
@@ -52,29 +65,65 @@ public class PlayerController : MonoBehaviour
         if (user.isPlayer)
         {
 #if UNITY_EDITOR
-           //h = Input.GetAxis("Horizontal");
-           //v = Input.GetAxis("Vertical");
+            //h = Input.GetAxis("Horizontal");
+            //v = Input.GetAxis("Vertical");
 #endif
 
 
-            if (Input.GetKeyDown(KeyCode.Z)) {
+            if (Input.GetKeyDown(KeyCode.Z))
+            {
                 Jump();
             }
 
-        //    Color c=renderer.material.color;
-        //if(user.FindState((int)User.State.Hide)>=0)
-        //{
-        //    c.a = Mathf.Lerp(c.a, 0.5f,Time.deltaTime * opaSpeed);
-        //    renderer.material.color = c;
-        //}
-        //else if(c.a<1)
-        //{
-        //    c.a = Mathf.Lerp(c.a, 1f, Time.deltaTime * opaSpeed);
-        //    renderer.material.color = c;
-        //}
+            if (user.FindState((int)User.State.Hide) >= 0)
+            {
+                hideAlpha = Mathf.Lerp(hideAlpha, 0.5f, Time.deltaTime * opaSpeed);
+                SetAlphaWithChildren(hideAlpha);
+            }
+            else if (hideAlpha < 1)
+            {
+                hideAlpha = Mathf.Lerp(hideAlpha, 0.5f, Time.deltaTime * opaSpeed);
+                SetAlphaWithChildren(hideAlpha);
+            }
+
+            if(user.FindState((int)User.State.Stun) >= 0)
+            {
+                movSpeed = 0;
+                rotSpeed = 0;
+            }
+            else if(user.FindState((int)User.State.Slow) >= 0)
+            {
+                movSpeed = oriMSpd/2;
+                rotSpeed = oriRSpd/2;
+            }
+            else if(movSpeed!=oriMSpd)
+            {
+                movSpeed = oriMSpd;
+                rotSpeed = oriRSpd;
+            }
+
+            if(user.FindState((int)User.State.Change) >= 0)
+            {
+                model.active = false;
+                for(int i=0;i<3;i++)
+                {
+                    if(i+1==user.objectKind)
+                    changeObjs[i].active = true;
+                    else
+                        changeObjs[i].active=false;
+                }
+            }
+            else if(!model.active)
+            {
+                model.active = true;
+                for (int i = 0; i < 3; i++)
+                {
+                        changeObjs[i].active = false;
+                }
+            }
         }
 
-        
+
     }
 
     void FixedUpdate()
@@ -97,7 +146,8 @@ public class PlayerController : MonoBehaviour
     }
 
 
-    public void SetAxis(float _h,float _v) {
+    public void SetAxis(float _h, float _v)
+    {
         h = _h;
         v = _v;
     }
@@ -148,7 +198,8 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    public void Jump() {
+    public void Jump()
+    {
         ri.velocity = new Vector3(ri.velocity.x, jumpPower, ri.velocity.z);
     }
 
@@ -232,6 +283,21 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// 투명도를 설정합니다.(이 오브젝트의 자식들까지 포함해서)
+    /// </summary>
+    /// <param name="alpha">투명도</param>
+    private void SetAlphaWithChildren(float alpha)
+    {
+        //Renderer[] rList = gameObject.GetComponentsInChildren<Renderer>();
+        //for (int i = 0; i < rList.Length; i++)
+        //{
+        //    Debug.Log("응액 "+rList.Length);
+        //    Color c = rList[i].material.color;
+        //    c.a = alpha;
+        //}
+    }
+
     void OnTriggerEnter(Collider col)
     {
         if (col.CompareTag("Hide"))
@@ -250,6 +316,14 @@ public class PlayerController : MonoBehaviour
                 item.SetDestroy();
             }
         }
+        else if(col.CompareTag("Trap"))
+        {
+            if (!col.GetComponent<Trap>().GetOwner().Equals(user.name))
+            {
+                PlayerDataManager.instance.SetStun(2);
+                Destroy(col.gameObject);
+            }
+        }
     }
 
     void OnTriggerStay(Collider col)
@@ -262,7 +336,7 @@ public class PlayerController : MonoBehaviour
                 {
                     print("탈출");
                 }
-                else if(user.isKeyHave)
+                else if (user.isKeyHave)
                 {
                     print("열쇠를 사용하여 오픈");
                     NetworkManager.instance.SendOpen(user.name);

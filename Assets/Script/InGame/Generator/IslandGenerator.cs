@@ -52,10 +52,6 @@ public class IslandGenerator : MonoBehaviour
     public int islandSize=15;
     public int keyNum=5;
 
-    public GameObject treePrefab;
-    public GameObject bushPrefab;
-    public GameObject rockPrefab;
-
     List<BlockPos>[] mapList = new List<BlockPos>[maxFloor];
     List<BlockPos>[] topMapList = new List<BlockPos>[maxFloor];
     //Leave top blocks only
@@ -175,7 +171,7 @@ public class IslandGenerator : MonoBehaviour
             if (topMapList[h].Count > 0)
             {
                 int r = Random.Range(0, topMapList[h].Count);
-                GameObject g = Instantiate(treePrefab, transform.position + topMapList[h][r].ToVector3(h + 1), Quaternion.Euler(-90, 0, 0));
+                GameObject g = Instantiate(GameManager.instance.blockObject[4], transform.position + topMapList[h][r].ToVector3(h + 1), Quaternion.Euler(-90, 0, 0));
                 g.transform.parent = transform;
                 topMapList[h].Remove(topMapList[h][r]);//이미 생성된 곳은 중복을 방지하기 위해서 리스트에서 지워준다
                 GameManager.instance.blockList.Add(new Block(g.transform.position, 4));
@@ -192,7 +188,7 @@ public class IslandGenerator : MonoBehaviour
             if (topMapList[h].Count > 0)
             {
                 int r = Random.Range(0, topMapList[h].Count);
-                GameObject g = Instantiate(bushPrefab, transform.position + topMapList[h][r].ToVector3(h + 1), Quaternion.Euler(-90, 0, 0));
+                GameObject g = Instantiate(GameManager.instance.blockObject[5], transform.position + topMapList[h][r].ToVector3(h + 1), Quaternion.Euler(-90, 0, 0));
                 g.transform.parent = transform;
                 topMapList[h].Remove(topMapList[h][r]);//이미 생성된 곳은 중복을 방지하기 위해서 리스트에서 지워준다
                 GameManager.instance.blockList.Add(new Block(g.transform.position, 5));
@@ -209,10 +205,10 @@ public class IslandGenerator : MonoBehaviour
             if (topMapList[h].Count > 0)
             {
                 int r = Random.Range(0, topMapList[h].Count);
-                GameObject g = Instantiate(rockPrefab, transform.position + topMapList[h][r].ToVector3(h + 1), Quaternion.Euler(-90, 0, 0));
+                GameObject g = Instantiate(GameManager.instance.blockObject[10], transform.position + topMapList[h][r].ToVector3(h + 1), Quaternion.Euler(-90, 0, 0));
                 g.transform.parent = transform;
                 topMapList[h].Remove(topMapList[h][r]);//이미 생성된 곳은 중복을 방지하기 위해서 리스트에서 지워준다
-                GameManager.instance.blockList.Add(new Block(g.transform.position, 5));
+                GameManager.instance.blockList.Add(new Block(g.transform.position, 10));
             }
         }
     }

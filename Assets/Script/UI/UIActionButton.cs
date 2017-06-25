@@ -34,6 +34,10 @@ public class UIActionButton : MonoBehaviour {
                 PlayerDataManager.instance.SetHide(3);
                 break;
             case 2:
+                PlayerDataManager.instance.CreateTrap();
+                break;
+            case 3:
+                PlayerDataManager.instance.SetChange(4,Random.Range(1,4));
                 break;
             default:
                 break;

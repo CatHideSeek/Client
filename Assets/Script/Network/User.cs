@@ -41,7 +41,7 @@ public class User
     /// <summary>
     /// 키를 완성한 유저인가?
     /// </summary>
-    public bool isKeyHave;
+    public bool isKeyHave=false;
     /// <summary>
     /// 열쇠조각 소유 수
     /// </summary>
@@ -53,7 +53,7 @@ public class User
     /// <summary>
     /// 변신한 오브젝트 종류
     /// </summary>
-    public int objectKind;
+    public int objectKind=0;//0 변신안함, 1 나무, 2 수풀,3 돌
 
     /// <summary>
     /// 상태

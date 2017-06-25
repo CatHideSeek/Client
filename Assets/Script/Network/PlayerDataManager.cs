@@ -10,9 +10,12 @@ public class PlayerDataManager : MonoBehaviour {
     public static PlayerDataManager instance;
 
     public User my;
-    public int itemType = 0;//소지 아이템 종류(0: 없음, 1: 은신물약, 2: 덫)
+    public int itemType = 3;//소지 아이템 종류(0: 없음, 1: 은신물약, 2: 덫, 3: 변신물약)
   
     float hideTime=0;
+    float stunTime = 0;
+    float slowTime = 0;
+    float changeTime = 0;
 
     void Awake() {
         if (instance == null)
@@ -36,13 +39,92 @@ public class PlayerDataManager : MonoBehaviour {
                 my.PopState(User.State.Hide);
             }
         }
+
+        if (stunTime > 0)
+        {
+            stunTime -= Time.deltaTime;
+            if (stunTime <= 0)
+            {
+                Debug.Log("스턴 해제");
+                my.PopState(User.State.Stun);
+            }
+        }
+
+        if (slowTime > 0)
+        {
+            slowTime -= Time.deltaTime;
+            if (slowTime <= 0)
+            {
+                Debug.Log("슬로우 해제");
+                my.PopState(User.State.Slow);
+            }
+        }
+
+        if(changeTime>0)
+        {
+            changeTime -= Time.deltaTime;
+            if(changeTime<=0)
+            {
+                my.PopState(User.State.Change);
+                my.objectKind = 0;
+            }
+        }
     }
 
+    /// <summary>
+    /// 은신상태로 설정합니다.
+    /// </summary>
+    /// <param name="t">은신 시간</param>
     public void SetHide(float t)
     {
         Debug.Log("은신 시작");
         my.PushState(User.State.Hide);
         hideTime = t;
+    }
+
+    /// <summary>
+    /// 스턴상태로 설정합니다.
+    /// </summary>
+    /// <param name="t">스턴 시간</param>
+    public void SetStun(float t)
+    {
+        Debug.Log("스턴 시작");
+        my.PushState(User.State.Stun);
+        stunTime = t;
+    }
+
+    /// <summary>
+    /// 슬로우상태로 설정합니다.
+    /// </summary>
+    /// <param name="t">슬로우 시간</param>
+    public void SetSlow(float t)
+    {
+        Debug.Log("슬로우 시작");
+        my.PushState(User.State.Slow);
+        slowTime = t;
+    }
+
+    /// <summary>
+    /// 변신상태로 설정합니다.
+    /// </summary>
+    /// <param name="t">변신 시간</param>
+    /// <param name="objId">변신할 오브젝트 종류(1~3)</param>
+    public void SetChange(float t,int objId)
+    {
+        my.PushState(User.State.Change);
+        changeTime = t;
+        my.objectKind = objId;
+    }
+
+    /// <summary>
+    /// 덫을 설치합니다.
+    /// </summary>
+    public void CreateTrap()
+    {
+        Debug.Log("트랩 설치");
+        Trap t=Instantiate(GameManager.instance.blockObject[9], my.controller.transform.position, GameManager.instance.blockObject[9].transform.rotation).GetComponent<Trap>();
+        t.SetOwner(my.name);
+        GameManager.instance.blockList.Add(new Block(t.transform.position, 9));
     }
 
 

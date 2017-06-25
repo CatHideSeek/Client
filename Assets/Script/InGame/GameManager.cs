@@ -20,6 +20,12 @@ public class GameManager : MonoBehaviour
     public MapGenerator mapGenerator;
     public GameObject playerObject, portalObject;
     public GameObject[] blockObject;
+    //0~3 땅블럭
+    //4 나무
+    //5 수풀
+    //6~7 다리
+    //8 키스포너
+    //9 트랩
     public Vector3 spawnPos = Vector3.zero;
     public List<Block> blockList = new List<Block>();
     public Transform map;

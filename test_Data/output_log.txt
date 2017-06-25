@@ -21,7 +21,7 @@ Platform assembly: C:\Users\YoungJin\GitRepository\CatHideSeek\Client\test_Data\
 Loading C:\Users\YoungJin\GitRepository\CatHideSeek\Client\test_Data\Managed\LitJson.dll into Unity Child Domain
 Platform assembly: C:\Users\YoungJin\GitRepository\CatHideSeek\Client\test_Data\Managed\TextMeshPro-1.0.55.56.0b9.dll (this message is harmless)
 Loading C:\Users\YoungJin\GitRepository\CatHideSeek\Client\test_Data\Managed\TextMeshPro-1.0.55.56.0b9.dll into Unity Child Domain
-- Completed reload, in  0.023 seconds
+- Completed reload, in  0.020 seconds
 Platform assembly: C:\Users\YoungJin\GitRepository\CatHideSeek\Client\test_Data\Managed\System.Core.dll (this message is harmless)
 Platform assembly: C:\Users\YoungJin\GitRepository\CatHideSeek\Client\test_Data\Managed\System.dll (this message is harmless)
 Platform assembly: C:\Users\YoungJin\GitRepository\CatHideSeek\Client\test_Data\Managed\Mono.Security.dll (this message is harmless)
@@ -29,10 +29,10 @@ desktop: 1920x1080 60Hz; virtual: 1920x1080 at 0,0
 <RI> Initializing input.
 <RI> Input initialized.
 <RI> Initialized touch support.
-UnloadTime: 1.087381 ms
+UnloadTime: 1.335339 ms
 Setting up 2 worker threads for Enlighten.
-  Thread -> id: 19c -> priority: 1 
-  Thread -> id: 1910 -> priority: 1 
+  Thread -> id: ef0 -> priority: 1 
+  Thread -> id: 1c98 -> priority: 1 
 연결성공
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
