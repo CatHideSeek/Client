@@ -11,11 +11,28 @@ public class PlayerDataManager : MonoBehaviour {
 
     public User my;
     public int itemType = 3;//소지 아이템 종류(0: 없음, 1: 은신물약, 2: 덫, 3: 변신물약)
-  
-    float hideTime=0;
+
+    #region StateTimeVariable
+    /// <summary>
+    /// 은신 시간
+    /// </summary>
+    float hideTime = 0;
+
+    /// <summary>
+    /// 스턴 시간
+    /// </summary>
     float stunTime = 0;
+
+    /// <summary>
+    /// 슬로우 시간
+    /// </summary>
     float slowTime = 0;
+
+    /// <summary>
+    /// 변신 시간
+    /// </summary>
     float changeTime = 0;
+    #endregion
 
     void Awake() {
         if (instance == null)
@@ -65,12 +82,14 @@ public class PlayerDataManager : MonoBehaviour {
             changeTime -= Time.deltaTime;
             if(changeTime<=0)
             {
+                Debug.Log("변신 해제");
                 my.PopState(User.State.Change);
                 my.objectKind = 0;
             }
         }
     }
 
+    #region ItemMethod
     /// <summary>
     /// 은신상태로 설정합니다.
     /// </summary>
@@ -111,9 +130,9 @@ public class PlayerDataManager : MonoBehaviour {
     /// <param name="objId">변신할 오브젝트 종류(1~3)</param>
     public void SetChange(float t,int objId)
     {
+        my.objectKind = objId;//오브젝트종류먼저 설정해놔야됨!
         my.PushState(User.State.Change);
         changeTime = t;
-        my.objectKind = objId;
     }
 
     /// <summary>
@@ -126,6 +145,7 @@ public class PlayerDataManager : MonoBehaviour {
         t.SetOwner(my.name);
         GameManager.instance.blockList.Add(new Block(t.transform.position, 9));
     }
+    #endregion
 
 
     public void EatKey()

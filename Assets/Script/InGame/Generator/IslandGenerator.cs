@@ -50,7 +50,8 @@ public class IslandGenerator : MonoBehaviour
     public int minKRockNum = 3;
     public int maxRockNum = 6;
     public int islandSize=15;
-    public int keyNum=5;
+    public int keyNum=1;
+    public int itemNum = 1;
 
     List<BlockPos>[] mapList = new List<BlockPos>[maxFloor];
     List<BlockPos>[] topMapList = new List<BlockPos>[maxFloor];
@@ -95,6 +96,7 @@ public class IslandGenerator : MonoBehaviour
         CreateBushes(Random.Range(minBushNum, maxBushNum + 1));
         CreateRocks(Random.Range(minKRockNum,  maxRockNum + 1));
         CreateKeys(keyNum);
+        CreateItems(itemNum);
     }
 
     void SetBlocks(int floor)
@@ -223,6 +225,24 @@ public class IslandGenerator : MonoBehaviour
                 int r = Random.Range(0, topMapList[h].Count);
                 GameObject g = Instantiate(GameManager.instance.blockObject[8], transform.position + topMapList[h][r].ToVector3(h + 1), Quaternion.Euler(-90, 0, 0));
                 g.transform.parent = transform;
+                g.name += "(" + i + ")";
+                topMapList[h].Remove(topMapList[h][r]);//이미 생성된 곳은 중복을 방지하기 위해서 리스트에서 지워준다
+                GameManager.instance.blockList.Add(new Block(g.transform.position, 8));
+            }
+        }
+    }
+
+    private void CreateItems(int cnt)
+    {
+        for (int i = 0; i < cnt; i++)
+        {
+            int h = Random.Range(0, maxFloor);
+            if (topMapList[h].Count > 0)
+            {
+                int r = Random.Range(0, topMapList[h].Count);
+                GameObject g = Instantiate(GameManager.instance.blockObject[11], transform.position + topMapList[h][r].ToVector3(h + 1), Quaternion.Euler(-90, 0, 0));
+                g.transform.parent = transform;
+                g.name += "(" + i+")";
                 topMapList[h].Remove(topMapList[h][r]);//이미 생성된 곳은 중복을 방지하기 위해서 리스트에서 지워준다
                 GameManager.instance.blockList.Add(new Block(g.transform.position, 8));
             }

@@ -101,11 +101,20 @@ public class User
     public void PushState(State state)
     {
         states.Add((State)state);
+        if (PlayerDataManager.instance.my == this)
+        {
+            if (state == State.Change)
+                NetworkManager.instance.SendState((int)state,objectKind);
+            else
+                NetworkManager.instance.SendState((int)state);
+        }
     }
 
     public void PopState(State _state)
     {
         states.RemoveAll(delegate(State state){return state == _state;});
+        if (PlayerDataManager.instance.my == this)
+            NetworkManager.instance.SendState(-((int)_state));
     }
 
     public void EatKey()
@@ -123,5 +132,4 @@ public class User
         else
             return false;
     }
-
 }

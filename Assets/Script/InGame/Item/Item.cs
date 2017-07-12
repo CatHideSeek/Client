@@ -5,6 +5,7 @@ using UnityEngine;
 public class Item : MonoBehaviour
 {
     public float flySpeed = 2f, rotSpeed = 180f, traSpeed=2f, upSpeed=2f;
+    public Spawner spawner;
 
     float time = 0,originY;
     bool destroy=false;
@@ -37,9 +38,10 @@ public class Item : MonoBehaviour
 
     protected virtual void Eaten(){}
 
-    public void SetDestroy()
+    public void SetDestroy(bool user)
     {
-        Eaten();
+        if(user)
+            Eaten();
         destroy=true;
         flySpeed = 0;
         rotSpeed = 0;

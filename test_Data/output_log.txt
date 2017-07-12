@@ -29,11 +29,3637 @@ desktop: 1920x1080 60Hz; virtual: 1920x1080 at 0,0
 <RI> Initializing input.
 <RI> Input initialized.
 <RI> Initialized touch support.
-UnloadTime: 1.335339 ms
+UnloadTime: 1.087070 ms
 Setting up 2 worker threads for Enlighten.
-  Thread -> id: ef0 -> priority: 1 
-  Thread -> id: 1c98 -> priority: 1 
+  Thread -> id: 12f0 -> priority: 1 
+  Thread -> id: 1f24 -> priority: 1 
 연결성공
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Texture rectangle is out of bounds
+ 
+(Filename:  Line: 1921)
+
+Texture rectangle is out of bounds
+ 
+(Filename:  Line: 1921)
+
+Unloading 4 Unused Serialized files (Serialized files now loaded: 0)
+Texture rectangle is out of bounds
+ 
+(Filename:  Line: 1921)
+
+Texture rectangle is out of bounds
+ 
+(Filename:  Line: 1921)
+
+Texture rectangle is out of bounds
+ 
+(Filename:  Line: 1921)
+
+Texture rectangle is out of bounds
+ 
+(Filename:  Line: 1921)
+
+Texture rectangle is out of bounds
+ 
+(Filename:  Line: 1921)
+
+Texture rectangle is out of bounds
+ 
+(Filename:  Line: 1921)
+
+Texture rectangle is out of bounds
+ 
+(Filename:  Line: 1921)
+
+
+Unloading 1610 unused Assets to reduce memory usage. Loaded Objects now: 11223.
+Total: 4.163703 ms (FindLiveObjects: 0.634124 ms CreateObjectMapping: 0.511380 ms MarkObjects: 1.152925 ms  DeleteObjects: 1.864963 ms)
+
+Unloading 0 Unused Serialized files (Serialized files now loaded: 0)
+
+Unloading 0 unused Assets to reduce memory usage. Loaded Objects now: 11223.
+Total: 2.130238 ms (FindLiveObjects: 0.588366 ms CreateObjectMapping: 0.216424 ms MarkObjects: 1.272886 ms  DeleteObjects: 0.052560 ms)
+
+Unloading 0 Unused Serialized files (Serialized files now loaded: 0)
+
+Unloading 0 unused Assets to reduce memory usage. Loaded Objects now: 11223.
+Total: 2.366450 ms (FindLiveObjects: 0.742646 ms CreateObjectMapping: 0.439342 ms MarkObjects: 1.170239 ms  DeleteObjects: 0.014222 ms)
+
+Unloading 0 Unused Serialized files (Serialized files now loaded: 0)
+
+Unloading 0 unused Assets to reduce memory usage. Loaded Objects now: 11223.
+Total: 2.341097 ms (FindLiveObjects: 0.746974 ms CreateObjectMapping: 0.247342 ms MarkObjects: 1.331939 ms  DeleteObjects: 0.014222 ms)
+
+Unloading 0 Unused Serialized files (Serialized files now loaded: 0)
+
+Unloading 0 unused Assets to reduce memory usage. Loaded Objects now: 11223.
+Total: 2.119107 ms (FindLiveObjects: 0.755631 ms CreateObjectMapping: 0.260328 ms MarkObjects: 1.089544 ms  DeleteObjects: 0.013603 ms)
+
+Unloading 0 Unused Serialized files (Serialized files now loaded: 0)
+
+Unloading 0 unused Assets to reduce memory usage. Loaded Objects now: 11223.
+Total: 2.158991 ms (FindLiveObjects: 0.638762 ms CreateObjectMapping: 0.293410 ms MarkObjects: 1.211978 ms  DeleteObjects: 0.014840 ms)
+
+Unloading 0 Unused Serialized files (Serialized files now loaded: 0)
+
+Unloading 0 unused Assets to reduce memory usage. Loaded Objects now: 11223.
+Total: 2.073658 ms (FindLiveObjects: 0.723167 ms CreateObjectMapping: 0.221989 ms MarkObjects: 1.116133 ms  DeleteObjects: 0.012367 ms)
+
+Unloading 0 Unused Serialized files (Serialized files now loaded: 0)
+
+Unloading 0 unused Assets to reduce memory usage. Loaded Objects now: 11223.
+Total: 2.062219 ms (FindLiveObjects: 0.785931 ms CreateObjectMapping: 0.206221 ms MarkObjects: 1.057389 ms  DeleteObjects: 0.012676 ms)
+
+Unloading 0 Unused Serialized files (Serialized files now loaded: 0)
+
+Unloading 0 unused Assets to reduce memory usage. Loaded Objects now: 11223.
+Total: 2.078605 ms (FindLiveObjects: 0.778201 ms CreateObjectMapping: 0.218898 ms MarkObjects: 1.067592 ms  DeleteObjects: 0.013603 ms)
+
+SendSpawnPos
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Initialize engine version: 5.6.1f1 (2860b30f0b54)
+GfxDevice: creating device client; threaded=1
+Direct3D:
+    Version:  Direct3D 11.0 [level 11.1]
+    Renderer: NVIDIA GeForce GTX 1060 3GB (ID=0x1c02)
+    Vendor:   NVIDIA
+    VRAM:     3019 MB
+    Driver:   21.21.13.7878
+Begin MonoManager ReloadAssembly
+Platform assembly: C:\Users\YoungJin\GitRepository\CatHideSeek\Client\test_Data\Managed\UnityEngine.dll (this message is harmless)
+Loading C:\Users\YoungJin\GitRepository\CatHideSeek\Client\test_Data\Managed\UnityEngine.dll into Unity Child Domain
+Platform assembly: C:\Users\YoungJin\GitRepository\CatHideSeek\Client\test_Data\Managed\Assembly-CSharp.dll (this message is harmless)
+Loading C:\Users\YoungJin\GitRepository\CatHideSeek\Client\test_Data\Managed\Assembly-CSharp.dll into Unity Child Domain
+Platform assembly: C:\Users\YoungJin\GitRepository\CatHideSeek\Client\test_Data\Managed\UnityEngine.UI.dll (this message is harmless)
+Loading C:\Users\YoungJin\GitRepository\CatHideSeek\Client\test_Data\Managed\UnityEngine.UI.dll into Unity Child Domain
+Platform assembly: C:\Users\YoungJin\GitRepository\CatHideSeek\Client\test_Data\Managed\UnityEngine.Networking.dll (this message is harmless)
+Loading C:\Users\YoungJin\GitRepository\CatHideSeek\Client\test_Data\Managed\UnityEngine.Networking.dll into Unity Child Domain
+Platform assembly: C:\Users\YoungJin\GitRepository\CatHideSeek\Client\test_Data\Managed\UnityEngine.Analytics.dll (this message is harmless)
+Loading C:\Users\YoungJin\GitRepository\CatHideSeek\Client\test_Data\Managed\UnityEngine.Analytics.dll into Unity Child Domain
+Platform assembly: C:\Users\YoungJin\GitRepository\CatHideSeek\Client\test_Data\Managed\LitJson.dll (this message is harmless)
+Loading C:\Users\YoungJin\GitRepository\CatHideSeek\Client\test_Data\Managed\LitJson.dll into Unity Child Domain
+Platform assembly: C:\Users\YoungJin\GitRepository\CatHideSeek\Client\test_Data\Managed\TextMeshPro-1.0.55.56.0b9.dll (this message is harmless)
+Loading C:\Users\YoungJin\GitRepository\CatHideSeek\Client\test_Data\Managed\TextMeshPro-1.0.55.56.0b9.dll into Unity Child Domain
+- Completed reload, in  0.023 seconds
+Platform assembly: C:\Users\YoungJin\GitRepository\CatHideSeek\Client\test_Data\Managed\System.Core.dll (this message is harmless)
+Platform assembly: C:\Users\YoungJin\GitRepository\CatHideSeek\Client\test_Data\Managed\System.dll (this message is harmless)
+Platform assembly: C:\Users\YoungJin\GitRepository\CatHideSeek\Client\test_Data\Managed\Mono.Security.dll (this message is harmless)
+desktop: 1920x1080 60Hz; virtual: 1920x1080 at 0,0
+<RI> Initializing input.
+<RI> Input initialized.
+<RI> Initialized touch support.
+UnloadTime: 1.816113 ms
+Setting up 2 worker threads for Enlighten.
+  Thread -> id: 23c8 -> priority: 1 
+  Thread -> id: 1034 -> priority: 1 
+연결성공
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+SendSpawnPos
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at PlayerController.OnTriggerExit (UnityEngine.Collider col) [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at PlayerController.OnTriggerExit (UnityEngine.Collider col) [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+game is play
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+game is play
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at GameManager.Timer () [0x00000] in <filename unknown>:0 
+  at GameManager.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
 

@@ -534,40 +534,50 @@ public class NetworkManager : MonoBehaviour
     public void OnState(SocketIOEvent e)
     {
         JSONObject json = e.data;
-        int state = 0;
-        int.TryParse(json.GetField("state").str, out state);
+        int state = (int)json.GetField("state").f;
+        int objKind = (int)json.GetField("objKind").f;
 
         string name = json.GetField("name").str;
         User user = enterRoom.FindUserByName(name);
 
-        if (state < 0)
+        if (user == PlayerDataManager.instance.my)
+            return;
+
+        if(state>0)
         {
-            int index = user.FindState(Mathf.Abs(state));
-            user.states.RemoveAt(index);
+            if (user.FindState(state) == -1)
+            {
+                user.PushState((User.State)state);
+                if (state == (int)User.State.Change)
+                    user.objectKind = objKind;
+                Debug.Log("OnState()" + user.FindState(state));
+            }
         }
-        else if (state > 0)
+        else if(state<0)
         {
-            user.states.Add((User.State)state);
+            user.PopState((User.State)(-state));
+            if (-state == (int)User.State.Change)
+                user.objectKind = 0;
         }
-        else
-        {
-            user.states.Clear();
-            user.states.Add(User.State.Normal);
-        }
+
     }
 
     /// <summary>
     /// 유저의 상태를 알립니다.
     /// </summary>
-    /// <param name="state">상태 Enum</param>
-    public void SendState(int state)
+    /// <param name="state">상태 Enum(-는 삭제, +는 추가)</param>
+    /// <param name="objKind">변신 오브젝트 종류(0: 기본값)</param>
+    public void SendState(int state,int objKind=0)
     {
         JSONObject json = new JSONObject(JSONObject.Type.OBJECT);
 
         json.AddField("name", playerData.my.name);
         json.AddField("state", state);
+        json.AddField("objKind", objKind);
 
         socket.Emit("state", json);
+
+        Debug.Log("SendState()");
     }
 
     public void OnGetKeyPart(SocketIOEvent e)
@@ -589,6 +599,7 @@ public class NetworkManager : MonoBehaviour
     /// 열쇠 조각의 획득을 알립니다.
     /// </summary>
     /// <param name="count">조각 수</param>
+    /// <param name="keyPos">획득위치</param>
     public void SendGetKeyPart(int count)
     {
         JSONObject json = new JSONObject(JSONObject.Type.OBJECT);
