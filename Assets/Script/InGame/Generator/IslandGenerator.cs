@@ -265,7 +265,7 @@ public class IslandGenerator : MonoBehaviour
         if (blocks.Count > 1)
         {
             originalSize = blocks[0].GetComponent<MeshRenderer>().material.mainTexture.width;
-            pow2 = GetTextureSize(blocks);
+            pow2 = 8;//GetTextureSize(blocks);
             size = pow2 * originalSize;
             combinedTexture = new Texture2D(size, size, textureFormat, useMipMaps);
 

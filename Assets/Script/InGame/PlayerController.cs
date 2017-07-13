@@ -24,7 +24,7 @@ public class PlayerController : MonoBehaviour
 
     Vector3 oldPos, currentPos;
     Quaternion oldRot, currentRot;
-    float hideAlpha=1;
+    float hideAlpha = 1;
 
     GameObject nameLabel;
     GameObject model;
@@ -65,26 +65,26 @@ public class PlayerController : MonoBehaviour
         if (user.isPlayer)
         {
 #if UNITY_EDITOR
-            //h = Input.GetAxis("Horizontal");
-            //v = Input.GetAxis("Vertical");
-#endif
+            h = Input.GetAxis("Horizontal");
+            v = Input.GetAxis("Vertical");
+
             if (Input.GetKeyDown(KeyCode.Z))
             {
                 Jump();
             }
+#endif
         }
 
         #region UpdateState
         if (user.FindState((int)User.State.Hide) >= 0)
         {
-            hideAlpha = Mathf.Lerp(hideAlpha, 0.5f, Time.deltaTime * opaSpeed);
-            SetAlphaWithChildren(hideAlpha);
+            SetRenderer(false);
         }
-        else if (hideAlpha < 1)
-        {
-            hideAlpha = Mathf.Lerp(hideAlpha, 0.5f, Time.deltaTime * opaSpeed);
-            SetAlphaWithChildren(hideAlpha);
-        }
+        //else if (hideAlpha < 1)
+        //{
+        //    hideAlpha = Mathf.Lerp(hideAlpha, 0.5f, Time.deltaTime * opaSpeed);
+        //    SetAlphaWithChildren(hideAlpha);
+        //}
 
         if (user.FindState((int)User.State.Stun) >= 0)
         {
@@ -104,22 +104,22 @@ public class PlayerController : MonoBehaviour
 
         if (user.FindState((int)User.State.Change) >= 0)
         {
-            model.active = false;
+            model.SetActive(false);
             for (int i = 0; i < 3; i++)
             {
                 if (i + 1 == user.objectKind)
-                    changeObjs[i].active = true;
+                    changeObjs[i].SetActive(true);
                 else
-                    changeObjs[i].active = false;
+                    changeObjs[i].SetActive(false);
             }
-            Debug.Log("sdfs"+user.objectKind);
+            Debug.Log("sdfs" + user.objectKind);
         }
-        else if (!model.active)
+        else if (!model.activeSelf)
         {
-            model.active = true;
+            model.SetActive(true);
             for (int i = 0; i < 3; i++)
             {
-                changeObjs[i].active = false;
+                changeObjs[i].SetActive(false);
             }
         }
         #endregion
@@ -285,23 +285,17 @@ public class PlayerController : MonoBehaviour
     /// <summary>
     /// 투명도를 설정합니다.(이 오브젝트의 자식들까지 포함해서)
     /// </summary>
-    /// <param name="alpha">투명도</param>
-    private void SetAlphaWithChildren(float alpha)
+    /// <param name="alpha">활성화 여부</param>
+    private void SetRenderer(bool active)
     {
-        //Renderer[] rList = gameObject.GetComponentsInChildren<Renderer>();
-        //for (int i = 0; i < rList.Length; i++)
-        //{
-        //    Debug.Log("응액 "+rList.Length);
-        //    Color c = rList[i].material.color;
-        //    c.a = alpha;
-        //}
+        model.SetActive(active);
     }
 
     void OnTriggerEnter(Collider col)
     {
         if (col.CompareTag("Hide"))
         {
-            if (!user.isPlayer&&renderer)
+            if (!user.isPlayer && renderer)
                 renderer.material.color = new Color(renderer.material.color.r, renderer.material.color.g, renderer.material.color.b, 0f); //0투명 ~ 1 불투명
             else
                 col.GetComponent<OpacityObject>().SetOpacity();
@@ -318,7 +312,7 @@ public class PlayerController : MonoBehaviour
                     item.SetDestroy(false);
             }
         }
-        else if(col.CompareTag("Trap"))
+        else if (col.CompareTag("Trap"))
         {
             if (!col.GetComponent<Trap>().GetOwner().Equals(user.name))
             {

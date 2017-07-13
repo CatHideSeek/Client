@@ -130,7 +130,7 @@ public class MapGenerator : MonoBehaviour
         {
             originalSize = blocks[0].GetComponent<MeshRenderer>().material.mainTexture.width;
             //pow2 = GetTextureSize(blocks);
-            pow2 = 4;
+            pow2 = 8;
             size = pow2 * originalSize;
             combinedTexture = new Texture2D(size, size, textureFormat, useMipMaps);
 
