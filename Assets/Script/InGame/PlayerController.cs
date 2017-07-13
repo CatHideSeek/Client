@@ -64,7 +64,7 @@ public class PlayerController : MonoBehaviour
 
         if (user.isPlayer)
         {
-#if UNITY_EDITOR
+//#if UNITY_EDITOR
             h = Input.GetAxis("Horizontal");
             v = Input.GetAxis("Vertical");
 
@@ -72,7 +72,7 @@ public class PlayerController : MonoBehaviour
             {
                 Jump();
             }
-#endif
+//#endif
         }
 
         #region UpdateState
@@ -356,7 +356,7 @@ public class PlayerController : MonoBehaviour
     {
         if (col.CompareTag("Hide"))
         {
-            if (!user.isPlayer)
+            if (!user.isPlayer&&renderer)
                 renderer.material.color = new Color(renderer.material.color.r, renderer.material.color.g, renderer.material.color.b, 1f); //0투명 ~ 1 불투명
             else
                 col.GetComponent<OpacityObject>().SetOpacity(false);

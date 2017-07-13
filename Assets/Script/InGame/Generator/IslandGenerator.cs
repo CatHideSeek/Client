@@ -52,6 +52,7 @@ public class IslandGenerator : MonoBehaviour
     public int islandSize=15;
     public int keyNum=1;
     public int itemNum = 1;
+    public int id = -1;
 
     List<BlockPos>[] mapList = new List<BlockPos>[maxFloor];
     List<BlockPos>[] topMapList = new List<BlockPos>[maxFloor];
@@ -62,15 +63,19 @@ public class IslandGenerator : MonoBehaviour
     public bool useMipMaps = true;
     public TextureFormat textureFormat = TextureFormat.RGB24;
 
-    void Awake()
+    public void Init()
     {
-		instance = this;
+        instance = this;
+
+        if (!PlayerDataManager.instance.my.isHost)
+            return;
+
         //Init 'mapList' and 'topMapList', Call 'SetBlocks()'
         for (int i = 0; i < maxFloor; i++)
         {
             mapList[i] = new List<BlockPos>();
             topMapList[i] = new List<BlockPos>();
-			SetBlocks(i);
+            SetBlocks(i);
         }
 
         //Create blocks
@@ -86,7 +91,7 @@ public class IslandGenerator : MonoBehaviour
                 GameObject g = Instantiate(GameManager.instance.blockObject[blockId], blockPos, Quaternion.Euler(-90, 0, 0));
                 g.transform.parent = transform;
                 blocks.Add(g);
-                GameManager.instance.blockList.Add(new Block(blockPos, blockId));
+                GameManager.instance.blockList.Add(new Block(blockPos, blockId, id));
             }
         }
 
@@ -94,7 +99,7 @@ public class IslandGenerator : MonoBehaviour
 
         CreateTrees(Random.Range(minTreeNum, maxTreeNum + 1));
         CreateBushes(Random.Range(minBushNum, maxBushNum + 1));
-        CreateRocks(Random.Range(minKRockNum,  maxRockNum + 1));
+        CreateRocks(Random.Range(minKRockNum, maxRockNum + 1));
         CreateKeys(keyNum);
         CreateItems(itemNum);
     }
@@ -176,7 +181,7 @@ public class IslandGenerator : MonoBehaviour
                 GameObject g = Instantiate(GameManager.instance.blockObject[4], transform.position + topMapList[h][r].ToVector3(h + 1), Quaternion.Euler(-90, 0, 0));
                 g.transform.parent = transform;
                 topMapList[h].Remove(topMapList[h][r]);//이미 생성된 곳은 중복을 방지하기 위해서 리스트에서 지워준다
-                GameManager.instance.blockList.Add(new Block(g.transform.position, 4));
+                GameManager.instance.blockList.Add(new Block(g.transform.position, 4,id));
             }
         }
     }
@@ -193,7 +198,7 @@ public class IslandGenerator : MonoBehaviour
                 GameObject g = Instantiate(GameManager.instance.blockObject[5], transform.position + topMapList[h][r].ToVector3(h + 1), Quaternion.Euler(-90, 0, 0));
                 g.transform.parent = transform;
                 topMapList[h].Remove(topMapList[h][r]);//이미 생성된 곳은 중복을 방지하기 위해서 리스트에서 지워준다
-                GameManager.instance.blockList.Add(new Block(g.transform.position, 5));
+                GameManager.instance.blockList.Add(new Block(g.transform.position, 5,id));
             }
         }
     }
@@ -210,7 +215,7 @@ public class IslandGenerator : MonoBehaviour
                 GameObject g = Instantiate(GameManager.instance.blockObject[10], transform.position + topMapList[h][r].ToVector3(h + 1), Quaternion.Euler(-90, 0, 0));
                 g.transform.parent = transform;
                 topMapList[h].Remove(topMapList[h][r]);//이미 생성된 곳은 중복을 방지하기 위해서 리스트에서 지워준다
-                GameManager.instance.blockList.Add(new Block(g.transform.position, 10));
+                GameManager.instance.blockList.Add(new Block(g.transform.position, 10,id));
             }
         }
     }
@@ -227,7 +232,7 @@ public class IslandGenerator : MonoBehaviour
                 g.transform.parent = transform;
                 g.name += "(" + i + ")";
                 topMapList[h].Remove(topMapList[h][r]);//이미 생성된 곳은 중복을 방지하기 위해서 리스트에서 지워준다
-                GameManager.instance.blockList.Add(new Block(g.transform.position, 8));
+                GameManager.instance.blockList.Add(new Block(g.transform.position, 8,id));
             }
         }
     }
@@ -244,13 +249,13 @@ public class IslandGenerator : MonoBehaviour
                 g.transform.parent = transform;
                 g.name += "(" + i+")";
                 topMapList[h].Remove(topMapList[h][r]);//이미 생성된 곳은 중복을 방지하기 위해서 리스트에서 지워준다
-                GameManager.instance.blockList.Add(new Block(g.transform.position, 8));
+                GameManager.instance.blockList.Add(new Block(g.transform.position, 11,id));
             }
         }
     }
 
 
-    private void Combine()
+    public void Combine()
     {
 
         int size;

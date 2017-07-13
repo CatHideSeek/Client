@@ -33,7 +33,6 @@ public class NetworkManager : MonoBehaviour
     /// </summary>
     [SerializeField]
     public Room enterRoom = new Room();
-
     void Awake()
     {
         if (instance == null)
@@ -85,6 +84,9 @@ public class NetworkManager : MonoBehaviour
         #endregion
 
         #region ReceiveInGameData
+        socket.On("initEnd", OnInitEnd);
+        socket.On("trap", OnTrap);
+        socket.On("generator", OnGenerator);
         socket.On("spawnPos", OnSpawnPos);
         socket.On("map", OnBlock);
         socket.On("portalCreate", OnPortal);
@@ -258,13 +260,18 @@ public class NetworkManager : MonoBehaviour
 
         UIInGame.instance.ViewNotice(user.name + "이 참가하였습니다.");
 
-        if (PlayerDataManager.instance.my.isHost)
+        if (PlayerDataManager.instance.my.isHost&&!PlayerDataManager.instance.my.name.Equals(user.name))
         {
             SendSpawnPos(user.name, GameManager.instance.spawnPos.y);
+            foreach(IslandInfo info in GameManager.instance.islandList)
+            {
+                SendGenerator(user.name,info.x, info.y, info.id);//생성기 먼저 생성해야됨
+            }
             foreach (Block block in GameManager.instance.blockList)
             {
-                SendBlock(user.name, block.pos, block.id);
+                SendBlock(user.name, block.pos, block.id,block.parent);
             }
+            SendInitEnd(user.name);
         }
     }
 
@@ -272,24 +279,41 @@ public class NetworkManager : MonoBehaviour
     {
         JSONObject json = e.data;
 
+        string targetName = json.GetField("target").str;
+        if (targetName.Equals(Define.ALL_Target))
+            targetName = PlayerDataManager.instance.my.name;
+
         //처음 들어온 유저에게만 맵을 생성하게 하기 위해
-        if (PlayerDataManager.instance.my.name.Equals(json.GetField("target").str) && !PlayerDataManager.instance.my.isHost)
+        if (PlayerDataManager.instance.my.name.Equals(targetName))
         {
             float x = json.GetField("bx").f;
             float y = json.GetField("by").f;
             float z = json.GetField("bz").f;
             int id = (int)json.GetField("bid").f;
-
-            Instantiate(GameManager.instance.blockObject[id], new Vector3(x, y, z), GameManager.instance.blockObject[id].transform.rotation);
+            int parent = (int)json.GetField("parent").f;
+            Debug.Log(parent);
+            GameObject block=Instantiate(GameManager.instance.blockObject[id], new Vector3(x, y, z), GameManager.instance.blockObject[id].transform.rotation);
+            if (id == 6 || id == 7)
+                block.transform.parent = MapGenerator.instance.transform;
+            else
+            {
+                Transform parentIsland=GameObject.Find("Island " + parent).transform;
+                block.transform.parent = parentIsland;
+                parentIsland.GetComponent<IslandGenerator>().blocks.Add(block);
+            }
             //오브젝트를 받아와서 배치함(id값은 0~3:땅, 4: 나무, 5: 수풀, 6~7: 다리, 8:키스포너)
         }
     }
 
+
     /// <summary>
     /// 블럭의 좌표를 다른 클라이언트에게 보냅니다.
     /// </summary>
+    /// <param name="targetName">유저 이름</param>
     /// <param name="pos">위치 Vector3</param>
-    public void SendBlock(string targetName, Vector3 pos, int id)
+    /// <param name="id">블럭 종류</param>
+    /// <param name="parent">부모</param>
+    public void SendBlock(string targetName, Vector3 pos, int id,int parent=-1)
     {
         JSONObject json = new JSONObject(JSONObject.Type.OBJECT);
 
@@ -298,8 +322,98 @@ public class NetworkManager : MonoBehaviour
         json.AddField("by", pos.y);
         json.AddField("bz", pos.z);
         json.AddField("bid", id);
+        json.AddField("parent", parent);
 
         socket.Emit("map", json);
+    }
+
+    public void OnInitEnd(SocketIOEvent e)
+    {
+        JSONObject json = e.data;
+
+        if (!PlayerDataManager.instance.my.name.Equals(json.GetField("target").str))
+            return;
+        for (int i = 0; i < MapGenerator.instance.islandNum;i++)
+        {
+            //여기서 병합해야됨,
+            //Debug.Log("sdfsdf"+MapGenerator.instance.islandNum);
+            //GameObject.Find("Island " + i).transform.GetComponent<IslandGenerator>().Combine();
+        }
+
+        MapGenerator.instance.transform.Rotate(new Vector3(0, 45, 0));
+    }
+
+    /// <summary>
+    /// 맵생성이 끝낫음을 알려준다
+    /// </summary>
+    public void SendInitEnd(string targetName)
+    {
+        JSONObject json = new JSONObject(JSONObject.Type.OBJECT);
+        json.AddField("target", targetName);
+        socket.Emit("initEnd", json);
+    }
+
+    public void OnGenerator(SocketIOEvent e)
+    {
+        JSONObject json = e.data;
+
+        if (!PlayerDataManager.instance.my.name.Equals(json.GetField("target").str))
+            return;
+
+        int x = (int)json.GetField("x").f;
+        int y = (int)json.GetField("y").f;
+        int id = (int)json.GetField("id").f;
+
+        MapGenerator.instance.CreateIsland(x, y, id);
+    }
+
+    /// <summary>
+    /// 섬생성기 정보를 다른 클라이언트에게 보냅니다.
+    /// </summary>
+    /// <param name="pos"></param>
+    /// <param name="id"></param>
+    public void SendGenerator(string targetName,int x,int y,int id)
+    {
+        JSONObject json = new JSONObject(JSONObject.Type.OBJECT);
+
+        json.AddField("target", targetName);
+        json.AddField("x", x);
+        json.AddField("y", y);
+        json.AddField("id", id);
+
+        socket.Emit("generator", json);
+    }
+
+    public void OnTrap(SocketIOEvent e)
+    {
+        JSONObject json = e.data;
+
+        float x = json.GetField("x").f;
+        float y = json.GetField("y").f;
+        float z = json.GetField("z").f;
+        string owner = json.GetField("owner").str;
+
+        if (owner.Equals(PlayerDataManager.instance.my.name))
+            return;
+
+        Trap t=Instantiate(GameManager.instance.blockObject[9], new Vector3(x, y, z), GameManager.instance.blockObject[9].transform.rotation).GetComponent<Trap>();
+        t.SetOwner(owner);
+    }
+
+    /// <summary>
+    /// 트랩생성 정보를 다른 클라이언트에게 보냅니다.
+    /// </summary>
+    /// <param name="pos"></param>
+    public void SendTrap(Vector3 pos)
+    {
+        JSONObject json = new JSONObject(JSONObject.Type.OBJECT);
+
+        json.AddField("x", pos.x);
+        json.AddField("y", pos.y);
+        json.AddField("z", pos.z);
+        json.AddField("owner", PlayerDataManager.instance.my.name);
+
+        socket.Emit("trap", json);
     }
 
     public void OnSpawnPos(SocketIOEvent e)

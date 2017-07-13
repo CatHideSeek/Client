@@ -143,7 +143,7 @@ public class PlayerDataManager : MonoBehaviour {
         Debug.Log("트랩 설치");
         Trap t=Instantiate(GameManager.instance.blockObject[9], my.controller.transform.position, GameManager.instance.blockObject[9].transform.rotation).GetComponent<Trap>();
         t.SetOwner(my.name);
-        GameManager.instance.blockList.Add(new Block(t.transform.position, 9));
+        NetworkManager.instance.SendTrap(t.transform.position);
     }
     #endregion
 
