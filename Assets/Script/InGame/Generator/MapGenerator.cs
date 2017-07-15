@@ -26,16 +26,22 @@ class IslandPos
 
 public class MapGenerator : MonoBehaviour
 {
+    public static MapGenerator instance;
 	public GameObject islandPrefab;
 	public GameObject bridgePrefab;
 	public int bridgeGab=10;
-	public int islandNum = 4;
+	public int islandNum;
 
 	IslandPos currentPos = new IslandPos ();
 	List<IslandPos> islandList = new List<IslandPos> ();
 
     public bool useMipMaps = true;
     public TextureFormat textureFormat = TextureFormat.RGB24;
+
+    void Awake()
+    {
+        instance = this;
+    }
 
     public void InitMap ()
 	{
@@ -59,25 +65,34 @@ public class MapGenerator : MonoBehaviour
                 if (temp.y - currentPos.y != 0)
                 {
                     obj.transform.Rotate(new Vector3(0, 90, 0));
-                    //GameManager.instance.blockList.Add(new Block(obj.transform.position, 6));
+                    GameManager.instance.blockList.Add(new Block(obj.transform.position, 6));
                 }
-                //else
-                    //GameManager.instance.blockList.Add(new Block(obj.transform.position, 7));
+                else
+                    GameManager.instance.blockList.Add(new Block(obj.transform.position, 7));
                 obj.transform.parent = transform;
                 obj.name +=  " "+(i-1)+">>"+i;
                 CombineBridge(obj);
 
 			} else
 				currentPos = temp;
-			GameObject islandGenerator = Instantiate (islandPrefab, transform.position + new Vector3 (temp.x, 0, temp.y) * bridgeGab, Quaternion.identity);
-            islandGenerator.transform.parent = transform;
-            islandGenerator.name += " " + i; 
-			islandList.Add (temp);
+
+            CreateIsland(temp.x, temp.y, i);
+            islandList.Add(temp);
+            GameManager.instance.islandList.Add(new IslandInfo(temp.x, temp.y, i));
 			currentPos = temp;
 		}
 
         transform.Rotate(new Vector3(0, 45, 0));
 	}
+
+    public void CreateIsland(int x,int y,int id)
+    {
+        GameObject islandGenerator = Instantiate(islandPrefab, transform.position + new Vector3(x, 0,y) * bridgeGab, Quaternion.identity);
+        islandGenerator.transform.parent = transform;
+        islandGenerator.name = "Island " + id;
+        islandGenerator.GetComponent<IslandGenerator>().id = id;
+        islandGenerator.GetComponent<IslandGenerator>().Init();
+    }
 
 	IslandPos SetIsland (IslandPos pos)
 	{

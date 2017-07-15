@@ -6,8 +6,6 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-
-
     public static GameManager instance;
 
     public float currentTime = 120f, portalOpenTime = 60f;
@@ -29,6 +27,7 @@ public class GameManager : MonoBehaviour
     public Vector3 spawnPos = Vector3.zero;
     public List<Block> blockList = new List<Block>();
     public Transform map;
+    public List<IslandInfo> islandList = new List<IslandInfo>();
 
     public PortalController portal;
     public int keySpawnerNum;
