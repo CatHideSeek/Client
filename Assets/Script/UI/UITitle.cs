@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement;
 
 /// <summary>
 /// 타이틀 씬에 관한 모든 UI를 제어하는 클래스입니다.
@@ -22,7 +21,7 @@ public class UITitle : MonoBehaviour {
 
 
     public void StartButton() {
-        SceneManager.LoadScene("LobbyScene");
+        SceneLoadManager.instance.LoadScene(SceneLoadManager.instance.OnLobby);
     }
 
     public void LoginButton() {

@@ -11,6 +11,22 @@ public class UIRoomSlot : MonoBehaviour {
         numberText.text = "No. " + index;
         nameText.text = room.name;
         countText.text = room.countPlayers + " / " + room.maxPlayers;
+
+        room.ui = this;
+
+        if (room.isPlay)
+            stateText.text = "<color=#ff0000ff>Playing..</color>";
+        else if (room.countPlayers == room.maxPlayers)
+            stateText.text = "<color=#00ffffff>Full..</color>";
+        else
+            stateText.text = "<color=#00ff00ff>Wait..</color>";
+    }
+
+    public void SetData(Room room)
+    {
+        nameText.text = room.name;
+        countText.text = room.countPlayers + " / " + room.maxPlayers;
+        
         if (room.isPlay)
             stateText.text = "<color=#ff0000ff>Playing..</color>";
         else if (room.countPlayers == room.maxPlayers)
@@ -20,8 +36,11 @@ public class UIRoomSlot : MonoBehaviour {
     }
 
 
+
     public void OnEnterRoom() {
 
     }
+
+
 
 }

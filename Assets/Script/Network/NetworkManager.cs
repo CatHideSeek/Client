@@ -131,6 +131,7 @@ public class NetworkManager : MonoBehaviour
             int.TryParse(json["roomList"][i]["countPlayers"].ToString(), out room.countPlayers);
             int.TryParse(json["roomList"][i]["readyPlayers"].ToString(), out room.readyPlayers);
             int.TryParse(json["roomList"][i]["maxPlayers"].ToString(), out room.maxPlayers);
+            int.TryParse(json["room"]["pw"].ToString(), out room.pw);
             bool.TryParse(json["roomList"][i]["isPlayed"].ToString(), out room.isPlay);
 
             roomList.Add(room);
@@ -149,22 +150,8 @@ public class NetworkManager : MonoBehaviour
         socket.Emit("roomList", json);
 
     }
-
-    public void OnRoomCreate(SocketIOEvent e)
-    {
-        JSONObject json = e.data;
-
-        Room room = new Room();
-
-        int.TryParse(json["room"]["id"].ToString(), out room.id);
-        room.name = json["room"]["name"].ToString();
-        int.TryParse(json["room"]["countPlayers"].ToString(), out room.countPlayers);
-        int.TryParse(json["room"]["readyPlayers"].ToString(), out room.readyPlayers);
-        int.TryParse(json["room"]["maxPlayers"].ToString(), out room.maxPlayers);
-        bool.TryParse(json["room"]["isPlayed"].ToString(), out room.isPlay);
-
-        roomList.Add(room);
-    }
+    
+   
 
     public void OnRoomJoin(SocketIOEvent e)
     {
@@ -193,17 +180,35 @@ public class NetworkManager : MonoBehaviour
         DeletRoom(name);
     }
 
+    public void OnRoomCreate(SocketIOEvent e)
+    {
+        JSONObject json = e.data;
+
+        Room room = new Room();
+
+        int.TryParse(json["room"]["id"].ToString(), out room.id);
+        room.name = json["room"]["name"].ToString();
+        int.TryParse(json["room"]["countPlayers"].ToString(), out room.countPlayers);
+        int.TryParse(json["room"]["readyPlayers"].ToString(), out room.readyPlayers);
+        int.TryParse(json["room"]["maxPlayers"].ToString(), out room.maxPlayers);
+        int.TryParse(json["room"]["pw"].ToString(), out room.pw);
+        bool.TryParse(json["room"]["isPlayed"].ToString(), out room.isPlay);
+
+        roomList.Add(room);
+    }
+
     /// <summary>
     /// 서버로 방 생성을 전송합니다.
     /// </summary>
     /// <param name="name">방 이름</param>
     /// <param name="maxPlayers">최대 입장 가능 수</param>
-    public void SendCreate(string name, int maxPlayers)
+    public void SendRoomCreate(string name, int maxPlayers, int pw)
     {
         JSONObject json = new JSONObject(JSONObject.Type.OBJECT);
 
         json.AddField("roomName", name);
         json.AddField("maxPlayers", maxPlayers);
+        json.AddField("pw", pw);
 
         socket.Emit("roomCreate", json);
     }
@@ -213,10 +218,10 @@ public class NetworkManager : MonoBehaviour
         JSONObject json = e.data;
         string name = json.GetField("roomName").str;
 
-        //bool.TryParse(json.GetField("isHost").str, out playerData.my.isHost);
+        bool.TryParse(json.GetField("isHost").str, out playerData.my.isHost);
 
         //입장한 방 세팅
-        //enterRoom = FindRoom(name);
+        enterRoom = FindRoom(name);
         //씬 이동
         //씬 ~ 이 ~ 동 ~ 코 ~ 드 ~
 
@@ -927,6 +932,17 @@ public class NetworkManager : MonoBehaviour
         string message = json.GetField("message").str;
         int where = 0;
         int.TryParse(json.GetField("where").str, out where);
+
+        GameObject g = GameObject.FindGameObjectWithTag("UIManager");
+        switch (where) {
+            case 0:
+                g.GetComponent<UILobby>().AddChatLog(name+ " : " +message);
+                break;
+            case 1:
+                break;
+            case 2:
+                break;
+        }
     }
 
     /// <summary>
@@ -934,7 +950,7 @@ public class NetworkManager : MonoBehaviour
     /// </summary>
     /// <param name="name">유저 이름</param>
     /// <param name="message">메세지</param>
-    /// <param name="where">어디에서 보내는가?</param>
+    /// <param name="where">어디에서 보내는가? 0 = 로비  1 = 방 2 = 인 게임</param>
     public void SendChat(string name, string message, int where)
     {
         JSONObject json = new JSONObject(JSONObject.Type.OBJECT);

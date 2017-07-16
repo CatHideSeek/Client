@@ -29,6 +29,10 @@ public class Room
     /// </summary>
     public int maxPlayers;
     /// <summary>
+    /// 방의 비밀번호
+    /// </summary>
+    public int pw;
+    /// <summary>
     /// 방 내 유저 리스트
     /// </summary>
     public List<User> userList = new List<User>();
@@ -40,6 +44,11 @@ public class Room
     /// 방의 술래가 된 유저 리스트
     /// </summary>
     public int bossPlayers = 0;
+
+    /// <summary>
+    /// 방 슬롯 UI
+    /// </summary>
+    public UIRoomSlot ui;
 
     /// <summary>
     /// [TEST] 방의 초기값 생성
@@ -64,6 +73,34 @@ public class Room
         this.name = name;
         this.maxPlayers = fullPlayer;
         this.userList = new List<User>();
+    }
+
+
+    /// <summary>
+    /// 방을 생성합니다.
+    /// </summary>
+    /// <param name="id">방 아이디</param>
+    /// <param name="name">방 이름</param>
+    /// <param name="fullPlayer">최대 인원 수</param>
+    public Room(int id, string name, int fullPlayer, int pw)
+    {
+        this.id = id;
+        this.name = name;
+        this.maxPlayers = fullPlayer;
+        this.pw = pw;
+        this.userList = new List<User>();
+    }
+
+    /// <summary>
+    /// 방의 비밀번호와 일치한지 체크합니다.
+    /// </summary>
+    /// <param name="pw">비밀번호</param>
+    /// <returns></returns>
+    public bool CheckPW(int pw)
+    {
+        if (this.pw == pw)
+            return true;
+        return false;
     }
 
     /// <summary>
@@ -166,6 +203,15 @@ public class Room
                 GameManager.instance.isEnd = true;
             }
         }
+    }
+
+    /// <summary>
+    /// 방 슬롯의 정보를 업데이트 합니다.
+    /// </summary>
+    public void UpdateUI()
+    {
+        if (ui != null)
+            ui.SetData(this);
     }
 
 }

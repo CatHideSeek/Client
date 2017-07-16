@@ -11,7 +11,7 @@ public class UILobby : MonoBehaviour
 
     public static UILobby instance;
 
-    public Animator menuAni, rommListAni, roomListChatLogAni, roomListChatInputAni;
+    public Animator rommListAni, ChatLogAni, ChatInputAni;
 
     public Text roomListText;
 
@@ -22,7 +22,7 @@ public class UILobby : MonoBehaviour
 
     public RectTransform roomScrollView;
 
-    bool isOpenRoomList = false, isOpenMenu = false;
+    bool isOpenRoomList = false;
 
     public Text chatLog;
 
@@ -33,8 +33,6 @@ public class UILobby : MonoBehaviour
 
     void CreateRoomList()
     {
-        //NetworkManager.instance.roomList;
-        //roomScrollView
 
         roomScrollView.sizeDelta = new Vector2(0, NetworkManager.instance.roomList.Count * -marginPos.y + 10f);
 
@@ -62,15 +60,6 @@ public class UILobby : MonoBehaviour
         }
     }
 
-    public void OnMenu()
-    {
-        isOpenMenu = !isOpenMenu;
-        if (isOpenMenu)
-            menuAni.SetTrigger("Open");
-        else
-            menuAni.SetTrigger("Close");
-    }
-
     public void OnroomList()
     {
         isOpenRoomList = !isOpenRoomList;
@@ -78,34 +67,27 @@ public class UILobby : MonoBehaviour
         {
             RemoveRoomList();
             rommListAni.SetTrigger("Open");
-            roomListChatInputAni.SetTrigger("Open");
-            roomListChatLogAni.SetTrigger("Open");
+            ChatInputAni.SetTrigger("Open");
+            ChatLogAni.SetTrigger("Open");
             CreateRoomList();
             roomListText.text = "닫기";
         }
         else
         {
             rommListAni.SetTrigger("Close");
-            roomListChatInputAni.SetTrigger("Close");
-            roomListChatLogAni.SetTrigger("Close");
+            ChatInputAni.SetTrigger("Close");
+            ChatLogAni.SetTrigger("Close");
             roomListText.text = "방 리스트";
         }
     }
 
     public void SendChat(InputField input)
     {
-        //NetworkManager.instance.SendChat(PlayerDataManager.instance.my.name, input.text, 0);
-        chatLog.text += "User : " + input.text + "\n";
-        if (scrollChat != null)
-            StopCoroutine(scrollChat);
-
-        scrollChat = StartCoroutine(ScrollChatLog(chatLog.transform.parent.parent.GetChild(1).GetComponent<Scrollbar>(), 0));
-
-
+        NetworkManager.instance.SendChat(PlayerDataManager.instance.my.name, input.text, 0);
+       
         input.text = "";
     }
 
-    Coroutine scrollChat = null;
 
     IEnumerator ScrollChatLog(Scrollbar bar, float value)
     {
@@ -117,9 +99,15 @@ public class UILobby : MonoBehaviour
 
     }
 
+    Coroutine scrollChat = null;
+
     public void AddChatLog(string message)
     {
         chatLog.text += message + "\n";
+        if (scrollChat != null)
+            StopCoroutine(scrollChat);
+
+        scrollChat = StartCoroutine(ScrollChatLog(chatLog.transform.parent.parent.GetChild(1).GetComponent<Scrollbar>(), 0));
     }
 
 
