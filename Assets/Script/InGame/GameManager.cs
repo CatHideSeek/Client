@@ -54,13 +54,6 @@ public class GameManager : MonoBehaviour
     {
         if (isPlay && !isEnd)
             Timer();
-
-        else if (!isPlay && PlayerDataManager.instance.my.isHost && Input.GetKeyDown(KeyCode.Space))
-        {
-            NetworkManager.instance.enterRoom.SetFirstBoss();
-            NetworkManager.instance.SendStart();
-        }
-
     }
 
     void Timer()

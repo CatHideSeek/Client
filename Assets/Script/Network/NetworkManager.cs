@@ -275,7 +275,7 @@ public class NetworkManager : MonoBehaviour
                     UIInGame.instance.ViewNotice("[특성] 이 고양이는 변신 상태에서 이동할 수 있습니다.");
                     break;
                 case 3:
-                    UIInGame.instance.ViewNotice("[특성] 이 고양이는 가장 가까운 적을 탐지할 수 있습니다.");
+                    UIInGame.instance.ViewNotice("[특성] 이 고양이는 가까운 적을 탐지할 수 있습니다.");
                     user.controller.arrow.SetActive(true);
                     break;
                 case 4:

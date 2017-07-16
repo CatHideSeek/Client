@@ -31,7 +31,8 @@ public class ArrowController : MonoBehaviour
         Transform closestEnemy = null;
         foreach (GameObject taggedEnemy in taggedEnemys)
         {
-            if (taggedEnemy == PlayerDataManager.instance.my.controller.gameObject)
+            PlayerController e = taggedEnemy.GetComponent<PlayerController>();
+            if (taggedEnemy == PlayerDataManager.instance.my.controller.gameObject||e.user.GetTeam()==p.user.GetTeam())
                 continue;
 
             Vector3 objectPos = taggedEnemy.transform.position;
@@ -49,13 +50,17 @@ public class ArrowController : MonoBehaviour
         }
 
         Color c = renderer.material.color;
-        if (closestEnemy)
+        if (closestDistSqr < viewRange)
         {
             arrow.transform.LookAt(new Vector3(closestEnemy.transform.position.x, arrow.transform.position.y, closestEnemy.transform.position.z));
             c.a = 1;
+            arrow.SetActive(true);
         }
         else
+        {
             c.a = 0;
+            arrow.SetActive(false);
+        }
         renderer.material.color = c;
         Debug.Log(c.a);
     }

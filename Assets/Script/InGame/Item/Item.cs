@@ -9,12 +9,12 @@ public class Item : MonoBehaviour
 
     float time = 0,originY;
     bool destroy=false;
-    Material mat;
+    Material[] mat;
 
     void Awake()
     {
         originY = transform.position.y;
-        mat = GetComponent<Renderer>().material;
+        mat = transform.Find("Model").GetComponent<Renderer>().materials;
     }
 
     void Update()
@@ -25,9 +25,10 @@ public class Item : MonoBehaviour
         
         if (destroy)
         {
-            Color c = mat.color;
+            Color c = mat[0].color;
             c.a -= traSpeed * Time.deltaTime;
-            mat.color = c;
+            for (int i = 0; i < mat.Length; i++)
+                mat[i].color = c;
             originY += upSpeed * Time.deltaTime;
             if(c.a<=0)
             {

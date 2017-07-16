@@ -16,6 +16,7 @@ public class UIInGame : MonoBehaviour
     public Text noticeText;
     public float noticeTime = 2f;
 
+
     void Awake()
     {
         instance = this;
@@ -35,10 +36,11 @@ public class UIInGame : MonoBehaviour
         PlayerDataManager.instance.my.isHost = true;
     }
 
-    //테스트 용 레디 버튼입니다. 언젠가 지워질꺼에요.
+    //테스트 용 시작 버튼입니다. 언젠가 지워질꺼에요.
     public void TestStart()
     {
         PlayerDataManager.instance.my.isReady = true;
+        NetworkManager.instance.enterRoom.SetFirstBoss();
         NetworkManager.instance.SendStart();
     }
 

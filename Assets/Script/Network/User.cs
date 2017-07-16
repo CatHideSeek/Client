@@ -132,4 +132,13 @@ public class User
         else
             return false;
     }
+
+    /// <summary>
+    /// 좀비인지 아닌지 반환해줍니다.(0:좀비아님, 1:좀비임)
+    /// </summary>
+    /// <returns></returns>
+    public bool GetTeam()
+    {
+        return (isBoss || isBossChild);
+    }
 }

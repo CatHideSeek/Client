@@ -38,6 +38,7 @@ public class PlayerController : MonoBehaviour
 
     public bool createdModel = false;
     bool bushing = false;
+    OpacityObject lastBush = null;
 
     void Awake()
     {
@@ -92,7 +93,7 @@ public class PlayerController : MonoBehaviour
         }
 
         #region UpdateState
-        if (user.FindState((int)User.State.Hide) >= 0||bushing)
+        if (user.FindState((int)User.State.Hide) >= 0||(bushing&&!lastBush.opacity))
         {
             if (!user.isPlayer)
                 SetRenderer(false);
@@ -313,6 +314,7 @@ public class PlayerController : MonoBehaviour
                 bushing = true;
             else
                 col.GetComponent<OpacityObject>().SetOpacity(true);
+            lastBush = col.GetComponent<OpacityObject>();
         }
         else if (col.CompareTag("Item"))
         {
@@ -378,6 +380,7 @@ public class PlayerController : MonoBehaviour
                 bushing = false;
             else
                 col.GetComponent<OpacityObject>().SetOpacity(false);
+            lastBush = null;
         }
     }
 
