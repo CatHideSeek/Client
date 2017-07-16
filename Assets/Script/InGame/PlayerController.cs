@@ -9,6 +9,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     public User user;
+    public GameObject[] catModel;
 
     Transform tr;
     Rigidbody ri;
@@ -33,6 +34,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     float clampTime = 50f;
 
+    public bool createdModel = false;
+
     void Awake()
     {
 
@@ -51,11 +54,23 @@ public class PlayerController : MonoBehaviour
         oriMSpd = movSpeed;
         oriRSpd = rotSpeed;
 
-        changeObjs = new GameObject[3];
         model = transform.Find("Cat").gameObject;
+        changeObjs = new GameObject[3];
         changeObjs[0] = transform.Find("Tree").gameObject;
         changeObjs[1] = transform.Find("Frost").gameObject;
         changeObjs[2] = transform.Find("Rock").gameObject;
+    }
+
+    /// <summary>
+    /// 플레이어의 모델을 지정해줍니다
+    /// </summary>
+    /// <param name="model">모델 id값(0~4)</param>
+    public void SetModel(int id)
+    {
+        Debug.Log("SetModel()");
+        GameObject g = Instantiate(catModel[id],transform.position+catModel[id].transform.position,Quaternion.identity);
+        g.transform.parent = model.transform;
+        createdModel = true;
     }
 
     // Update is called once per frame

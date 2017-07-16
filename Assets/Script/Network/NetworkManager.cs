@@ -74,6 +74,7 @@ public class NetworkManager : MonoBehaviour
         #endregion
 
         #region ReceivePlayerData
+        socket.On("modelType", OnModelType);
         socket.On("move", OnPosition);
         socket.On("rotate", OnRotation);
         socket.On("state", OnState);
@@ -258,6 +259,9 @@ public class NetworkManager : MonoBehaviour
         g.GetComponent<PlayerController>().SetUser(user);
         g.name = user.name;
 
+        if (name == playerData.my.name)
+            playerData.SetCatModel(Random.Range(0, 5));//고양이 종류를 정해줍니다.
+
         UIInGame.instance.ViewNotice(user.name + "이 참가하였습니다.");
 
         if (PlayerDataManager.instance.my.isHost&&!PlayerDataManager.instance.my.name.Equals(user.name))
@@ -274,7 +278,24 @@ public class NetworkManager : MonoBehaviour
             SendInitEnd(user.name);
         }
 
-        SendPosition(PlayerDataManager.instance.my.controller.transform.position);//방금 입장한 사람을 위해 현재좌표를 전송
+        SendPosition(playerData.my.controller.transform.position);//방금 입장한 사람을 위해 현재좌표를 전송
+        SendModelType(playerData.modelType);//방금 입장한 사람을 위해 내 모델타입을 전송
+    }
+
+    /// <summary>
+    /// 서버로 방 입장에 성공했음을 보냅니다.
+    /// </summary>
+    public void SendJoin()
+    {
+        JSONObject json = new JSONObject(JSONObject.Type.OBJECT);
+
+        playerData.my.name = "User" + Random.Range(1, 100);
+
+        json.AddField("name", playerData.my.name);
+        json.AddField("isHost", playerData.my.isHost);
+        json.AddField("characterKind", playerData.my.characterKind);
+
+        socket.Emit("roomJoin", json);
     }
 
     public void OnBlock(SocketIOEvent e)
@@ -293,7 +314,6 @@ public class NetworkManager : MonoBehaviour
             float z = json.GetField("bz").f;
             int id = (int)json.GetField("bid").f;
             int parent = (int)json.GetField("parent").f;
-            Debug.Log(parent);
             GameObject block=Instantiate(GameManager.instance.blockObject[id], new Vector3(x, y, z), GameManager.instance.blockObject[id].transform.rotation);
             if (id == 6 || id == 7)
                 block.transform.parent = MapGenerator.instance.transform;
@@ -418,6 +438,36 @@ public class NetworkManager : MonoBehaviour
         socket.Emit("trap", json);
     }
 
+    public void OnModelType(SocketIOEvent e)
+    {
+
+        JSONObject json = e.data;
+        string name = json.GetField("name").str;
+        int id = (int)json.GetField("id").f;
+        User user = enterRoom.FindUserByName(name);
+
+        if (user.controller.createdModel)
+            return;
+
+        if(user!=null)
+            user.controller.SetModel(id);
+    }
+
+    /// <summary>
+    /// 내 고양이 종류를 다른 클라이언트에게 보냅니다.
+    /// </summary>
+    /// <param name="id"></param>
+    public void SendModelType(int id)
+    {
+        Debug.Log("SendModelType()"+id);
+        JSONObject json = new JSONObject(JSONObject.Type.OBJECT);
+
+        json.AddField("name", playerData.my.name);
+        json.AddField("id",id);
+        
+        socket.Emit("modelType", json);
+    }
+
     public void OnSpawnPos(SocketIOEvent e)
     {
         JSONObject json = e.data;
@@ -444,22 +494,6 @@ public class NetworkManager : MonoBehaviour
         print("SendSpawnPos");
 
         socket.Emit("spawnPos", json);
-    }
-
-    /// <summary>
-    /// 서버로 방 입장에 성공했음을 보냅니다.
-    /// </summary>
-    public void SendJoin()
-    {
-        JSONObject json = new JSONObject(JSONObject.Type.OBJECT);
-
-        playerData.my.name = "User" + Random.Range(1, 100);
-
-        json.AddField("name", playerData.my.name);
-        json.AddField("isHost", playerData.my.isHost);
-        json.AddField("characterKind", playerData.my.characterKind);
-
-        socket.Emit("roomJoin", json);
     }
 
     public void OnUserList(SocketIOEvent e)

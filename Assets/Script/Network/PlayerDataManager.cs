@@ -11,6 +11,7 @@ public class PlayerDataManager : MonoBehaviour {
 
     public User my;
     public int itemType = 0;//소지 아이템 종류(0: 없음, 1: 은신물약, 2: 덫, 3: 변신물약)
+    public int modelType = -1;//고양이 종류(0:기본 1:도둑, 2:서커스, 3:팔랑귀, 4:장인)
 
     #region StateTimeVariable
     /// <summary>
@@ -162,5 +163,13 @@ public class PlayerDataManager : MonoBehaviour {
     public void EatItem(int id)
     {
         itemType = id;
+    }
+
+    public void SetCatModel(int id)
+    {
+        Debug.Log("SetCatModel()");
+        modelType = id;
+        my.controller.SetModel(modelType);
+        NetworkManager.instance.SendModelType(modelType);
     }
 }

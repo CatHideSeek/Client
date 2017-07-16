@@ -21,8 +21,6 @@ public class CameraController : MonoBehaviour {
 
     void FixedUpdate() {
         if (target != null)
-        {
             tr.position = Vector3.Lerp(tr.position, target.position + margin, Time.deltaTime * followSpeed);
-        }
     }
 }
