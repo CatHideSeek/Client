@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour
 {
     public User user;
     public GameObject[] catModel;
+    public GameObject arrow;
 
     Transform tr;
     Rigidbody ri;
@@ -29,12 +30,14 @@ public class PlayerController : MonoBehaviour
 
     GameObject nameLabel;
     GameObject model;
+    GameObject realModel;
     GameObject[] changeObjs;
 
     [SerializeField]
     float clampTime = 50f;
 
     public bool createdModel = false;
+    bool bushing = false;
 
     void Awake()
     {
@@ -67,9 +70,8 @@ public class PlayerController : MonoBehaviour
     /// <param name="model">모델 id값(0~4)</param>
     public void SetModel(int id)
     {
-        Debug.Log("SetModel()");
-        GameObject g = Instantiate(catModel[id],transform.position+catModel[id].transform.position,Quaternion.identity);
-        g.transform.parent = model.transform;
+        realModel = Instantiate(catModel[id],transform.position+catModel[id].transform.position,Quaternion.identity);
+        realModel.transform.parent = model.transform;
         createdModel = true;
     }
 
@@ -90,15 +92,13 @@ public class PlayerController : MonoBehaviour
         }
 
         #region UpdateState
-        if (user.FindState((int)User.State.Hide) >= 0)
+        if (user.FindState((int)User.State.Hide) >= 0||bushing)
         {
-            SetRenderer(false);
+            if (!user.isPlayer)
+                SetRenderer(false);
         }
-        //else if (hideAlpha < 1)
-        //{
-        //    hideAlpha = Mathf.Lerp(hideAlpha, 0.5f, Time.deltaTime * opaSpeed);
-        //    SetAlphaWithChildren(hideAlpha);
-        //}
+        else if (!realModel.active)
+            SetRenderer(true);
 
         if (user.FindState((int)User.State.Stun) >= 0)
         {
@@ -126,7 +126,6 @@ public class PlayerController : MonoBehaviour
                 else
                     changeObjs[i].SetActive(false);
             }
-            Debug.Log("sdfs" + user.objectKind);
         }
         else if (!model.activeSelf)
         {
@@ -141,7 +140,7 @@ public class PlayerController : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (user.isPlayer && (h!=0 || v!=0 || ri.velocity.y!=0))
+        if (user.isPlayer && (h != 0 || v != 0 || ri.velocity.y != 0) && (PlayerDataManager.instance.modelType == 2 || user.FindState((int)User.State.Change) == -1))
             Move();
         else if (h == 0 && v == 0)
             ri.velocity = new Vector3(0, ri.velocity.y, 0);
@@ -231,7 +230,8 @@ public class PlayerController : MonoBehaviour
         if (pos.sqrMagnitude > 0.1f)
             targetDir = pos.normalized;
 
-        tr.rotation = Quaternion.Slerp(tr.rotation, Quaternion.LookRotation(targetDir), Time.deltaTime * rotSpeed);
+        if(targetDir!=Vector3.zero)
+            tr.rotation = Quaternion.Slerp(tr.rotation, Quaternion.LookRotation(targetDir), Time.deltaTime * rotSpeed);
 
         ri.velocity = new Vector3(0, ri.velocity.y, 0);
         ri.velocity = new Vector3(inputDir.x * movSpeed, ri.velocity.y, inputDir.z * movSpeed);
@@ -302,17 +302,17 @@ public class PlayerController : MonoBehaviour
     /// <param name="alpha">활성화 여부</param>
     private void SetRenderer(bool active)
     {
-        model.SetActive(active);
+        realModel.SetActive(active);
     }
 
     void OnTriggerEnter(Collider col)
     {
         if (col.CompareTag("Hide"))
         {
-            if (!user.isPlayer && renderer)
-                renderer.material.color = new Color(renderer.material.color.r, renderer.material.color.g, renderer.material.color.b, 0f); //0투명 ~ 1 불투명
+            if (!user.isPlayer)
+                bushing = true;
             else
-                col.GetComponent<OpacityObject>().SetOpacity();
+                col.GetComponent<OpacityObject>().SetOpacity(true);
         }
         else if (col.CompareTag("Item"))
         {
@@ -328,9 +328,13 @@ public class PlayerController : MonoBehaviour
         }
         else if (col.CompareTag("Trap"))
         {
-            if (!col.GetComponent<Trap>().GetOwner().Equals(user.name))
+            Trap t=col.GetComponent<Trap>();
+            if (!t.GetOwner().Equals(user.name))
             {
-                PlayerDataManager.instance.SetStun(2);
+                if(t.stun)
+                    PlayerDataManager.instance.SetStun(2);
+                else
+                    PlayerDataManager.instance.SetSlow(2);
                 Destroy(col.gameObject);
             }
         }
@@ -370,8 +374,8 @@ public class PlayerController : MonoBehaviour
     {
         if (col.CompareTag("Hide"))
         {
-            if (!user.isPlayer&&renderer)
-                renderer.material.color = new Color(renderer.material.color.r, renderer.material.color.g, renderer.material.color.b, 1f); //0투명 ~ 1 불투명
+            if (!user.isPlayer)
+                bushing = false;
             else
                 col.GetComponent<OpacityObject>().SetOpacity(false);
         }

@@ -28,13 +28,19 @@ public class UIActionButton : MonoBehaviour {
 
     public void ItemButton() {
         print("item button works");
-        switch(PlayerDataManager.instance.itemType)
+        switch(player.itemType)
         {
             case 1:
-                PlayerDataManager.instance.SetHide(3);
+                if(player.modelType==1)
+                    PlayerDataManager.instance.SetHide(6);
+                else
+                    PlayerDataManager.instance.SetHide(3);
                 break;
             case 2:
-                PlayerDataManager.instance.CreateTrap();
+                if (player.modelType == 4)
+                    PlayerDataManager.instance.CreateTrap(true);
+                else
+                    PlayerDataManager.instance.CreateTrap(false);
                 break;
             case 3:
                 PlayerDataManager.instance.SetChange(4,Random.Range(1,4));

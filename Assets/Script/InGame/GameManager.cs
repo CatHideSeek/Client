@@ -71,7 +71,7 @@ public class GameManager : MonoBehaviour
 
 
         //포탈 생성 조건
-        if (!isPortalSet && currentTime < portalOpenTime)
+        if (!isPortalSet && currentTime < portalOpenTime&&portalObject)
         {
             portalObject.SetActive(true);
             isPortalSet = true;
