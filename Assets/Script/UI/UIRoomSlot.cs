@@ -19,4 +19,9 @@ public class UIRoomSlot : MonoBehaviour {
             stateText.text = "<color=#00ff00ff>Wait..</color>";
     }
 
+
+    public void OnEnterRoom() {
+
+    }
+
 }

@@ -24,7 +24,7 @@ public class UILobby : MonoBehaviour
 
     bool isOpenRoomList = false, isOpenMenu = false;
 
-    public Text[] chatLog;
+    public Text chatLog;
 
     private void Awake()
     {
@@ -81,35 +81,45 @@ public class UILobby : MonoBehaviour
             roomListChatInputAni.SetTrigger("Open");
             roomListChatLogAni.SetTrigger("Open");
             CreateRoomList();
-            roomListText.text = "Close";
+            roomListText.text = "닫기";
         }
         else
         {
             rommListAni.SetTrigger("Close");
             roomListChatInputAni.SetTrigger("Close");
             roomListChatLogAni.SetTrigger("Close");
-            roomListText.text = "Open";
+            roomListText.text = "방 리스트";
         }
     }
 
     public void SendChat(InputField input)
     {
         //NetworkManager.instance.SendChat(PlayerDataManager.instance.my.name, input.text, 0);
-        for (int i = 0; i < chatLog.Length; i++)
-        {
-            chatLog[i].text += "User : " + input.text + "\n";
-            chatLog[i].transform.parent.parent.GetComponent<ScrollRect>().verticalNormalizedPosition = 0f;
-        }
+        chatLog.text += "User : " + input.text + "\n";
+        if (scrollChat != null)
+            StopCoroutine(scrollChat);
+
+        scrollChat = StartCoroutine(ScrollChatLog(chatLog.transform.parent.parent.GetChild(1).GetComponent<Scrollbar>(), 0));
+
 
         input.text = "";
     }
 
+    Coroutine scrollChat = null;
+
+    IEnumerator ScrollChatLog(Scrollbar bar, float value)
+    {
+        while (bar.value != value)
+        {
+            bar.value = Mathf.Lerp(bar.value, value, Time.deltaTime * 10f);
+            yield return null;
+        }
+
+    }
+
     public void AddChatLog(string message)
     {
-        for (int i = 0; i < chatLog.Length; i++)
-        {
-            chatLog[i].text += message + "\n";
-        }
+        chatLog.text += message + "\n";
     }
 
 
