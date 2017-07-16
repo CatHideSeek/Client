@@ -139,12 +139,12 @@ public class PlayerDataManager : MonoBehaviour {
     /// <summary>
     /// 덫을 설치합니다.
     /// </summary>
-    public void CreateTrap()
+    public void CreateTrap(bool stun)
     {
-        Debug.Log("트랩 설치");
         Trap t=Instantiate(GameManager.instance.blockObject[9], my.controller.transform.position, GameManager.instance.blockObject[9].transform.rotation).GetComponent<Trap>();
         t.SetOwner(my.name);
-        NetworkManager.instance.SendTrap(t.transform.position);
+        t.stun = stun;
+        NetworkManager.instance.SendTrap(t.transform.position,stun);
     }
     #endregion
 

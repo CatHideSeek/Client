@@ -265,9 +265,33 @@ public class NetworkManager : MonoBehaviour
         g.name = user.name;
 
         if (name == playerData.my.name)
-            playerData.SetCatModel(Random.Range(0, 5));//고양이 종류를 정해줍니다.
-
-        UIInGame.instance.ViewNotice(user.name + "이 참가하였습니다.");
+        {
+            int r=Random.Range(0, 5);
+            playerData.SetCatModel(r);//고양이 종류를 정해줍니다.
+            switch(r)
+            {
+                case 0:
+                    UIInGame.instance.ViewNotice("[특성] 이 고양이는 가장 멍청합니다.");
+                    break;
+                case 1:
+                    UIInGame.instance.ViewNotice("[특성] 이 고양이는 더 오래 은신할 수 있습니다.");
+                    break;
+                case 2:
+                    UIInGame.instance.ViewNotice("[특성] 이 고양이는 변신 상태에서 이동할 수 있습니다.");
+                    break;
+                case 3:
+                    UIInGame.instance.ViewNotice("[특성] 이 고양이는 가까운 적을 탐지할 수 있습니다.");
+                    user.controller.arrow.SetActive(true);
+                    break;
+                case 4:
+                    UIInGame.instance.ViewNotice("[특성] 이 고양이의 덫은 적을 기절시킬 수 있습니다.");
+                    break;
+                default:
+                    break;
+            }
+        }
+        else
+            UIInGame.instance.ViewNotice(user.name + "이 참가하였습니다.");
 
         if (PlayerDataManager.instance.my.isHost&&!PlayerDataManager.instance.my.name.Equals(user.name))
         {
@@ -419,19 +443,21 @@ public class NetworkManager : MonoBehaviour
         float y = json.GetField("y").f;
         float z = json.GetField("z").f;
         string owner = json.GetField("owner").str;
+        bool stun = json.GetField("stun").b;
 
         if (owner.Equals(PlayerDataManager.instance.my.name))
             return;
 
         Trap t=Instantiate(GameManager.instance.blockObject[9], new Vector3(x, y, z), GameManager.instance.blockObject[9].transform.rotation).GetComponent<Trap>();
         t.SetOwner(owner);
+        t.stun = stun;
     }
 
     /// <summary>
     /// 트랩생성 정보를 다른 클라이언트에게 보냅니다.
     /// </summary>
     /// <param name="pos"></param>
-    public void SendTrap(Vector3 pos)
+    public void SendTrap(Vector3 pos,bool stun)
     {
         JSONObject json = new JSONObject(JSONObject.Type.OBJECT);
 
@@ -439,6 +465,7 @@ public class NetworkManager : MonoBehaviour
         json.AddField("y", pos.y);
         json.AddField("z", pos.z);
         json.AddField("owner", PlayerDataManager.instance.my.name);
+        json.AddField("stun", stun);
 
         socket.Emit("trap", json);
     }

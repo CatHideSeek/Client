@@ -6,7 +6,7 @@ public class OpacityObject : MonoBehaviour {
     [SerializeField]
     float opaSpeed = 8f;
 
-    bool opacity=false;
+    public bool opacity=false;
     Material mat;
 
     void Start()

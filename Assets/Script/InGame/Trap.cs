@@ -6,6 +6,7 @@ using UnityEngine;
 [RequireComponent(typeof(BoxCollider))]
 public class Trap : MonoBehaviour
 {
+    public bool stun=false;
     Rigidbody ri;
     BoxCollider col;
     string owner;

@@ -7,11 +7,28 @@ public class UIActionButton : MonoBehaviour {
 
     PlayerDataManager player;
 
+    public static UIActionButton instance;
+
     public Image itemButtonIcon;
+    public bool tagPress = false;
+
+    float time = 0.1f;
 
     private void Start()
     {
+        instance = this;
         player = PlayerDataManager.instance;
+    }
+
+    void Update()
+    {
+        if (time <= 0.1f)
+        {
+            time += Time.deltaTime;
+            tagPress = true;
+        }
+        else
+            tagPress = false;
     }
 
     public void JumpButton() {
@@ -20,6 +37,7 @@ public class UIActionButton : MonoBehaviour {
 
     public void ActionButton() {
         print("action button works");
+        time = 0;
     }
 
     public void UpdateItemIcon(Sprite icon) {
@@ -28,13 +46,19 @@ public class UIActionButton : MonoBehaviour {
 
     public void ItemButton() {
         print("item button works");
-        switch(PlayerDataManager.instance.itemType)
+        switch(player.itemType)
         {
             case 1:
-                PlayerDataManager.instance.SetHide(3);
+                if(player.modelType==1)
+                    PlayerDataManager.instance.SetHide(6);
+                else
+                    PlayerDataManager.instance.SetHide(3);
                 break;
             case 2:
-                PlayerDataManager.instance.CreateTrap();
+                if (player.modelType == 4)
+                    PlayerDataManager.instance.CreateTrap(true);
+                else
+                    PlayerDataManager.instance.CreateTrap(false);
                 break;
             case 3:
                 PlayerDataManager.instance.SetChange(4,Random.Range(1,4));

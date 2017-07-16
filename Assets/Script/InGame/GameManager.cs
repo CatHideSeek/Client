@@ -54,13 +54,6 @@ public class GameManager : MonoBehaviour
     {
         if (isPlay && !isEnd)
             Timer();
-
-        else if (!isPlay && PlayerDataManager.instance.my.isHost && Input.GetKeyDown(KeyCode.Space))
-        {
-            NetworkManager.instance.enterRoom.SetFirstBoss();
-            NetworkManager.instance.SendStart();
-        }
-
     }
 
     void Timer()
@@ -71,7 +64,7 @@ public class GameManager : MonoBehaviour
 
 
         //포탈 생성 조건
-        if (!isPortalSet && currentTime < portalOpenTime)
+        if (!isPortalSet && currentTime < portalOpenTime&&portalObject)
         {
             portalObject.SetActive(true);
             isPortalSet = true;
