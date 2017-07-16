@@ -61,7 +61,6 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
         if (user.isPlayer)
         {
 //#if UNITY_EDITOR
@@ -127,7 +126,7 @@ public class PlayerController : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (user.isPlayer && (h != 0 || v != 0))
+        if (user.isPlayer && (h!=0 || v!=0 || ri.velocity.y!=0))
             Move();
         else if (h == 0 && v == 0)
             ri.velocity = new Vector3(0, ri.velocity.y, 0);
@@ -232,7 +231,7 @@ public class PlayerController : MonoBehaviour
     public void CheckPosition()
     {
         //이동 하였는지 체크 합니다.
-        if (oldPos != tr.position)
+        if (oldPos!=tr.position)
         {
             oldPos = tr.position;
             //이동 하였다고 socket 메세지 전송

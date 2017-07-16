@@ -273,6 +273,8 @@ public class NetworkManager : MonoBehaviour
             }
             SendInitEnd(user.name);
         }
+
+        SendPosition(PlayerDataManager.instance.my.controller.transform.position);//방금 입장한 사람을 위해 현재좌표를 전송
     }
 
     public void OnBlock(SocketIOEvent e)
