@@ -23,31 +23,6 @@ public class CameraController : MonoBehaviour
         cam = GetComponent<Camera>();
     }
 
-    /// <summary>
-    /// 시야를 설정합니다. 클수록 멀리 보입니다.
-    /// </summary>
-    /// <param name="view">float 값</param>
-    public void SetViewSize(float view)
-    {
-        if (viewSizeLerp != null)
-            StopCoroutine(viewSizeLerp);
-
-        viewSizeLerp = StartCoroutine(ViewSizeLerp(view));
-    }
-
-    Coroutine viewSizeLerp = null;
-
-    IEnumerator ViewSizeLerp(float view)
-    {
-        while (cam.farClipPlane != view)
-        {
-            cam.farClipPlane = Mathf.Lerp(cam.farClipPlane, view, Time.deltaTime * 10f);
-            yield return null;
-        }
-
-    }
-
-
     void FixedUpdate()
     {
         if (target != null)

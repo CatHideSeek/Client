@@ -29,6 +29,10 @@ public class Room
     /// </summary>
     public int maxPlayers;
     /// <summary>
+    /// 로딩이 완료된 플레이어 수
+    /// </summary>
+    public int loadingPlayers;
+    /// <summary>
     /// 방의 비밀번호
     /// </summary>
     public int pw;
