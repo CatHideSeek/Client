@@ -46,7 +46,7 @@ public class UITargetUserInfo : MonoBehaviour
         }
 
         User u = target.GetComponent<PlayerController>().user;
-        Debug.Log(u.GetTeam() + "   " + PlayerDataManager.instance.my.GetTeam());
+        //Debug.Log(u.GetTeam() + "   " + PlayerDataManager.instance.my.GetTeam());
         if (u.GetTeam() != PlayerDataManager.instance.my.GetTeam())
         {
             nameLabel.SetActive(false);

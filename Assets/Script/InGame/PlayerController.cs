@@ -28,6 +28,8 @@ public class PlayerController : MonoBehaviour
     Quaternion oldRot, currentRot;
     float hideAlpha = 1;
 
+    public UITargetUserInfo infoUI;
+
     GameObject nameLabel;
     GameObject model;
     GameObject realModel;
@@ -72,7 +74,7 @@ public class PlayerController : MonoBehaviour
     public void SetModel(int id)
     {
         print("set model");
-        realModel = Instantiate(catModel[id],transform.position+catModel[id].transform.position,Quaternion.identity);
+        realModel = Instantiate(catModel[id], transform.position + catModel[id].transform.position, Quaternion.identity);
         realModel.transform.parent = model.transform;
         createdModel = true;
     }
@@ -82,7 +84,7 @@ public class PlayerController : MonoBehaviour
     {
         if (user.isPlayer)
         {
-//#if UNITY_EDITOR
+            //#if UNITY_EDITOR
             h = Input.GetAxis("Horizontal");
             v = Input.GetAxis("Vertical");
 
@@ -90,16 +92,16 @@ public class PlayerController : MonoBehaviour
             {
                 Jump();
             }
-//#endif
+            //#endif
         }
 
         #region UpdateState
-        if (user.FindState((int)User.State.Hide) >= 0||(bushing&&!lastBush.opacity))
+        if (user.FindState((int)User.State.Hide) >= 0 || (bushing && !lastBush.opacity))
         {
             if (!user.isPlayer)
                 SetRenderer(false);
         }
-        else if (realModel !=null && !realModel.activeSelf)
+        else if (realModel != null && !realModel.activeSelf)
             SetRenderer(true);
 
         if (user.FindState((int)User.State.Stun) >= 0)
@@ -181,7 +183,8 @@ public class PlayerController : MonoBehaviour
 
         user = u;
 
-        nameLabel = UIInGame.instance.MakeNameLabel(tr, user.name);
+        nameLabel = NetworkManager.instance.MakePlayerInfoUI(GameObject.FindGameObjectWithTag("Canvas").transform, tr, user.name);
+        infoUI = nameLabel.GetComponent<UITargetUserInfo>();
     }
 
     /// <summary>
@@ -232,7 +235,7 @@ public class PlayerController : MonoBehaviour
         if (pos.sqrMagnitude > 0.1f)
             targetDir = pos.normalized;
 
-        if(targetDir!=Vector3.zero)
+        if (targetDir != Vector3.zero)
             tr.rotation = Quaternion.Slerp(tr.rotation, Quaternion.LookRotation(targetDir), Time.deltaTime * rotSpeed);
 
         ri.velocity = new Vector3(0, ri.velocity.y, 0);
@@ -248,7 +251,7 @@ public class PlayerController : MonoBehaviour
     public void CheckPosition()
     {
         //이동 하였는지 체크 합니다.
-        if (oldPos!=tr.position)
+        if (oldPos != tr.position)
         {
             oldPos = tr.position;
             //이동 하였다고 socket 메세지 전송
@@ -331,10 +334,10 @@ public class PlayerController : MonoBehaviour
         }
         else if (col.CompareTag("Trap"))
         {
-            Trap t=col.GetComponent<Trap>();
+            Trap t = col.GetComponent<Trap>();
             if (!t.GetOwner().Equals(user.name))
             {
-                if(t.stun)
+                if (t.stun)
                     PlayerDataManager.instance.SetStun(2);
                 else
                     PlayerDataManager.instance.SetSlow(2);

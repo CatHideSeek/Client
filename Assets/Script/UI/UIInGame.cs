@@ -10,7 +10,6 @@ public class UIInGame : MonoBehaviour
     public Text timer;
 
     public Transform canvas;
-    public GameObject nameLabel;
 
     public GameObject notice;
     public Text noticeText;
@@ -61,13 +60,7 @@ public class UIInGame : MonoBehaviour
     }
 
       
-    public GameObject MakeNameLabel(Transform tr, string name) {
-        GameObject g = Instantiate(nameLabel, canvas);
-
-        g.GetComponent<UITargetUserInfo>().SetTarget(tr,name);
-
-        return g;
-    }
+   
 
 
     IEnumerator WaitNotice() {

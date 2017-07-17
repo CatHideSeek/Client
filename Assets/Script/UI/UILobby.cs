@@ -8,9 +8,7 @@ using UnityEngine.UI;
 /// </summary>
 public class UILobby : MonoBehaviour
 {
-
-    public static UILobby instance;
-
+    
     public Animator rommListAni, ChatLogAni, ChatInputAni;
 
     public Text roomListText;
@@ -26,29 +24,23 @@ public class UILobby : MonoBehaviour
 
     public Text chatLog;
 
-    private void Awake()
-    {
-        instance = this;
-    }
-
-
 
     public void CreateRoomList()
     {
 
         roomScrollView.sizeDelta = new Vector2(0, NetworkManager.instance.roomList.Count * -marginPos.y + 10f);
 
-        for (int i = 0; i < NetworkManager.instance.roomList.Count; i++)
+        for (int i = 2; i < NetworkManager.instance.roomList.Count; i++)
         {
 
             if (NetworkManager.instance.roomList[i].id != 0)
             {
                 GameObject g = Instantiate(roomSlot);
                 roomSlotList.Add(g);
-                g.GetComponent<UIRoomSlot>().SetData(i + 1, NetworkManager.instance.roomList[i]);
+                g.GetComponent<UIRoomSlot>().SetData((i-2) + 1, NetworkManager.instance.roomList[i]);
                 RectTransform tr = g.GetComponent<RectTransform>();
                 tr.SetParent(roomScrollView);
-                tr.localPosition = startPos + new Vector2(marginPos.x, marginPos.y * i);
+                tr.localPosition = startPos + new Vector2(marginPos.x, marginPos.y * (i - 2));
                 tr.localScale = new Vector2(1, 1);
             }
         }

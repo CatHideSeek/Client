@@ -10,6 +10,8 @@ public class UIRoomSlot : MonoBehaviour {
 
     private Room roomData;
 
+    public bool isWaitRoom = false;
+
     private void Awake()
     {
         slotButton = GetComponent<Button>();
@@ -25,20 +27,24 @@ public class UIRoomSlot : MonoBehaviour {
 
         room.ui = this;
 
-        if (room.isPlay)
+        if (!isWaitRoom)
         {
-            stateText.text = "<color=#ff0000ff>Playing..</color>";
-            slotButton.enabled = false;
-        }
-        else if (room.countPlayers == room.maxPlayers)
-        {
-            stateText.text = "<color=#00ffffff>Full..</color>";
-            slotButton.enabled = false;
-        }
-        else
-        {
-            stateText.text = "<color=#00ff00ff>Wait..</color>";
-            slotButton.enabled = true;
+
+            if (room.isPlay)
+            {
+                stateText.text = "<color=#ff0000ff>Playing..</color>";
+                slotButton.enabled = false;
+            }
+            else if (room.countPlayers == room.maxPlayers)
+            {
+                stateText.text = "<color=#00ffffff>Full..</color>";
+                slotButton.enabled = false;
+            }
+            else
+            {
+                stateText.text = "<color=#00ff00ff>Wait..</color>";
+                slotButton.enabled = true;
+            }
         }
     }
 
@@ -49,27 +55,31 @@ public class UIRoomSlot : MonoBehaviour {
         nameText.text = room.name;
         countText.text = room.countPlayers + " / " + room.maxPlayers;
 
-        if (room.isPlay)
+        if (!isWaitRoom)
         {
-            stateText.text = "<color=#ff0000ff>Playing..</color>";
-            slotButton.enabled = false;
-        }
-        else if (room.countPlayers == room.maxPlayers)
-        {
-            stateText.text = "<color=#00ffffff>Full..</color>";
-            slotButton.enabled = false;
-        }
-        else
-        {
-            stateText.text = "<color=#00ff00ff>Wait..</color>";
-            slotButton.enabled = true;
+
+            if (room.isPlay)
+            {
+                stateText.text = "<color=#ff0000ff>Playing..</color>";
+                slotButton.enabled = false;
+            }
+            else if (room.countPlayers == room.maxPlayers)
+            {
+                stateText.text = "<color=#00ffffff>Full..</color>";
+                slotButton.enabled = false;
+            }
+            else
+            {
+                stateText.text = "<color=#00ff00ff>Wait..</color>";
+                slotButton.enabled = true;
+            }
         }
     }
 
 
 
     public void OnEnterRoom() {
-        NetworkManager.instance.SendEnter(roomData.id+roomData.name);
+        NetworkManager.instance.SendWaitRoomEnter(roomData.id+roomData.name);
     }
 
 
