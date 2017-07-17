@@ -71,6 +71,7 @@ public class PlayerController : MonoBehaviour
     /// <param name="model">모델 id값(0~4)</param>
     public void SetModel(int id)
     {
+        print("set model");
         realModel = Instantiate(catModel[id],transform.position+catModel[id].transform.position,Quaternion.identity);
         realModel.transform.parent = model.transform;
         createdModel = true;
@@ -98,7 +99,7 @@ public class PlayerController : MonoBehaviour
             if (!user.isPlayer)
                 SetRenderer(false);
         }
-        else if (!realModel.active)
+        else if (realModel !=null && !realModel.activeSelf)
             SetRenderer(true);
 
         if (user.FindState((int)User.State.Stun) >= 0)

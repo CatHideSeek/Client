@@ -28,6 +28,8 @@ public class NetworkManager : MonoBehaviour
     /// </summary>
     PlayerDataManager playerData;
 
+    public GameObject playerObject;
+
     /// <summary>
     /// 입장한 방 정보
     /// </summary>
@@ -50,15 +52,20 @@ public class NetworkManager : MonoBehaviour
     {
         playerData = PlayerDataManager.instance;
 
+        #region Error
+        socket.On("errorcode", OnErrorCode);
+        #endregion
+
         #region DB
-        socket.On("login", null);
-        socket.On("register", null);
+        socket.On("register", OnRegister);
         #endregion
 
         #region ReceiveRoomData
         socket.On("roomList", OnRoomList);
         socket.On("userList", OnUserList);
 
+        socket.On("lobbyEnter", OnLobbyEnter);
+        socket.On("lobbyEnterUser", OnLobbyEnter);
         socket.On("lobbyCreate", OnRoomCreate);
         socket.On("lobbyJoin", OnRoomJoin);
         socket.On("lobbyStart", OnRoomStart);
@@ -116,10 +123,132 @@ public class NetworkManager : MonoBehaviour
         SendJoin();
     }
 
+
+    #region ErrorMethod
+
+    public void OnErrorCode(SocketIOEvent e)
+    {
+        JSONObject json = e.data;
+        int code = (int)(json.GetField("code").f);
+
+        print(GameObject.FindWithTag("UIManager").name);
+
+        switch (code)
+        {
+            case 0: GameObject.FindWithTag("UIManager").GetComponent<UITitle>().nameError.SetActive(true); break;
+        }
+
+    }
+
+    #endregion
+
+    #region DataMethod
+
+    public void OnRegister(SocketIOEvent e)
+    {
+
+        JSONObject json = e.data;
+        string socketID = json.GetField("socketID").str;
+        string name = json.GetField("name").str;
+
+        playerData.my.socketID = socketID;
+        playerData.my.name = name;
+        SceneLoadManager.instance.LoadScene(SceneLoadManager.instance.OnLobby);
+
+    }
+
+    public void SendRegister(string name)
+    {
+        JSONObject json = new JSONObject(JSONObject.Type.OBJECT);
+        json.AddField("name", name);
+
+        socket.Emit("register", json);
+    }
+
+    #endregion
+
+
     #region RoomMethod
+
+    public void OnLobbyEnter(SocketIOEvent e)
+    {
+
+        LitJson.JsonData json = LitJson.JsonMapper.ToObject(e.data.ToString());
+
+        enterRoom = FindRoom("0Lobby");
+
+        print("start for");
+        print(json["userList"].Count +"asdq");
+        for (int i = 0; i < json["userList"].Count; i++)
+        {
+            print("asdq2e");
+            print(json["userList"][i]["socketID"].ToString() + "\n"+ json["userList"][i]["name"].ToString());
+
+            string socketID = json["userList"][i]["socketID"].ToString();
+            string name = json["userList"][i]["name"].ToString();
+
+
+            if (playerData.my.name != name)
+            {
+
+                User user = new User(name, socketID);
+
+                enterRoom.AddUser(user);
+
+                GameObject g = Instantiate(playerObject, Vector3.zero, Quaternion.identity);
+                g.GetComponent<PlayerController>().SetUser(user);
+
+                g.name = user.name;
+            }
+            print("end for userList");
+        }
+
+    }
+
+    public void OnLobbyEnterUser(SocketIOEvent e)
+    {
+        JSONObject json = e.data;
+
+        print("join is work");
+
+        string name = json.GetField("name").str;
+        string socketID = json.GetField("socketID").str;
+
+
+        User user = new User(name, socketID);
+
+        enterRoom.AddUser(user);
+
+        if (name == playerData.my.name)
+        {
+            playerData.my = user;
+            user.isPlayer = true;
+        }
+
+        GameObject g = Instantiate(playerObject, Vector3.zero, Quaternion.identity);
+        g.GetComponent<PlayerController>().SetUser(user);
+        g.name = user.name;
+
+        if (name == playerData.my.name)
+        {
+            int r = Random.Range(0, 5);
+            playerData.SetCatModel(r);//고양이 종류를 정해줍니다.
+        }
+    }
+
+    public void SendLobbyEnter()
+    {
+        JSONObject json = new JSONObject(JSONObject.Type.OBJECT);
+        json.AddField("name", playerData.my.name);
+
+        socket.Emit("lobbyEnter", json);
+    }
+
 
     public void OnRoomList(SocketIOEvent e)
     {
+        roomList.Clear();
+
         LitJson.JsonData json = LitJson.JsonMapper.ToObject(e.data.ToString());
 
         for (int i = 0; i < json["roomList"].Count; ++i)
@@ -131,11 +260,14 @@ public class NetworkManager : MonoBehaviour
             int.TryParse(json["roomList"][i]["countPlayers"].ToString(), out room.countPlayers);
             int.TryParse(json["roomList"][i]["readyPlayers"].ToString(), out room.readyPlayers);
             int.TryParse(json["roomList"][i]["maxPlayers"].ToString(), out room.maxPlayers);
-            int.TryParse(json["room"]["pw"].ToString(), out room.pw);
-            bool.TryParse(json["roomList"][i]["isPlayed"].ToString(), out room.isPlay);
-
+            int.TryParse(json["roomList"][i]["pw"].ToString(), out room.pw);
+            bool.TryParse(json["roomList"][i]["isPlay"].ToString(), out room.isPlay);
+            
             roomList.Add(room);
         }
+        
+        GameObject.FindGameObjectWithTag("UIManager").GetComponent<UILobby>().CreateRoomList();
+
 
     }
 
@@ -150,8 +282,8 @@ public class NetworkManager : MonoBehaviour
         socket.Emit("roomList", json);
 
     }
-    
-   
+
+
 
     public void OnRoomJoin(SocketIOEvent e)
     {
@@ -161,7 +293,10 @@ public class NetworkManager : MonoBehaviour
         string name = json.GetField("roomName").str;
         Room r = FindRoom(name);
         if (r != null)
+        {
             int.TryParse(json.GetField("roomName").str, out r.countPlayers);
+            r.UpdateUI();
+        }
     }
 
     public void OnRoomStart(SocketIOEvent e)
@@ -170,7 +305,10 @@ public class NetworkManager : MonoBehaviour
         string name = json.GetField("roomName").str;
         Room r = FindRoom(name);
         if (r != null)
+        {
             bool.TryParse(json.GetField("isPlay").str, out r.isPlay);
+            r.UpdateUI();
+        }
     }
 
     public void OnRoomDelet(SocketIOEvent e)
@@ -184,6 +322,8 @@ public class NetworkManager : MonoBehaviour
     {
         JSONObject json = e.data;
 
+        print("asdqwe123");
+
         Room room = new Room();
 
         int.TryParse(json["room"]["id"].ToString(), out room.id);
@@ -192,9 +332,11 @@ public class NetworkManager : MonoBehaviour
         int.TryParse(json["room"]["readyPlayers"].ToString(), out room.readyPlayers);
         int.TryParse(json["room"]["maxPlayers"].ToString(), out room.maxPlayers);
         int.TryParse(json["room"]["pw"].ToString(), out room.pw);
-        bool.TryParse(json["room"]["isPlayed"].ToString(), out room.isPlay);
+        bool.TryParse(json["room"]["isPlay"].ToString(), out room.isPlay);
 
         roomList.Add(room);
+
+        GameObject.FindGameObjectWithTag("UIManager").GetComponent<UILobby>().CreateRoomList();
     }
 
     /// <summary>
@@ -211,6 +353,7 @@ public class NetworkManager : MonoBehaviour
         json.AddField("pw", pw);
 
         socket.Emit("roomCreate", json);
+        //자동으로 방으로 입장 됨.
     }
 
     public void OnEnter(SocketIOEvent e)
@@ -222,15 +365,14 @@ public class NetworkManager : MonoBehaviour
 
         //입장한 방 세팅
         enterRoom = FindRoom(name);
-        //씬 이동
-        //씬 ~ 이 ~ 동 ~ 코 ~ 드 ~
 
+        SceneLoadManager.instance.LoadScene(SceneLoadManager.instance.OnWaitRoom);
     }
 
     /// <summary>
     /// 서버로 방 입장 시도를 보냅니다.
     /// </summary>
-    /// <param name="name">방 이름</param>
+    /// <param name="name">방 이름 = index + name </param>
     public void SendEnter(string name)
     {
         JSONObject json = new JSONObject(JSONObject.Type.OBJECT);
@@ -243,6 +385,7 @@ public class NetworkManager : MonoBehaviour
 
         JSONObject json = e.data;
 
+        print("join is work");
 
         string name = json.GetField("name").str;
         string socketID = json.GetField("socketID").str;
@@ -266,9 +409,9 @@ public class NetworkManager : MonoBehaviour
 
         if (name == playerData.my.name)
         {
-            int r=Random.Range(0, 5);
+            int r = Random.Range(0, 5);
             playerData.SetCatModel(r);//고양이 종류를 정해줍니다.
-            switch(r)
+            switch (r)
             {
                 case 0:
                     UIInGame.instance.ViewNotice("[특성] 이 고양이는 가장 멍청합니다.");
@@ -293,16 +436,16 @@ public class NetworkManager : MonoBehaviour
         else
             UIInGame.instance.ViewNotice(user.name + "이 참가하였습니다.");
 
-        if (PlayerDataManager.instance.my.isHost&&!PlayerDataManager.instance.my.name.Equals(user.name))
+        if (PlayerDataManager.instance.my.isHost && !PlayerDataManager.instance.my.name.Equals(user.name))
         {
             SendSpawnPos(user.name, GameManager.instance.spawnPos.y);
-            foreach(IslandInfo info in GameManager.instance.islandList)
+            foreach (IslandInfo info in GameManager.instance.islandList)
             {
-                SendGenerator(user.name,info.x, info.y, info.id);//생성기 먼저 생성해야됨
+                SendGenerator(user.name, info.x, info.y, info.id);//생성기 먼저 생성해야됨
             }
             foreach (Block block in GameManager.instance.blockList)
             {
-                SendBlock(user.name, block.pos, block.id,block.parent);
+                SendBlock(user.name, block.pos, block.id, block.parent);
             }
             SendInitEnd(user.name);
         }
@@ -343,12 +486,12 @@ public class NetworkManager : MonoBehaviour
             float z = json.GetField("bz").f;
             int id = (int)json.GetField("bid").f;
             int parent = (int)json.GetField("parent").f;
-            GameObject block=Instantiate(GameManager.instance.blockObject[id], new Vector3(x, y, z), GameManager.instance.blockObject[id].transform.rotation);
+            GameObject block = Instantiate(GameManager.instance.blockObject[id], new Vector3(x, y, z), GameManager.instance.blockObject[id].transform.rotation);
             if (id == 6 || id == 7)
                 block.transform.parent = MapGenerator.instance.transform;
             else
             {
-                Transform parentIsland=GameObject.Find("Island " + parent).transform;
+                Transform parentIsland = GameObject.Find("Island " + parent).transform;
                 block.transform.parent = parentIsland;
                 parentIsland.GetComponent<IslandGenerator>().blocks.Add(block);
             }
@@ -364,7 +507,7 @@ public class NetworkManager : MonoBehaviour
     /// <param name="pos">위치 Vector3</param>
     /// <param name="id">블럭 종류</param>
     /// <param name="parent">부모</param>
-    public void SendBlock(string targetName, Vector3 pos, int id,int parent=-1)
+    public void SendBlock(string targetName, Vector3 pos, int id, int parent = -1)
     {
         JSONObject json = new JSONObject(JSONObject.Type.OBJECT);
 
@@ -384,7 +527,7 @@ public class NetworkManager : MonoBehaviour
 
         if (!PlayerDataManager.instance.my.name.Equals(json.GetField("target").str))
             return;
-        for (int i = 0; i < MapGenerator.instance.islandNum;i++)
+        for (int i = 0; i < MapGenerator.instance.islandNum; i++)
         {
             //여기서 병합해야됨,
             //Debug.Log("sdfsdf"+MapGenerator.instance.islandNum);
@@ -423,7 +566,7 @@ public class NetworkManager : MonoBehaviour
     /// </summary>
     /// <param name="pos"></param>
     /// <param name="id"></param>
-    public void SendGenerator(string targetName,int x,int y,int id)
+    public void SendGenerator(string targetName, int x, int y, int id)
     {
         JSONObject json = new JSONObject(JSONObject.Type.OBJECT);
 
@@ -448,7 +591,7 @@ public class NetworkManager : MonoBehaviour
         if (owner.Equals(PlayerDataManager.instance.my.name))
             return;
 
-        Trap t=Instantiate(GameManager.instance.blockObject[9], new Vector3(x, y, z), GameManager.instance.blockObject[9].transform.rotation).GetComponent<Trap>();
+        Trap t = Instantiate(GameManager.instance.blockObject[9], new Vector3(x, y, z), GameManager.instance.blockObject[9].transform.rotation).GetComponent<Trap>();
         t.SetOwner(owner);
         t.stun = stun;
     }
@@ -457,7 +600,7 @@ public class NetworkManager : MonoBehaviour
     /// 트랩생성 정보를 다른 클라이언트에게 보냅니다.
     /// </summary>
     /// <param name="pos"></param>
-    public void SendTrap(Vector3 pos,bool stun)
+    public void SendTrap(Vector3 pos, bool stun)
     {
         JSONObject json = new JSONObject(JSONObject.Type.OBJECT);
 
@@ -481,7 +624,7 @@ public class NetworkManager : MonoBehaviour
         if (user.controller.createdModel)
             return;
 
-        if(user!=null)
+        if (user != null)
             user.controller.SetModel(id);
     }
 
@@ -491,12 +634,12 @@ public class NetworkManager : MonoBehaviour
     /// <param name="id"></param>
     public void SendModelType(int id)
     {
-        Debug.Log("SendModelType()"+id);
+        Debug.Log("SendModelType()" + id);
         JSONObject json = new JSONObject(JSONObject.Type.OBJECT);
 
         json.AddField("name", playerData.my.name);
-        json.AddField("id",id);
-        
+        json.AddField("id", id);
+
         socket.Emit("modelType", json);
     }
 
@@ -725,7 +868,7 @@ public class NetworkManager : MonoBehaviour
         if (user == PlayerDataManager.instance.my)
             return;
 
-        if(state>0)
+        if (state > 0)
         {
             if (user.FindState(state) == -1)
             {
@@ -735,7 +878,7 @@ public class NetworkManager : MonoBehaviour
                 Debug.Log("OnState()" + user.FindState(state));
             }
         }
-        else if(state<0)
+        else if (state < 0)
         {
             user.PopState((User.State)(-state));
             if (-state == (int)User.State.Change)
@@ -749,7 +892,7 @@ public class NetworkManager : MonoBehaviour
     /// </summary>
     /// <param name="state">상태 Enum(-는 삭제, +는 추가)</param>
     /// <param name="objKind">변신 오브젝트 종류(0: 기본값)</param>
-    public void SendState(int state,int objKind=0)
+    public void SendState(int state, int objKind = 0)
     {
         JSONObject json = new JSONObject(JSONObject.Type.OBJECT);
 
@@ -961,9 +1104,11 @@ public class NetworkManager : MonoBehaviour
         int.TryParse(json.GetField("where").str, out where);
 
         GameObject g = GameObject.FindGameObjectWithTag("UIManager");
-        switch (where) {
+
+        switch (where)
+        {
             case 0:
-                g.GetComponent<UILobby>().AddChatLog(name+ " : " +message);
+                g.GetComponent<UILobby>().AddChatLog(name + " : " + message);
                 break;
             case 1:
                 break;

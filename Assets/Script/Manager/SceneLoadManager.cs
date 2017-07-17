@@ -39,7 +39,7 @@ public class SceneLoadManager : MonoBehaviour {
     /// LoadScene 함수의 인자가 되는 함수, 대기실로 이동합니다.
     /// </summary>
     public void OnWaitRoom() {
-        SceneManager.LoadScene("WaitScene");
+        SceneManager.LoadScene("WaitRoomScene");
     }
     /// <summary>
     /// LoadScene 함수의 인자가 되는 함수, 인게임으로 이동합니다.

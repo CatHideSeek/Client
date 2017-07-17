@@ -6,35 +6,19 @@ using UnityEngine.UI;
 /// <summary>
 /// 타이틀 씬에 관한 모든 UI를 제어하는 클래스입니다.
 /// </summary>
-public class UITitle : MonoBehaviour {
-
-    public static UITitle instance;
-
-    public InputField idInput, pwInput, nickInput, emailInput;
+public class UITitle : MonoBehaviour
+{
 
 
-    private void Awake()
+    public InputField nickInput;
+    public GameObject nameError;
+
+    public void OnJoin()
     {
-        instance = this;
+        if (nickInput.text != "")
+            NetworkManager.instance.SendRegister(nickInput.text);
     }
 
-
-
-    public void StartButton() {
-        SceneLoadManager.instance.LoadScene(SceneLoadManager.instance.OnLobby);
-    }
-
-    public void LoginButton() {
-
-    }
-
-    public void RegisterButton() {
-
-    }
-
-    public void SendRegister() {
-
-    }
 
 
 

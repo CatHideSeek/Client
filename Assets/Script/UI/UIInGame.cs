@@ -64,7 +64,7 @@ public class UIInGame : MonoBehaviour
     public GameObject MakeNameLabel(Transform tr, string name) {
         GameObject g = Instantiate(nameLabel, canvas);
 
-        g.GetComponent<UITargetUserName>().SetTarget(tr,name);
+        g.GetComponent<UITargetUserInfo>().SetTarget(tr,name);
 
         return g;
     }

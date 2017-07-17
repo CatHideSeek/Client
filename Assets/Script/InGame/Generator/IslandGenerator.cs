@@ -286,7 +286,7 @@ public class IslandGenerator : MonoBehaviour
             }
             combinedTexture.Apply();
 
-            material = new Material(Shader.Find("Mobile/Diffuse"));
+            material = new Material(Shader.Find("Standard"));
             material.mainTexture = combinedTexture;
             
             for (int i = 0; i < blocks.Count; i++)

@@ -31,20 +31,26 @@ public class UILobby : MonoBehaviour
         instance = this;
     }
 
-    void CreateRoomList()
+
+
+    public void CreateRoomList()
     {
 
         roomScrollView.sizeDelta = new Vector2(0, NetworkManager.instance.roomList.Count * -marginPos.y + 10f);
 
         for (int i = 0; i < NetworkManager.instance.roomList.Count; i++)
         {
-            GameObject g = Instantiate(roomSlot);
-            roomSlotList.Add(g);
-            g.GetComponent<UIRoomSlot>().SetData(i + 1, NetworkManager.instance.roomList[i]);
-            RectTransform tr = g.GetComponent<RectTransform>();
-            tr.parent = roomScrollView;
-            tr.localPosition = startPos + new Vector2(marginPos.x, marginPos.y * i);
-            tr.localScale = new Vector2(1, 1);
+
+            if (NetworkManager.instance.roomList[i].id != 0)
+            {
+                GameObject g = Instantiate(roomSlot);
+                roomSlotList.Add(g);
+                g.GetComponent<UIRoomSlot>().SetData(i + 1, NetworkManager.instance.roomList[i]);
+                RectTransform tr = g.GetComponent<RectTransform>();
+                tr.SetParent(roomScrollView);
+                tr.localPosition = startPos + new Vector2(marginPos.x, marginPos.y * i);
+                tr.localScale = new Vector2(1, 1);
+            }
         }
 
     }
@@ -69,7 +75,6 @@ public class UILobby : MonoBehaviour
             rommListAni.SetTrigger("Open");
             ChatInputAni.SetTrigger("Open");
             ChatLogAni.SetTrigger("Open");
-            CreateRoomList();
             roomListText.text = "닫기";
         }
         else
@@ -79,13 +84,18 @@ public class UILobby : MonoBehaviour
             ChatLogAni.SetTrigger("Close");
             roomListText.text = "방 리스트";
         }
+
+        NetworkManager.instance.SendRoomList();
     }
 
     public void SendChat(InputField input)
     {
-        NetworkManager.instance.SendChat(PlayerDataManager.instance.my.name, input.text, 0);
-       
-        input.text = "";
+        if (input.text != "")
+        {
+            NetworkManager.instance.SendChat(PlayerDataManager.instance.my.name, input.text, 0);
+
+            input.text = "";
+        }
     }
 
 
@@ -96,7 +106,7 @@ public class UILobby : MonoBehaviour
             bar.value = Mathf.Lerp(bar.value, value, Time.deltaTime * 10f);
             yield return null;
         }
-
+        scrollChat = null;
     }
 
     Coroutine scrollChat = null;
