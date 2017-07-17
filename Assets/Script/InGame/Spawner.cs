@@ -22,5 +22,9 @@ public class Spawner : MonoBehaviour
             spawnTime = spawnDelay;
             created=true;
         }
+
+		if (PlayerDataManager.instance.my.GetTeam () == true) {
+			gameObject.SetActive (false);
+		}
 	}
 }

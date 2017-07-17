@@ -16,6 +16,7 @@ public class UIInGame : MonoBehaviour
     public Text noticeText;
     public float noticeTime = 2f;
 
+	public GameObject us,gs;
 
     void Awake()
     {
@@ -56,9 +57,21 @@ public class UIInGame : MonoBehaviour
     /// </summary>
     /// <param name="message">메세지</param>
     public void ViewNotice(string message) {
+		Debug.Log ("sdfdsfds");
         noticeText.text = message;
         StartCoroutine("WaitNotice");
     }
+
+	public void ViewUserState(string message){
+		us.GetComponent<StateAlarm> ().PushAlarm (message);
+		StartCoroutine("WaitUserState");
+	}
+
+	public void ViewGameState(string message)
+	{
+		gs.GetComponent<StateAlarm> ().PushAlarm (message);
+		StartCoroutine("WaitGameState");
+	}
 
       
     public GameObject MakeNameLabel(Transform tr, string name) {
@@ -76,4 +89,15 @@ public class UIInGame : MonoBehaviour
         notice.SetActive(false);
     }
 
+	IEnumerator WaitUserState() {
+		us.SetActive(true);
+		yield return new WaitForSeconds(noticeTime);
+		us.SetActive(false);
+	}
+
+	IEnumerator WaitGameState() {
+		gs.SetActive(true);
+		yield return new WaitForSeconds(noticeTime);
+		gs.SetActive(false);
+	}
 }

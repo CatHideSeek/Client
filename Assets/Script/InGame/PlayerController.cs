@@ -8,6 +8,8 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 public class PlayerController : MonoBehaviour
 {
+	bool clear=false;
+
     public User user;
     public GameObject[] catModel;
     public GameObject arrow;
@@ -29,9 +31,10 @@ public class PlayerController : MonoBehaviour
     float hideAlpha = 1;
 
     GameObject nameLabel;
-    GameObject model;
-    GameObject realModel;
-    GameObject[] changeObjs;
+    public GameObject model;
+    public GameObject realModel;
+    public GameObject[] changeObjs;
+	public GameObject spotLight;
 
     [SerializeField]
     float clampTime = 50f;
@@ -42,7 +45,6 @@ public class PlayerController : MonoBehaviour
 
     void Awake()
     {
-
         tr = GetComponent<Transform>();
         ri = GetComponent<Rigidbody>();
         renderer = GetComponent<Renderer>();
@@ -59,10 +61,6 @@ public class PlayerController : MonoBehaviour
         oriRSpd = rotSpeed;
 
         model = transform.Find("Cat").gameObject;
-        changeObjs = new GameObject[3];
-        changeObjs[0] = transform.Find("Tree").gameObject;
-        changeObjs[1] = transform.Find("Frost").gameObject;
-        changeObjs[2] = transform.Find("Rock").gameObject;
     }
 
     /// <summary>
@@ -90,64 +88,101 @@ public class PlayerController : MonoBehaviour
             {
                 Jump();
             }
+			if (!spotLight.active)
+				spotLight.SetActive (true);
 //#endif
         }
 
         #region UpdateState
-        if (user.FindState((int)User.State.Hide) >= 0||(bushing&&!lastBush.opacity))
+		if(clear)
+		{
+			for (int i = 0; i < 3; i++)
+			{
+				changeObjs[i].SetActive(false);
+			}
+			SetRenderer(false);
+			return;
+		}
+        else if (user.FindState((int)User.State.Hide) >= 0||(bushing&&!lastBush.opacity))
         {
             if (!user.isPlayer)
                 SetRenderer(false);
         }
-        else if (realModel !=null && !realModel.activeSelf)
-            SetRenderer(true);
+		else if (user.FindState((int)User.State.Change) >= 0)
+		{
+			SetRenderer(false);
+		}
+		else
+		{
+			SetRenderer(true);
+		}
+
+		if (user.FindState((int)User.State.Change) >= 0)
+		{
+			for (int i = 0; i < 3; i++)
+			{
+				if (i + 1 == user.objectKind)
+					changeObjs[i].SetActive(true);
+				else
+					changeObjs[i].SetActive(false);
+			}
+		}
+		else
+		{
+			for (int i = 0; i < 3; i++)
+			{
+				changeObjs[i].SetActive(false);
+			}
+		}
 
         if (user.FindState((int)User.State.Stun) >= 0)
         {
+			nameLabel.GetComponent<UITargetUserInfo>().stun.enabled=true;
+			nameLabel.GetComponent<UITargetUserInfo>().slow.enabled=false;
             movSpeed = 0;
             rotSpeed = 0;
         }
         else if (user.FindState((int)User.State.Slow) >= 0)
         {
+			nameLabel.GetComponent<UITargetUserInfo>().slow.enabled=true;
+			nameLabel.GetComponent<UITargetUserInfo>().stun.enabled=false;
             movSpeed = oriMSpd / 2;
             rotSpeed = oriRSpd / 2;
         }
         else if (movSpeed != oriMSpd)
         {
+			nameLabel.GetComponent<UITargetUserInfo>().stun.enabled=false;
+			nameLabel.GetComponent<UITargetUserInfo>().slow.enabled=false;
             movSpeed = oriMSpd;
             rotSpeed = oriRSpd;
         }
+		else
+		{
+			nameLabel.GetComponent<UITargetUserInfo>().stun.enabled=false;
+			nameLabel.GetComponent<UITargetUserInfo>().slow.enabled=false;
+		}
 
-        if (user.FindState((int)User.State.Change) >= 0)
-        {
-            model.SetActive(false);
-            for (int i = 0; i < 3; i++)
-            {
-                if (i + 1 == user.objectKind)
-                    changeObjs[i].SetActive(true);
-                else
-                    changeObjs[i].SetActive(false);
-            }
-        }
-        else if (!model.activeSelf)
-        {
-            model.SetActive(true);
-            for (int i = 0; i < 3; i++)
-            {
-                changeObjs[i].SetActive(false);
-            }
-        }
+		if(!model.active)
+		{
+			nameLabel.GetComponent<UITargetUserInfo>().stun.enabled=false;
+			nameLabel.GetComponent<UITargetUserInfo>().slow.enabled=false;
+		}
+
+       
         #endregion
     }
 
     void FixedUpdate()
     {
-        if (user.isPlayer && (h != 0 || v != 0 || ri.velocity.y != 0) && (PlayerDataManager.instance.modelType == 2 || user.FindState((int)User.State.Change) == -1))
-            Move();
+		if (clear)
+			return;
+
+		if (user.isPlayer && (h != 0 || v != 0 || ri.velocity.y != 0) && (   PlayerDataManager.instance.modelType == 2 || user.FindState((int)User.State.Change)==-1   )  )
+			Move();
         else if (h == 0 && v == 0)
             ri.velocity = new Vector3(0, ri.velocity.y, 0);
 
-        if (!user.isPlayer && oldPos != tr.position)
+        if(!user.isPlayer && oldPos != tr.position)
         {
             tr.position = Vector3.Lerp(tr.position, currentPos, Time.deltaTime * clampTime);
         }
@@ -317,7 +352,7 @@ public class PlayerController : MonoBehaviour
                 col.GetComponent<OpacityObject>().SetOpacity(true);
             lastBush = col.GetComponent<OpacityObject>();
         }
-        else if (col.CompareTag("Item"))
+		else if (col.CompareTag("Item")&&user.GetTeam()==false)
         {
             Item item = col.GetComponent<Item>();
             if (!item.GetDestroy())
@@ -329,17 +364,16 @@ public class PlayerController : MonoBehaviour
                     item.SetDestroy(false);
             }
         }
-        else if (col.CompareTag("Trap"))
+		else if (col.CompareTag("Trap")&&user.GetTeam()==true)
         {
             Trap t=col.GetComponent<Trap>();
-            if (!t.GetOwner().Equals(user.name))
-            {
-                if(t.stun)
-                    PlayerDataManager.instance.SetStun(2);
-                else
-                    PlayerDataManager.instance.SetSlow(2);
+			if (user == PlayerDataManager.instance.my) {
+				if (t.stun)
+					PlayerDataManager.instance.SetStun (2);
+				else
+					PlayerDataManager.instance.SetSlow (2);
+			}
                 Destroy(col.gameObject);
-            }
         }
     }
 
@@ -352,6 +386,8 @@ public class PlayerController : MonoBehaviour
                 if (GameManager.instance.portal.isOpen)
                 {
                     print("탈출");
+					UIInGame.instance.ViewNotice (user.name + "(이)가 탈출에 성공하였습니다");
+					clear = true;
                 }
                 else if (user.isKeyHave)
                 {

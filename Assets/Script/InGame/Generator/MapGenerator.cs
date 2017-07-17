@@ -41,7 +41,13 @@ public class MapGenerator : MonoBehaviour
     void Awake()
     {
         instance = this;
+
     }
+
+	void Start()
+	{
+		GameManager.instance.portalIsland = Random.Range (0, MapGenerator.instance.islandNum);
+	}
 
     public void InitMap ()
 	{

@@ -8,8 +8,9 @@ public class UIActionButton : MonoBehaviour {
     PlayerDataManager player;
 
     public static UIActionButton instance;
+	public GameObject actionButton;
 
-    public Image itemButtonIcon;
+    public Image[] itemButtonIcon;
     public bool tagPress = false;
 
     float time = 0.1f;
@@ -29,6 +30,9 @@ public class UIActionButton : MonoBehaviour {
         }
         else
             tagPress = false;
+
+		if (PlayerDataManager.instance.my.GetTeam () == true)
+			actionButton.SetActive (false);
     }
 
     public void JumpButton() {
@@ -66,8 +70,16 @@ public class UIActionButton : MonoBehaviour {
             default:
                 break;
         }
-        PlayerDataManager.instance.itemType = 0;
+		SetItem (0);
     }
 
-
+	public void SetItem(int id)
+	{
+		PlayerDataManager.instance.itemType=id;
+		for (int i = 0; i < itemButtonIcon.Length; i++) {
+			itemButtonIcon [i].enabled = false;
+		}
+		if(id>0)
+			itemButtonIcon [id-1].enabled = true;
+	}
 }

@@ -119,7 +119,7 @@ public class User
 
     public void EatKey()
     {
-        keyCount++;
+        keyCount+=10;
     }
 
     public void SetHaveKey() {

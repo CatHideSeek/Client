@@ -382,7 +382,7 @@ public class NetworkManager : MonoBehaviour
 
     public void OnJoin(SocketIOEvent e)
     {
-
+		Debug.Log ("OnJoin()");
         JSONObject json = e.data;
 
         print("join is work");
@@ -432,6 +432,7 @@ public class NetworkManager : MonoBehaviour
                 default:
                     break;
             }
+			GameManager.instance.isModelReady = true;
         }
         else
             UIInGame.instance.ViewNotice(user.name + "이 참가하였습니다.");
@@ -486,7 +487,11 @@ public class NetworkManager : MonoBehaviour
             float z = json.GetField("bz").f;
             int id = (int)json.GetField("bid").f;
             int parent = (int)json.GetField("parent").f;
-            GameObject block = Instantiate(GameManager.instance.blockObject[id], new Vector3(x, y, z), GameManager.instance.blockObject[id].transform.rotation);
+			GameObject block;
+			if(id==12)
+				block = Instantiate(GameManager.instance.blockObject[id], new Vector3(x, y, z), Quaternion.Euler(-90,0,0));
+			else
+			block = Instantiate(GameManager.instance.blockObject[id], new Vector3(x, y, z), GameManager.instance.blockObject[id].transform.rotation);
             if (id == 6 || id == 7)
                 block.transform.parent = MapGenerator.instance.transform;
             else
@@ -913,10 +918,12 @@ public class NetworkManager : MonoBehaviour
 
         User user = enterRoom.FindUserByName(name);
 
+
         if (user != null)
         {
+
             user.keyCount = (int)json.GetField("part").f;
-            UIInGame.instance.ViewNotice(name + " (이)가 열쇠 조각을 얻었습니다.");
+			UIInGame.instance.ViewUserState (name + " (이)가 열쇠 조각을 얻었습니다.");
         }
     }
 
@@ -945,7 +952,7 @@ public class NetworkManager : MonoBehaviour
         if (user != null)
         {
             user.isKeyHave = json.GetField("have").b;
-            UIInGame.instance.ViewNotice(name + " (이)가 열쇠를 완성했습니다.");
+			UIInGame.instance.ViewUserState(name + " (이)가 열쇠를 완성했습니다.");
         }
     }
 
@@ -1004,7 +1011,7 @@ public class NetworkManager : MonoBehaviour
         {
             user.isBossChild = true;
             enterRoom.UpdateBossPlayer(1);
-            UIInGame.instance.ViewNotice(name + " (이)가 " + tager + "에게 잡혔습니다.");
+			UIInGame.instance.ViewUserState (name + " (이)가 " + tager + "에게 잡혔습니다.");
         }
 
     }
@@ -1034,7 +1041,7 @@ public class NetworkManager : MonoBehaviour
         float z = json.GetField("z").f;
         Vector3 pos = new Vector3(x, y, z);
         //포탈 오브젝트 생성
-        UIInGame.instance.ViewNotice("포탈이 생성되었습니다.");
+		UIInGame.instance.ViewGameState("포탈이 생성되었습니다.");
     }
 
     /// <summary>
@@ -1057,7 +1064,7 @@ public class NetworkManager : MonoBehaviour
         string name = json.GetField("name").str;
         //포탈 오픈!
 
-        UIInGame.instance.ViewNotice(name + " (이)가 포탈을 열었습니다. 어서 들어가세요!");
+		UIInGame.instance.ViewGameState(name + " (이)가 포탈을 열었습니다. 어서 들어가세요!");
         GameManager.instance.portal.isOpen = true;
 
     }
@@ -1079,7 +1086,7 @@ public class NetworkManager : MonoBehaviour
     {
         JSONObject json = e.data;
         //포탈 닫힘!
-        UIInGame.instance.ViewNotice("포탈이 닫혔습니다. 마지막까지 살아남으세요.");
+		UIInGame.instance.ViewGameState("포탈이 닫혔습니다. 마지막까지 살아남으세요.");
     }
 
     /// <summary>

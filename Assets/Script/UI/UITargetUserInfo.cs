@@ -17,6 +17,8 @@ public class UITargetUserInfo : MonoBehaviour
     public Vector2 margin;
 
     public float chatViewTime = 1f;
+	public Image slow;
+	public Image stun;
 
     void Awake()
     {
@@ -46,8 +48,7 @@ public class UITargetUserInfo : MonoBehaviour
         }
 
         User u = target.GetComponent<PlayerController>().user;
-        Debug.Log(u.GetTeam() + "   " + PlayerDataManager.instance.my.GetTeam());
-        if (u.GetTeam() != PlayerDataManager.instance.my.GetTeam())
+		if (u.GetTeam() != PlayerDataManager.instance.my.GetTeam()||!u.controller.model.active)
         {
             nameLabel.SetActive(false);
         }
@@ -55,6 +56,8 @@ public class UITargetUserInfo : MonoBehaviour
         {
             nameLabel.SetActive(true);
         }
+
+		stun.gameObject.transform.Rotate (new Vector3 (0, 0, Time.deltaTime * 180));
     }
 
 
@@ -110,5 +113,4 @@ public class UITargetUserInfo : MonoBehaviour
 
         emotionView = null;
     }
-
 }

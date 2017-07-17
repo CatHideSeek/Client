@@ -151,6 +151,7 @@ public class PlayerDataManager : MonoBehaviour {
 
     public void EatKey()
     {
+		my.keyCount++;
         print("열쇠 소지갯수: " + my.keyCount);
         NetworkManager.instance.SendGetKeyPart(my.keyCount);
 
@@ -162,7 +163,7 @@ public class PlayerDataManager : MonoBehaviour {
 
     public void EatItem(int id)
     {
-        itemType = id;
+		UIActionButton.instance.SetItem (id);
     }
 
     public void SetCatModel(int id)

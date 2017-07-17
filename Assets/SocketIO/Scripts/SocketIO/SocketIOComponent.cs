@@ -303,7 +303,7 @@ namespace SocketIO
 		private void EmitPacket(Packet packet)
 		{
 			#if SOCKET_IO_DEBUG
-			debugMethod.Invoke("[SocketIO] " + packet);
+			//debugMethod.Invoke("[SocketIO] " + packet);
 			#endif
 			
 			try {

@@ -15,8 +15,11 @@ public class GameManager : MonoBehaviour
     public bool isPortalSet = false;
     public bool isEnd = false;
 
+	public bool isModelReady=false;
+
     public MapGenerator mapGenerator;
-    public GameObject playerObject, portalObject;
+	public GameObject playerObject;
+	public GameObject portalObject;
     public GameObject[] blockObject;
     //0~3 땅블럭
     //4 나무
@@ -31,6 +34,7 @@ public class GameManager : MonoBehaviour
 
     public PortalController portal;
     public int keySpawnerNum;
+	public int portalIsland=-1;
 
     UIInGame ui;
 
@@ -60,6 +64,7 @@ public class GameManager : MonoBehaviour
     {
         currentTime -= Time.deltaTime;
 
+		Debug.Log ("currentTime" + currentTime);
         ui.UpdateTimerText(string.Format("{0:D2} : {1:D2}", (int)currentTime / 60, (int)currentTime % 60));
 
 

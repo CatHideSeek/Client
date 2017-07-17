@@ -97,6 +97,8 @@ public class IslandGenerator : MonoBehaviour
 
         Combine();
 
+		if (GameManager.instance.portalIsland == id)
+			CreatePortal ();
         CreateTrees(Random.Range(minTreeNum, maxTreeNum + 1));
         CreateBushes(Random.Range(minBushNum, maxBushNum + 1));
         CreateRocks(Random.Range(minKRockNum, maxRockNum + 1));
@@ -253,6 +255,21 @@ public class IslandGenerator : MonoBehaviour
             }
         }
     }
+
+	private void CreatePortal()
+	{
+		int h = Random.Range(0, maxFloor);
+		if (topMapList[h].Count > 0)
+		{
+			int r = topMapList [h].Count - 1;
+			GameObject g = Instantiate(GameManager.instance.blockObject[12], transform.position + topMapList[h][r].ToVector3(h + 2), Quaternion.Euler(-90, 0, 0));
+			g.transform.parent = transform;
+			topMapList[h].Remove(topMapList[h][r]);//이미 생성된 곳은 중복을 방지하기 위해서 리스트에서 지워준다
+			GameManager.instance.blockList.Add(new Block(g.transform.position, 12,id));
+
+			GameManager.instance.portalObject = g;
+		}
+	}
 
 
     public void Combine()
