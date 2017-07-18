@@ -7,5 +7,6 @@ public class TrapPotion : Item
     protected override void Eaten()
     {
         PlayerDataManager.instance.EatItem(2);
+        spawner.created = false;
     }
 }

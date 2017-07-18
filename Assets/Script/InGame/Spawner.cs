@@ -6,7 +6,9 @@ public class Spawner : MonoBehaviour
 {
     public GameObject[] prefabs;
     public bool created = false;
-    float spawnDelay=10f, spawnTime=0;
+    public int s = 0;
+    public float spawnDelay=10f;
+    float spawnTime=0;
 	
 	void Update ()
     {
@@ -16,7 +18,9 @@ public class Spawner : MonoBehaviour
             spawnTime -= Time.deltaTime;
         if(spawnTime<=0)
         {
-            GameObject prefab = prefabs[Random.Range(0, prefabs.Length)];
+            GameObject prefab = prefabs[s++];
+            if (s >=prefabs.Length)
+                s = 0;
             GameObject key=Instantiate(prefab, transform.position + prefab.transform.position, Quaternion.identity);
             key.GetComponent<Item>().spawner = this;
             spawnTime = spawnDelay;

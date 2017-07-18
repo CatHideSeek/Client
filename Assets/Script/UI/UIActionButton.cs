@@ -31,7 +31,7 @@ public class UIActionButton : MonoBehaviour {
         else
             tagPress = false;
 
-		if (PlayerDataManager.instance.my.GetTeam () == true)
+		if (actionButton && PlayerDataManager.instance.my.GetTeam () == true)
 			actionButton.SetActive (false);
     }
 
@@ -41,7 +41,19 @@ public class UIActionButton : MonoBehaviour {
 
     public void ActionButton() {
         print("action button works");
-        time = 0;
+        if (PlayerDataManager.instance.my.controller.clear)
+        {
+            GameObject targetP = null;
+            GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
+            do
+            {
+                targetP = players[Random.Range(0, players.Length)];
+            } while (targetP.GetComponent<PlayerController>().clear);
+
+            CameraController.instance.target = targetP.transform;
+        }
+        else
+            time = 0;
     }
 
     public void UpdateItemIcon(Sprite icon) {

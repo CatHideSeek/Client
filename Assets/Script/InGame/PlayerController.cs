@@ -8,7 +8,7 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 public class PlayerController : MonoBehaviour
 {
-    bool clear = false;
+    public bool clear = false;
 
     public User user;
     public GameObject[] catModel;
@@ -39,17 +39,18 @@ public class PlayerController : MonoBehaviour
     public GameObject spotLight;
 
     [SerializeField]
-    float movLerpTime = 0.1f,rotLerpTime = 5f;
+    float movLerpTime = 0.1f, rotLerpTime = 5f;
 
     [SerializeField]
     float syncTime, syncDelay, lastSyncTime;
 
     [SerializeField]
-    float timeStamp = 0f, timeMaxStamp = 0.05f; 
+    float timeStamp = 0f, timeMaxStamp = 0.05f;
 
     public bool createdModel = false;
     bool bushing = false;
     OpacityObject lastBush = null;
+    int jumpCnt = 0;
 
     void Awake()
     {
@@ -77,7 +78,7 @@ public class PlayerController : MonoBehaviour
     /// <param name="model">모델 id값(0~4)</param>
     public void SetModel(int id)
     {
-        print("set model");
+        print(gameObject.name+" >> set model");
         realModel = Instantiate(catModel[id], transform.position + catModel[id].transform.position, Quaternion.identity);
         realModel.transform.parent = model.transform;
         createdModel = true;
@@ -86,6 +87,14 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (clear)
+        {
+            gameObject.SetActive(false);
+            return;
+        }
+        if (GameManager.instance != null && GameManager.instance.isEnd)
+            return;
+
         if (user.isPlayer)
         {
 #if UNITY_EDITOR || UNITY_STANDALONE
@@ -114,8 +123,7 @@ public class PlayerController : MonoBehaviour
         }
         else if (user.FindState((int)User.State.Hide) >= 0 || (bushing && !lastBush.opacity))
         {
-            if (!user.isPlayer)
-                SetRenderer(false);
+            SetRenderer(false);
         }
         else if (user.FindState((int)User.State.Change) >= 0)
         {
@@ -144,28 +152,28 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        if (user.FindState((int)User.State.Stun) >= 0)
+        if (user.FindState((int)User.State.Stun) >= 0 && nameLabel)
         {
             nameLabel.GetComponent<UITargetUserInfo>().stun.enabled = true;
             nameLabel.GetComponent<UITargetUserInfo>().slow.enabled = false;
             movSpeed = 0;
             rotSpeed = 0;
         }
-        else if (user.FindState((int)User.State.Slow) >= 0)
+        else if (user.FindState((int)User.State.Slow) >= 0 && nameLabel)
         {
             nameLabel.GetComponent<UITargetUserInfo>().slow.enabled = true;
             nameLabel.GetComponent<UITargetUserInfo>().stun.enabled = false;
             movSpeed = oriMSpd / 2;
             rotSpeed = oriRSpd / 2;
         }
-        else if (movSpeed != oriMSpd)
+        else if (movSpeed != oriMSpd && nameLabel)
         {
             nameLabel.GetComponent<UITargetUserInfo>().stun.enabled = false;
             nameLabel.GetComponent<UITargetUserInfo>().slow.enabled = false;
             movSpeed = oriMSpd;
             rotSpeed = oriRSpd;
         }
-        else
+        else if (nameLabel)
         {
             nameLabel.GetComponent<UITargetUserInfo>().stun.enabled = false;
             nameLabel.GetComponent<UITargetUserInfo>().slow.enabled = false;
@@ -197,8 +205,11 @@ public class PlayerController : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (clear)
+        if (clear|| (GameManager.instance != null && GameManager.instance.isEnd))
             return;
+
+        if (ri.velocity.y<1&&ri.velocity.y>-1)
+            jumpCnt = 0;
 
         if (user.isPlayer && (h != 0 || v != 0 || ri.velocity.y != 0) && (PlayerDataManager.instance.modelType == 2 || user.FindState((int)User.State.Change) == -1))
             Move();
@@ -219,7 +230,9 @@ public class PlayerController : MonoBehaviour
     /// <param name="u">User 정보</param>
     public void SetUser(User u)
     {
+        Debug.Log("SetUser()");
         u.controller = this;
+        createdModel = false;
 
         if (u.isPlayer)
         {
@@ -262,7 +275,10 @@ public class PlayerController : MonoBehaviour
 
     public void Jump()
     {
+        if (jumpCnt >= 2)
+            return;
         ri.velocity = new Vector3(ri.velocity.x, jumpPower, ri.velocity.z);
+        jumpCnt++;
     }
 
     /// <summary>
@@ -301,7 +317,7 @@ public class PlayerController : MonoBehaviour
         {
             oldPos = tr.position;
             //이동 하였다고 socket 메세지 전송
-            NetworkManager.instance.SendPosition(oldPos,ri.velocity);
+            NetworkManager.instance.SendPosition(oldPos, ri.velocity,false);
         }
     }
 
@@ -323,10 +339,14 @@ public class PlayerController : MonoBehaviour
     /// 다른 플레이어의 위치를 세팅합니다.
     /// </summary>
     /// <param name="pos">위치 Vector3</param>
-    public void SetPosition(Vector3 pos, Vector3 vel)
+    public void SetPosition(Vector3 pos, Vector3 vel, bool isDirect)
     {
-        currentPos = pos;
+        if (isDirect)
+            tr.position = pos;
+        else
+            currentPos = pos;
     }
+
 
     /// <summary>
     /// 다른 플레이어의 회전을 세팅합니다.
@@ -385,32 +405,23 @@ public class PlayerController : MonoBehaviour
 
     void OnTriggerStay(Collider col)
     {
-        if (user.isPlayer && Input.GetKeyDown(KeyCode.Space))
+        if (user.isPlayer && UIActionButton.instance.tagPress)
         {
             if (col.CompareTag("Portal"))
             {
+                print("탈출");
                 if (GameManager.instance.portal.isOpen)
                 {
                     print("탈출");
                     UIInGame.instance.ViewNotice(user.name + "(이)가 탈출에 성공하였습니다");
                     clear = true;
+                    GameManager.instance.isEscape = true;
                 }
                 else if (user.isKeyHave)
                 {
-                    print("열쇠를 사용하여 오픈");
+                    GameManager.instance.portal.Open();
                     NetworkManager.instance.SendOpen(user.name);
                 }
-            }
-            else if (col.CompareTag("Item"))
-            {
-                /*
-                ItemController item = col.GetComponent<ItemController>();
-                if (!item.GetDestroy())
-                {
-                    print("아이템 획득");
-                    col.GetComponent<ItemController>().SetDestroy();
-                }
-                */
             }
         }
     }

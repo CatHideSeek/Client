@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
 class IslandPos
 {
 	public int x, y,type;
@@ -33,6 +34,8 @@ public class MapGenerator : MonoBehaviour
 	public int islandNum;
 
 	IslandPos currentPos = new IslandPos ();
+
+    [SerializeField]
 	List<IslandPos> islandList = new List<IslandPos> ();
 
     public bool useMipMaps = true;
@@ -51,6 +54,7 @@ public class MapGenerator : MonoBehaviour
 
     public void InitMap ()
 	{
+		Debug.Log ("InitMap()");
 		if (!PlayerDataManager.instance.my.isHost)
 			return;
 		

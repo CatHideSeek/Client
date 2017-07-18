@@ -178,8 +178,9 @@ public class Room
     /// </summary>
     public void SetFirstBoss()
     {
-        int rand = Random.Range(0, countPlayers);
+        int rand = Random.Range(0, maxPlayers);
         NetworkManager.instance.SendRootTag(userList[rand].name);
+        UIInGame.instance.ViewNotice(userList[rand].name + " (이)가 첫 술래가 되었습니다.");
     }
 
     /// <summary>
@@ -216,6 +217,13 @@ public class Room
     {
         if (ui != null)
             ui.SetData(this);
+    }
+
+
+    public void SetGravity() {
+        for (int i = 0; i < userList.Count; i++) {
+            userList[i].controller.GetComponent<Rigidbody>().useGravity = true;
+        }
     }
 
 }

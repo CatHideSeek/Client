@@ -7,5 +7,6 @@ public class HidePotion : Item {
     protected override void Eaten()
     {
         PlayerDataManager.instance.EatItem(1);
+        spawner.created = false;
     }
 }

@@ -7,5 +7,6 @@ public class TransformPotion : Item
     protected override void Eaten()
     {
         PlayerDataManager.instance.EatItem(3);
+        spawner.created = false;
     }
 }

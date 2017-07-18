@@ -151,7 +151,7 @@ public class PlayerDataManager : MonoBehaviour {
 
     public void EatKey()
     {
-		my.keyCount++;
+		my.keyCount+=1;
         print("열쇠 소지갯수: " + my.keyCount);
         NetworkManager.instance.SendGetKeyPart(my.keyCount);
 

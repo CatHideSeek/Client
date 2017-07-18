@@ -249,6 +249,7 @@ public class IslandGenerator : MonoBehaviour
                 int r = Random.Range(0, topMapList[h].Count);
                 GameObject g = Instantiate(GameManager.instance.blockObject[11], transform.position + topMapList[h][r].ToVector3(h + 1), Quaternion.Euler(-90, 0, 0));
                 g.transform.parent = transform;
+                g.GetComponent<Spawner>().s = id%3;
                 g.name += "(" + i+")";
                 topMapList[h].Remove(topMapList[h][r]);//이미 생성된 곳은 중복을 방지하기 위해서 리스트에서 지워준다
                 GameManager.instance.blockList.Add(new Block(g.transform.position, 11,id));
@@ -264,6 +265,8 @@ public class IslandGenerator : MonoBehaviour
 			int r = topMapList [h].Count - 1;
 			GameObject g = Instantiate(GameManager.instance.blockObject[12], transform.position + topMapList[h][r].ToVector3(h + 2), Quaternion.Euler(-90, 0, 0));
 			g.transform.parent = transform;
+            GameManager.instance.portalObject = g;
+            GameManager.instance.portal = g.GetComponent<PortalController>();
 			topMapList[h].Remove(topMapList[h][r]);//이미 생성된 곳은 중복을 방지하기 위해서 리스트에서 지워준다
 			GameManager.instance.blockList.Add(new Block(g.transform.position, 12,id));
 

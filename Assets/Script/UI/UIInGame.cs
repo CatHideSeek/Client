@@ -19,6 +19,12 @@ public class UIInGame : MonoBehaviour
 
     public Sprite goodIcon, happyIcon, sadIcon, angryIcon, confuseIcon;
 
+	public GameObject result;
+	public Sprite loseResult;
+	public Text resultText;
+	public Text tagerText;
+	public Text hiderText;
+
     void Awake()
     {
         instance = this;
@@ -30,8 +36,6 @@ public class UIInGame : MonoBehaviour
     }
 
     public void TestEnter() {
-        NetworkManager.instance.TestEnterRoom();
-		GameManager.instance.mapGenerator.InitMap ();
     }
 
     public void SetHost() {
@@ -106,6 +110,34 @@ public class UIInGame : MonoBehaviour
             case 4: return confuseIcon;
         }
         return null;
+    }
+
+	public void SetResult(bool lose,bool manWin)
+	{
+		if (lose) {
+			result.GetComponent<Image> ().sprite = loseResult;
+		}
+
+		if(PlayerDataManager.instance.my.GetTeam())
+			resultText.text="Tager";
+		else
+			resultText.text="Hider";
+
+		GameObject[] ps = GameObject.FindGameObjectsWithTag ("Player");
+		for (int i = 0; i < ps.Length; i++) {
+			User u = ps [i].GetComponent<PlayerController> ().user;
+			if (u.GetTeam ())
+				tagerText.text += "\n"+u.name;
+			else
+				hiderText.text+= "\n"+u.name;
+		}
+		
+		result.SetActive(true);
+	}
+
+
+    public void ExitGame() {
+        NetworkManager.instance.SendExit();
     }
 
 }

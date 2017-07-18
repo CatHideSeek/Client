@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ArrowController : MonoBehaviour
 {
-    public float viewRange = 10;
+    public float viewRange = 60;
     public GameObject arrow;
     PlayerController p;
     Renderer renderer;
@@ -19,7 +19,7 @@ public class ArrowController : MonoBehaviour
         renderer = arrow.transform.Find("Model").Find("Cube").GetComponent<Renderer>();
     }
 
-    void FixedUpdate()
+    void LateUpdate()
     {
         if (!p.user.isPlayer || PlayerDataManager.instance.modelType != 3)
             return;

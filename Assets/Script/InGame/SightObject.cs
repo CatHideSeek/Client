@@ -27,7 +27,7 @@ public class SightObject : MonoBehaviour {
 				player = PlayerDataManager.instance.my.controller.gameObject.transform;
 			return;
 		}
-		if (Vector3.Distance (player.position, transform.position) <= 3.5f) {
+		if (Vector3.Distance (player.position, transform.position) <= 4f) { // distance 사용 금지 
 			if (pc)
 				pc.model.SetActive (true);
 			else
