@@ -8,7 +8,7 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 public class PlayerController : MonoBehaviour
 {
-	bool clear=false;
+    bool clear = false;
 
     public User user;
     public GameObject[] catModel;
@@ -36,10 +36,16 @@ public class PlayerController : MonoBehaviour
     public GameObject model;
     public GameObject realModel;
     public GameObject[] changeObjs;
-	public GameObject spotLight;
+    public GameObject spotLight;
 
     [SerializeField]
-    float clampTime = 50f;
+    float movLerpTime = 0.1f,rotLerpTime = 5f;
+
+    [SerializeField]
+    float syncTime, syncDelay, lastSyncTime;
+
+    [SerializeField]
+    float timeStamp = 0f, timeMaxStamp = 0.05f; 
 
     public bool createdModel = false;
     bool bushing = false;
@@ -82,7 +88,7 @@ public class PlayerController : MonoBehaviour
     {
         if (user.isPlayer)
         {
-            //#if UNITY_EDITOR
+#if UNITY_EDITOR || UNITY_STANDALONE
             h = Input.GetAxis("Horizontal");
             v = Input.GetAxis("Vertical");
 
@@ -90,111 +96,114 @@ public class PlayerController : MonoBehaviour
             {
                 Jump();
             }
-			if (!spotLight.active)
-				spotLight.SetActive (true);
-//#endif
+#endif
+            if (!spotLight.activeSelf)
+                spotLight.SetActive(true);
+
         }
 
         #region UpdateState
-		if(clear)
-		{
-			for (int i = 0; i < 3; i++)
-			{
-				changeObjs[i].SetActive(false);
-			}
-			SetRenderer(false);
-			return;
-		}
-        else if(user.FindState((int)User.State.Hide) >= 0 || (bushing && !lastBush.opacity))
+        if (clear)
+        {
+            for (int i = 0; i < 3; i++)
+            {
+                changeObjs[i].SetActive(false);
+            }
+            SetRenderer(false);
+            return;
+        }
+        else if (user.FindState((int)User.State.Hide) >= 0 || (bushing && !lastBush.opacity))
         {
             if (!user.isPlayer)
                 SetRenderer(false);
         }
-		else if (user.FindState((int)User.State.Change) >= 0)
-		{
-			SetRenderer(false);
-		}
-		else
-		{
-			SetRenderer(true);
-		}
+        else if (user.FindState((int)User.State.Change) >= 0)
+        {
+            SetRenderer(false);
+        }
+        else
+        {
+            SetRenderer(true);
+        }
 
-		if (user.FindState((int)User.State.Change) >= 0)
-		{
-			for (int i = 0; i < 3; i++)
-			{
-				if (i + 1 == user.objectKind)
-					changeObjs[i].SetActive(true);
-				else
-					changeObjs[i].SetActive(false);
-			}
-		}
-		else
-		{
-			for (int i = 0; i < 3; i++)
-			{
-				changeObjs[i].SetActive(false);
-			}
-		}
+        if (user.FindState((int)User.State.Change) >= 0)
+        {
+            for (int i = 0; i < 3; i++)
+            {
+                if (i + 1 == user.objectKind)
+                    changeObjs[i].SetActive(true);
+                else
+                    changeObjs[i].SetActive(false);
+            }
+        }
+        else
+        {
+            for (int i = 0; i < 3; i++)
+            {
+                changeObjs[i].SetActive(false);
+            }
+        }
 
         if (user.FindState((int)User.State.Stun) >= 0)
         {
-			nameLabel.GetComponent<UITargetUserInfo>().stun.enabled=true;
-			nameLabel.GetComponent<UITargetUserInfo>().slow.enabled=false;
+            nameLabel.GetComponent<UITargetUserInfo>().stun.enabled = true;
+            nameLabel.GetComponent<UITargetUserInfo>().slow.enabled = false;
             movSpeed = 0;
             rotSpeed = 0;
         }
         else if (user.FindState((int)User.State.Slow) >= 0)
         {
-			nameLabel.GetComponent<UITargetUserInfo>().slow.enabled=true;
-			nameLabel.GetComponent<UITargetUserInfo>().stun.enabled=false;
+            nameLabel.GetComponent<UITargetUserInfo>().slow.enabled = true;
+            nameLabel.GetComponent<UITargetUserInfo>().stun.enabled = false;
             movSpeed = oriMSpd / 2;
             rotSpeed = oriRSpd / 2;
         }
         else if (movSpeed != oriMSpd)
         {
-			nameLabel.GetComponent<UITargetUserInfo>().stun.enabled=false;
-			nameLabel.GetComponent<UITargetUserInfo>().slow.enabled=false;
+            nameLabel.GetComponent<UITargetUserInfo>().stun.enabled = false;
+            nameLabel.GetComponent<UITargetUserInfo>().slow.enabled = false;
             movSpeed = oriMSpd;
             rotSpeed = oriRSpd;
         }
-		else
-		{
-			nameLabel.GetComponent<UITargetUserInfo>().stun.enabled=false;
-			nameLabel.GetComponent<UITargetUserInfo>().slow.enabled=false;
-		}
+        else
+        {
+            nameLabel.GetComponent<UITargetUserInfo>().stun.enabled = false;
+            nameLabel.GetComponent<UITargetUserInfo>().slow.enabled = false;
+        }
 
-		if(!model.active)
-		{
-			nameLabel.GetComponent<UITargetUserInfo>().stun.enabled=false;
-			nameLabel.GetComponent<UITargetUserInfo>().slow.enabled=false;
-		}
+        if (!model.active)
+        {
+            nameLabel.GetComponent<UITargetUserInfo>().stun.enabled = false;
+            nameLabel.GetComponent<UITargetUserInfo>().slow.enabled = false;
+        }
 
-       
-        
+        #endregion
+
+        #region Sync
+        //syncTime += Time.deltaTime;
+
+        if (!user.isPlayer && currentPos != tr.position)
+        {
+            tr.position = Vector3.Lerp(tr.position, currentPos, Time.deltaTime * movLerpTime);
+        }
+
+        if (!user.isPlayer && currentRot != tr.rotation)
+        {
+            tr.rotation = Quaternion.Lerp(tr.rotation, currentRot, Time.deltaTime * rotLerpTime);
+        }
+
+        #endregion
     }
-    #endregion
 
     void FixedUpdate()
     {
-		if (clear)
-			return;
+        if (clear)
+            return;
 
-		if (user.isPlayer && (h != 0 || v != 0 || ri.velocity.y != 0) && (   PlayerDataManager.instance.modelType == 2 || user.FindState((int)User.State.Change)==-1   )  )
-			Move();
-        else if (h == 0 && v == 0)
-            ri.velocity = new Vector3(0, ri.velocity.y, 0);
-
-        if(!user.isPlayer && oldPos != tr.position)
-        {
-            tr.position = Vector3.Lerp(tr.position, currentPos, Time.deltaTime * clampTime);
-        }
-
-        if (!user.isPlayer && oldRot != tr.rotation)
-        {
-            tr.rotation = Quaternion.Lerp(tr.rotation, currentRot, Time.deltaTime * clampTime);
-        }
-
+        if (user.isPlayer && (h != 0 || v != 0 || ri.velocity.y != 0) && (PlayerDataManager.instance.modelType == 2 || user.FindState((int)User.State.Change) == -1))
+            Move();
+        //else if (h == 0 && v == 0)
+        //    ri.velocity = new Vector3(0, ri.velocity.y, 0);
     }
 
 
@@ -263,10 +272,7 @@ public class PlayerController : MonoBehaviour
     {
 
         Vector3 targetDir = Vector3.zero;
-        Vector3 inputDir = new Vector3(h, 0, v);
-        Vector3 pos = inputDir.normalized;
-        pos.x = Mathf.Round(pos.x);
-        pos.z = Mathf.Round(pos.z);
+        Vector3 pos = new Vector3(h, 0, v).normalized;
 
         if (pos.sqrMagnitude > 0.1f)
             targetDir = pos.normalized;
@@ -275,10 +281,14 @@ public class PlayerController : MonoBehaviour
             tr.rotation = Quaternion.Slerp(tr.rotation, Quaternion.LookRotation(targetDir), Time.deltaTime * rotSpeed);
 
         ri.velocity = new Vector3(0, ri.velocity.y, 0);
-        ri.velocity = new Vector3(inputDir.x * movSpeed, ri.velocity.y, inputDir.z * movSpeed);
-
-        CheckPosition();
-        CheckRotation();
+        ri.velocity = new Vector3(h * movSpeed, ri.velocity.y, v * movSpeed);
+        timeStamp += Time.deltaTime;
+        if (timeStamp > timeMaxStamp)
+        {
+            CheckPosition();
+            CheckRotation();
+            timeStamp = 0;
+        }
     }
 
     /// <summary>
@@ -291,7 +301,7 @@ public class PlayerController : MonoBehaviour
         {
             oldPos = tr.position;
             //이동 하였다고 socket 메세지 전송
-            NetworkManager.instance.SendPosition(oldPos);
+            NetworkManager.instance.SendPosition(oldPos,ri.velocity);
         }
     }
 
@@ -313,14 +323,9 @@ public class PlayerController : MonoBehaviour
     /// 다른 플레이어의 위치를 세팅합니다.
     /// </summary>
     /// <param name="pos">위치 Vector3</param>
-    public void SetPosition(Vector3 pos)
+    public void SetPosition(Vector3 pos, Vector3 vel)
     {
         currentPos = pos;
-        //이동 하였는지 체크 합니다.
-        if (oldPos != currentPos)
-        {
-            oldPos = currentPos;
-        }
     }
 
     /// <summary>
@@ -330,11 +335,6 @@ public class PlayerController : MonoBehaviour
     public void SetRotation(Quaternion rot)
     {
         currentRot = rot;
-        //회전 하였는지 체크합니다.
-        if (oldRot != currentRot)
-        {
-            oldRot = currentRot;
-        }
     }
 
     /// <summary>
@@ -343,7 +343,8 @@ public class PlayerController : MonoBehaviour
     /// <param name="alpha">활성화 여부</param>
     private void SetRenderer(bool active)
     {
-        realModel.SetActive(active);
+        if (realModel != null)
+            realModel.SetActive(active);
     }
 
     void OnTriggerEnter(Collider col)
@@ -356,7 +357,7 @@ public class PlayerController : MonoBehaviour
                 col.GetComponent<OpacityObject>().SetOpacity(true);
             lastBush = col.GetComponent<OpacityObject>();
         }
-		else if (col.CompareTag("Item")&&user.GetTeam()==false)
+        else if (col.CompareTag("Item") && user.GetTeam() == false)
         {
             Item item = col.GetComponent<Item>();
             if (!item.GetDestroy())
@@ -368,16 +369,17 @@ public class PlayerController : MonoBehaviour
                     item.SetDestroy(false);
             }
         }
-		else if (col.CompareTag("Trap")&&user.GetTeam()==true)
+        else if (col.CompareTag("Trap") && user.GetTeam() == true)
         {
-            Trap t=col.GetComponent<Trap>();
-			if (user == PlayerDataManager.instance.my) {
-				if (t.stun)
-					PlayerDataManager.instance.SetStun (2);
-				else
-					PlayerDataManager.instance.SetSlow (2);
-			}
-                Destroy(col.gameObject);
+            Trap t = col.GetComponent<Trap>();
+            if (user == PlayerDataManager.instance.my)
+            {
+                if (t.stun)
+                    PlayerDataManager.instance.SetStun(2);
+                else
+                    PlayerDataManager.instance.SetSlow(2);
+            }
+            Destroy(col.gameObject);
         }
     }
 
@@ -390,8 +392,8 @@ public class PlayerController : MonoBehaviour
                 if (GameManager.instance.portal.isOpen)
                 {
                     print("탈출");
-					UIInGame.instance.ViewNotice (user.name + "(이)가 탈출에 성공하였습니다");
-					clear = true;
+                    UIInGame.instance.ViewNotice(user.name + "(이)가 탈출에 성공하였습니다");
+                    clear = true;
                 }
                 else if (user.isKeyHave)
                 {

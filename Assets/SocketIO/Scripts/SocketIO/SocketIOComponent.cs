@@ -26,7 +26,7 @@
  */
 
 #endregion
-#define SOCKET_IO_DEBUG			// Uncomment this for debug
+//#define SOCKET_IO_DEBUG			// Uncomment this for debug
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -303,7 +303,7 @@ namespace SocketIO
 		private void EmitPacket(Packet packet)
 		{
 			#if SOCKET_IO_DEBUG
-			//debugMethod.Invoke("[SocketIO] " + packet);
+			debugMethod.Invoke("[SocketIO] " + packet);
 			#endif
 			
 			try {

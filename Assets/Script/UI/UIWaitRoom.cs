@@ -73,7 +73,7 @@ public class UIWaitRoom : MonoBehaviour
     {
         if (PlayerDataManager.instance.my.isHost)
         {
-            if (NetworkManager.instance.enterRoom.readyPlayers == NetworkManager.instance.enterRoom.countPlayers)
+            if (NetworkManager.instance.enterRoom.readyPlayers == NetworkManager.instance.enterRoom.maxPlayers)
                 NetworkManager.instance.SendStart();
         }
         else {

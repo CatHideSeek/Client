@@ -62,6 +62,6 @@ public class ArrowController : MonoBehaviour
             arrow.SetActive(false);
         }
         renderer.material.color = c;
-        Debug.Log(c.a);
+//        Debug.Log(c.a);
     }
 }

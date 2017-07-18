@@ -17,6 +17,8 @@ public class UIInGame : MonoBehaviour
 
 	public GameObject us,gs;
 
+    public Sprite goodIcon, happyIcon, sadIcon, angryIcon, confuseIcon;
+
     void Awake()
     {
         instance = this;
@@ -72,10 +74,6 @@ public class UIInGame : MonoBehaviour
 		StartCoroutine("WaitGameState");
 	}
 
-      
-   
-
-
     IEnumerator WaitNotice() {
         notice.SetActive(true);
         yield return new WaitForSeconds(noticeTime);
@@ -93,4 +91,21 @@ public class UIInGame : MonoBehaviour
 		yield return new WaitForSeconds(noticeTime);
 		gs.SetActive(false);
 	}
+
+
+    public void SendEmoticon(int id) {
+        NetworkManager.instance.SendChat(PlayerDataManager.instance.my.name,id.ToString(),2);
+    }
+
+    public Sprite GetEmotionIcon(int id) {
+        switch (id) {
+            case 0: return goodIcon;
+            case 1: return happyIcon;
+            case 2: return sadIcon;
+            case 3: return angryIcon;
+            case 4: return confuseIcon;
+        }
+        return null;
+    }
+
 }

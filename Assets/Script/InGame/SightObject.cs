@@ -23,7 +23,7 @@ public class SightObject : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if (player == null) {
-			if(GameManager.instance.isModelReady)
+			if(GameManager.instance != null && GameManager.instance.isModelReady)
 				player = PlayerDataManager.instance.my.controller.gameObject.transform;
 			return;
 		}

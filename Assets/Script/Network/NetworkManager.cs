@@ -182,6 +182,9 @@ public class NetworkManager : MonoBehaviour
 
         enterRoom = FindRoom("0Lobby");
 
+        enterRoom.userList.Clear();
+
+        print(json["userList"]);
 
         for (int i = 0; i < json["userList"].Count; i++)
         {
@@ -202,6 +205,7 @@ public class NetworkManager : MonoBehaviour
                 g.GetComponent<PlayerController>().SetUser(user);
 
                 g.name = user.name;
+                
             }
         }
 
@@ -235,8 +239,10 @@ public class NetworkManager : MonoBehaviour
         {
             int r = Random.Range(0, 5);
             playerData.SetCatModel(r);//고양이 종류를 정해줍니다.
+            
         }
-
+        SendPosition(playerData.my.controller.transform.position, Vector3.zero);//방금 입장한 사람을 위해 현재좌표를 전송
+        SendModelType(playerData.modelType);//방금 입장한 사람을 위해 내 모델타입을 전송
 
     }
 
@@ -339,7 +345,11 @@ public class NetworkManager : MonoBehaviour
         {
             int r = Random.Range(0, 5);
             playerData.SetCatModel(r);//고양이 종류를 정해줍니다.
+
         }
+
+        SendPosition(playerData.my.controller.transform.position, Vector3.zero);//방금 입장한 사람을 위해 현재좌표를 전송
+        SendModelType(playerData.modelType);//방금 입장한 사람을 위해 내 모델타입을 전송
     }
 
     public void SendWaitRoomJoin()
@@ -527,7 +537,7 @@ public class NetworkManager : MonoBehaviour
             SendInitEnd(user.name);
         }
 
-        SendPosition(playerData.my.controller.transform.position);//방금 입장한 사람을 위해 현재좌표를 전송
+        SendPosition(playerData.my.controller.transform.position, Vector3.zero);//방금 입장한 사람을 위해 현재좌표를 전송
         SendModelType(playerData.modelType);//방금 입장한 사람을 위해 내 모델타입을 전송
     }
 
@@ -538,7 +548,7 @@ public class NetworkManager : MonoBehaviour
     {
         JSONObject json = new JSONObject(JSONObject.Type.OBJECT);
 
-        playerData.my.name = "User" + Random.Range(1, 100);
+        //playerData.my.name = "User" + Random.Range(1, 100);
 
         json.AddField("name", playerData.my.name);
         json.AddField("isHost", playerData.my.isHost);
@@ -759,6 +769,8 @@ public class NetworkManager : MonoBehaviour
 
         enterRoom.userList.Clear();
 
+        print("userlist is work");
+
         for (int i = 0; i < json["userList"].Count; ++i)
         {
             string socketID = json["userList"][i]["socketID"].ToString();
@@ -774,7 +786,7 @@ public class NetworkManager : MonoBehaviour
 
                 enterRoom.AddUser(user);
 
-                GameObject g = Instantiate(GameManager.instance.playerObject, GameManager.instance.spawnPos, Quaternion.identity);
+                GameObject g = Instantiate(playerObject, Vector3.zero, Quaternion.identity);
                 g.GetComponent<PlayerController>().SetUser(user);
                 g.name = user.name;
             }
@@ -794,7 +806,7 @@ public class NetworkManager : MonoBehaviour
             print(user.name);
             user.isReady = json.GetField("isReady").b;
             enterRoom.readyPlayers = (int)json.GetField("readyPlayers").f;
-
+            user.controller.infoUI.SetRedayLabel(user.isReady);
             GameObject.FindWithTag("UIManager").GetComponent<UIWaitRoom>().UpdateReadyText(enterRoom);
         }
         else
@@ -850,6 +862,7 @@ public class NetworkManager : MonoBehaviour
     public void OnExit(SocketIOEvent e)
     {
         JSONObject json = e.data;
+        print("exit work");
         enterRoom.DeletUser(json.GetField("name").str);
     }
 
@@ -886,12 +899,15 @@ public class NetworkManager : MonoBehaviour
         float y = json.GetField("y").f;
         float z = json.GetField("z").f;
 
-        User user = enterRoom.FindUserByName(name);
+        float rx = json.GetField("rx").f;
+        float ry = json.GetField("ry").f;
+        float rz = json.GetField("rz").f;
 
+        User user = enterRoom.FindUserByName(name);
 
         if (user != null)
         {
-            user.controller.SetPosition(new Vector3(x, y, z));
+            user.controller.SetPosition(new Vector3(x, y, z),new Vector3(rx,ry,rz));
         }
 
     }
@@ -900,7 +916,7 @@ public class NetworkManager : MonoBehaviour
     /// 움직인 좌표를 다른 클라이언트에게 보냅니다.
     /// </summary>
     /// <param name="pos">위치 Vector3</param>
-    public void SendPosition(Vector3 pos)
+    public void SendPosition(Vector3 pos, Vector3 vel)
     {
         JSONObject json = new JSONObject(JSONObject.Type.OBJECT);
 
@@ -908,6 +924,11 @@ public class NetworkManager : MonoBehaviour
         json.AddField("x", pos.x);
         json.AddField("y", pos.y);
         json.AddField("z", pos.z);
+
+
+        json.AddField("rx", vel.x);
+        json.AddField("ry", vel.y);
+        json.AddField("rz", vel.z);
 
         socket.Emit("move", json);
     }
@@ -1197,18 +1218,22 @@ public class NetworkManager : MonoBehaviour
         string message = json.GetField("message").str;
         int where = (int)json.GetField("where").f;
 
-        enterRoom.FindUserByName(name).controller.infoUI.SetChatText(message);
+        
 
         GameObject g = GameObject.FindGameObjectWithTag("UIManager");
         switch (where)
         {
             case 0:
+                enterRoom.FindUserByName(name).controller.infoUI.SetChatText(message);
                 g.GetComponent<UILobby>().AddChatLog(name + " : " + message);
                 break;
             case 1:
+                enterRoom.FindUserByName(name).controller.infoUI.SetChatText(message);
                 g.GetComponent<UIWaitRoom>().AddChatLog(name + " : " + message);
                 break;
             case 2:
+                Sprite icon = g.GetComponent<UIInGame>().GetEmotionIcon(int.Parse(message));
+                enterRoom.FindUserByName(name).controller.infoUI.SetEmotion(icon);
                 break;
         }
 

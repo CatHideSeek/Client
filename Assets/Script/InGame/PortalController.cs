@@ -11,7 +11,7 @@ public class PortalController : MonoBehaviour {
     Animator ani;
 
     void Awake() {
-        ani = GetComponent<Animator>();
+        ani = transform.GetChild(0).GetComponent<Animator>();
     }
 
     private void Update()
@@ -29,7 +29,7 @@ public class PortalController : MonoBehaviour {
         if (!isOpen)
         {
             isOpen = true;
-            ani.SetBool("Open",true);
+            ani.SetTrigger("Open");
             gameObject.SetActive(true);
         }
             
@@ -38,7 +38,7 @@ public class PortalController : MonoBehaviour {
     public void Close() {
         if (isOpen) {
             isOpen = false;
-            ani.SetBool("Open", false);
+            ani.SetTrigger("Close");
             gameObject.SetActive(false);
         }
     }

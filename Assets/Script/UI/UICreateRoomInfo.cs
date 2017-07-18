@@ -14,6 +14,10 @@ public class UICreateRoomInfo : MonoBehaviour
     public void OnCreateRoom()
     {
         string name = roomNameInput.text;
+
+        if (name == "")
+            return;
+
         int pw = -1;
         if (roomPwInput.text != "")
              pw = int.Parse(roomPwInput.text);

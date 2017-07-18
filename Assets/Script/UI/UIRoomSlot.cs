@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class UIRoomSlot : MonoBehaviour {
 
     public Text numberText, nameText, countText, stateText;
+    public GameObject lockIcon;
     Button slotButton;
 
     private Room roomData;
@@ -24,6 +25,12 @@ public class UIRoomSlot : MonoBehaviour {
         numberText.text = "No. " + index;
         nameText.text = room.name;
         countText.text = room.countPlayers + " / " + room.maxPlayers;
+
+        if (room.pw != -1) {
+            lockIcon.SetActive(true);
+        }
+        else
+            lockIcon.SetActive(false);
 
         room.ui = this;
 
@@ -55,6 +62,13 @@ public class UIRoomSlot : MonoBehaviour {
         nameText.text = room.name;
         countText.text = room.countPlayers + " / " + room.maxPlayers;
 
+        if (room.pw != -1)
+        {
+            lockIcon.SetActive(true);
+        }
+        else
+            lockIcon.SetActive(false);
+
         if (!isWaitRoom)
         {
 
@@ -79,9 +93,22 @@ public class UIRoomSlot : MonoBehaviour {
 
 
     public void OnEnterRoom() {
-        NetworkManager.instance.SendWaitRoomEnter(roomData.id+roomData.name);
+        if (roomData.pw != -1) {
+            GameObject.FindWithTag("UIManager").GetComponent<UILobby>().SetPwInput(roomData);
+        }
+        else
+        {
+            NetworkManager.instance.SendWaitRoomEnter(roomData.id + roomData.name);
+        }
     }
 
+    public void OnEnterRoom(bool pass)
+    {
+        if (pass)
+            NetworkManager.instance.SendWaitRoomEnter(roomData.id + roomData.name);
+        else
+            GameObject.FindWithTag("UIManager").GetComponent<UILobby>().SetWrongPw();
+    }
 
 
 }

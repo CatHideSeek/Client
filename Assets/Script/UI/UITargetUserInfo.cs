@@ -87,8 +87,8 @@ public class UITargetUserInfo : MonoBehaviour
         chatView = null;
     }
 
-    public void SetRedayLabel() {
-        readyLabel.SetActive(!(readyLabel.activeSelf));
+    public void SetRedayLabel(bool isReady) {
+        readyLabel.SetActive(isReady);
     }
 
     public void SetEmotion(Sprite emotion) {

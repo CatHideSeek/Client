@@ -35,7 +35,7 @@ public class Room
     /// <summary>
     /// 방의 비밀번호
     /// </summary>
-    public int pw;
+    public int pw = -1;
     /// <summary>
     /// 방 내 유저 리스트
     /// </summary>

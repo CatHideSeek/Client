@@ -24,6 +24,8 @@ public class UILobby : MonoBehaviour
 
     public Text chatLog;
 
+    public GameObject pwInput, wrongPw;
+
 
     public void CreateRoomList()
     {
@@ -112,5 +114,13 @@ public class UILobby : MonoBehaviour
         scrollChat = StartCoroutine(ScrollChatLog(chatLog.transform.parent.parent.GetChild(1).GetComponent<Scrollbar>(), 0));
     }
 
+    public void SetPwInput(Room room) {
+        pwInput.SetActive(true);
+        pwInput.GetComponent<UIPWInput>().SetRoomData(room);
+    }
+
+    public void SetWrongPw() {
+        wrongPw.SetActive(true);
+    }
 
 }
