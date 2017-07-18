@@ -52,6 +52,9 @@ public class PlayerController : MonoBehaviour
     bool bushing = false;
     OpacityObject lastBush = null;
 
+    [SerializeField]
+    bool jumped = false, groundCheck = false;
+
     void Awake()
     {
         tr = GetComponent<Transform>();
@@ -206,6 +209,9 @@ public class PlayerController : MonoBehaviour
             Move();
         //else if (h == 0 && v == 0)
         //    ri.velocity = new Vector3(0, ri.velocity.y, 0);
+
+        if (groundCheck)
+            GroundCheck();
     }
 
 
@@ -265,8 +271,19 @@ public class PlayerController : MonoBehaviour
 
     public void Jump()
     {
+        if (jumped)
+            return;
+
         ri.velocity = new Vector3(ri.velocity.x, jumpPower, ri.velocity.z);
         audioBGS.PlayOneShot(SoundManager.instance.jumpBGS);
+        jumped = true;
+        StartCoroutine("JumpDelay");
+    }
+
+    IEnumerator JumpDelay() {
+        yield return new WaitForSeconds(0.3f);
+        groundCheck = true;
+
     }
 
     /// <summary>
@@ -436,5 +453,14 @@ public class PlayerController : MonoBehaviour
     public void PlayTagUser() {
         audioBGS.PlayOneShot(SoundManager.instance.tagBGS);
     }
-    
+
+
+    void GroundCheck() {
+        RaycastHit hit;
+        if (Physics.Raycast(tr.position, -tr.up, out hit, 0.5f)) {
+            jumped = false;
+            groundCheck = false;
+        }
+    }
+
 }
