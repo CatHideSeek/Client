@@ -46,6 +46,7 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         ui = UIInGame.instance;
+        SoundManager.instance.PlayInGameBGM();
     }
 
     public void StartGame()

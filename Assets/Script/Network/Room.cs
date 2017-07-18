@@ -189,6 +189,7 @@ public class Room
     public void UpdateCountPlayer(int count)
     {
         countPlayers += count;
+        UpdateUI();
     }
 
     /// <summary>
