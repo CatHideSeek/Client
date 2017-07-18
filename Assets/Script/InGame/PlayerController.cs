@@ -5,7 +5,7 @@ using UnityEngine;
 /// <summary>
 /// 인게임 내에서 유저를 컨트롤 하는 클래스입니다.
 /// </summary>
-[RequireComponent(typeof(Rigidbody))]
+[RequireComponent(typeof(Rigidbody),typeof(CapsuleCollider),typeof(AudioSource))]
 public class PlayerController : MonoBehaviour
 {
     public bool clear = false;
@@ -17,6 +17,7 @@ public class PlayerController : MonoBehaviour
     Transform tr;
     Rigidbody ri;
     Renderer renderer;
+    AudioSource audioBGS;
 
     public TagController tagController;
 
@@ -52,11 +53,15 @@ public class PlayerController : MonoBehaviour
     OpacityObject lastBush = null;
     int jumpCnt = 0;
 
+    [SerializeField]
+    bool jumped = false, groundCheck = false;
+
     void Awake()
     {
         tr = GetComponent<Transform>();
         ri = GetComponent<Rigidbody>();
         renderer = GetComponent<Renderer>();
+        audioBGS = GetComponent<AudioSource>();
 
         //위치 초기값 지정
         currentPos = tr.position;
@@ -215,6 +220,9 @@ public class PlayerController : MonoBehaviour
             Move();
         //else if (h == 0 && v == 0)
         //    ri.velocity = new Vector3(0, ri.velocity.y, 0);
+
+        if (groundCheck)
+            GroundCheck();
     }
 
 
@@ -243,6 +251,7 @@ public class PlayerController : MonoBehaviour
 
         nameLabel = NetworkManager.instance.MakePlayerInfoUI(GameObject.FindGameObjectWithTag("Canvas").transform, tr, user.name);
         infoUI = nameLabel.GetComponent<UITargetUserInfo>();
+        infoUI.SetRedayLabel(user.isReady);
     }
 
     /// <summary>
@@ -275,10 +284,18 @@ public class PlayerController : MonoBehaviour
 
     public void Jump()
     {
-        if (jumpCnt >= 2)
+        if (jumped)
             return;
+
         ri.velocity = new Vector3(ri.velocity.x, jumpPower, ri.velocity.z);
-        jumpCnt++;
+        audioBGS.PlayOneShot(SoundManager.instance.jumpBGS);
+        jumped = true;
+        StartCoroutine("JumpDelay");
+    }
+
+    IEnumerator JumpDelay() {
+        yield return new WaitForSeconds(0.3f);
+        groundCheck = true;
     }
 
     /// <summary>
@@ -383,6 +400,8 @@ public class PlayerController : MonoBehaviour
             if (!item.GetDestroy())
             {
                 print("아이템 획득");
+
+                audioBGS.PlayOneShot(SoundManager.instance.getItemBGS);
                 if (user == PlayerDataManager.instance.my)
                     item.SetDestroy(true);
                 else
@@ -435,6 +454,19 @@ public class PlayerController : MonoBehaviour
             else
                 col.GetComponent<OpacityObject>().SetOpacity(false);
             lastBush = null;
+        }
+    }
+
+    public void PlayTagUser() {
+        audioBGS.PlayOneShot(SoundManager.instance.tagBGS);
+    }
+
+
+    void GroundCheck() {
+        RaycastHit hit;
+        if (Physics.Raycast(tr.position, -tr.up, out hit, 0.5f)) {
+            jumped = false;
+            groundCheck = false;
         }
     }
 

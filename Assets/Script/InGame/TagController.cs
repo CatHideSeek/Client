@@ -25,6 +25,7 @@ public class TagController : MonoBehaviour
             if (!isDelayTag && player.user.CheckTag() && !col.GetComponent<TagController>().player.user.CheckTag() && col.CompareTag("Tag"))
             {
                 NetworkManager.instance.SendChildTag(player.user.name, col.GetComponent<TagController>().player.user.name);
+                player.PlayTagUser();
                 StartCoroutine("DelayTag");
             }
         }

@@ -347,11 +347,11 @@ public class NetworkManager : MonoBehaviour
         {
             int r = Random.Range(0, 5);
             playerData.SetCatModel(r);//고양이 종류를 정해줍니다.
-
         }
 
         SendPosition(playerData.my.controller.transform.position, Vector3.zero,true);//방금 입장한 사람을 위해 현재좌표를 전송
         SendModelType(playerData.modelType);//방금 입장한 사람을 위해 내 모델타입을 전송
+        enterRoom.UpdateUI();
     }
 
     public void SendWaitRoomJoin()
@@ -1377,7 +1377,7 @@ public class NetworkManager : MonoBehaviour
         GameObject g = Instantiate(playerInfoUI, canvas);
 
         g.GetComponent<UITargetUserInfo>().SetTarget(tr, name);
-
+        
         return g;
     }
 

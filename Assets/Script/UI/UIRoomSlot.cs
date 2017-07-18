@@ -22,7 +22,7 @@ public class UIRoomSlot : MonoBehaviour {
     public void SetData(int index,Room room) {
         roomData = room;
 
-        numberText.text = "No. " + index;
+        
         nameText.text = room.name;
         countText.text = room.countPlayers + " / " + room.maxPlayers;
 
@@ -36,7 +36,7 @@ public class UIRoomSlot : MonoBehaviour {
 
         if (!isWaitRoom)
         {
-
+            numberText.text = "No. " + index;
             if (room.isPlay)
             {
                 stateText.text = "<color=#ff0000ff>Playing..</color>";
@@ -109,6 +109,6 @@ public class UIRoomSlot : MonoBehaviour {
         else
             GameObject.FindWithTag("UIManager").GetComponent<UILobby>().SetWrongPw();
     }
-
+    
 
 }

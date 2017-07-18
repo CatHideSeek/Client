@@ -7,5 +7,6 @@ public class LobbyManager : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         NetworkManager.instance.SendLobbyEnter();
+        SoundManager.instance.PlayLobbyBGM();
 	}
 }
