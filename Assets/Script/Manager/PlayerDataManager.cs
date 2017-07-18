@@ -168,7 +168,6 @@ public class PlayerDataManager : MonoBehaviour {
 
     public void SetCatModel(int id)
     {
-        Debug.Log("SetCatModel()");
         modelType = id;
         my.controller.SetModel(modelType);
         NetworkManager.instance.SendModelType(modelType);

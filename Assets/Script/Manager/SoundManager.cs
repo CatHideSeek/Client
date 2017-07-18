@@ -29,7 +29,7 @@ public class SoundManager : MonoBehaviour {
     public void PlayWaitRoomBGM()
     {
         audioBGM.Stop();
-        audioBGM.clip = lobbyBGM;
+        audioBGM.clip = waitRoomBGM;
         audioBGM.loop = true;
         audioBGM.Play();
     }
@@ -37,7 +37,7 @@ public class SoundManager : MonoBehaviour {
     public void PlayInGameBGM()
     {
         audioBGM.Stop();
-        audioBGM.clip = lobbyBGM;
+        audioBGM.clip = inGameBGM;
         audioBGM.loop = true;
         audioBGM.Play();
     }

@@ -83,7 +83,6 @@ public class PlayerController : MonoBehaviour
     /// <param name="model">모델 id값(0~4)</param>
     public void SetModel(int id)
     {
-        print(gameObject.name+" >> set model");
         realModel = Instantiate(catModel[id], transform.position + catModel[id].transform.position, Quaternion.identity);
         realModel.transform.parent = model.transform;
         createdModel = true;
@@ -238,7 +237,6 @@ public class PlayerController : MonoBehaviour
     /// <param name="u">User 정보</param>
     public void SetUser(User u)
     {
-        Debug.Log("SetUser()");
         u.controller = this;
         createdModel = false;
 
