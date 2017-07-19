@@ -206,7 +206,10 @@ public class Room
             if (bossPlayers == countPlayers)
             {
                 Debug.Log("게임 종료 술래 승리");
-                GameManager.instance.isEnd = true;
+                GameManager.instance.EndGame();
+            }
+            else if (bossPlayers <= 0) {
+                GameManager.instance.EndGame();
             }
         }
     }

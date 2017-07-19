@@ -125,14 +125,17 @@ public class GameManager : MonoBehaviour
 		isEnd = true;
 		bool manWin;
 
-		if(currentTime==0)//시간이 다되서 끝낫을때
-		{
-			manWin = checkPlayerWin ();
-		}
-		else//유저가 모두 잡히거나, 모두  탈출
-		{
-			manWin = GameManager.instance.isEscape;
-		}
+        if (currentTime == 0)//시간이 다되서 끝낫을때
+        {
+            manWin = checkPlayerWin();
+        }
+        else if (checkPlayer() == 0) {
+            manWin = true;
+        }
+        else//유저가 모두 잡히거나, 모두  탈출
+        {
+            manWin = GameManager.instance.isEscape;
+        }
 
 
 		User myu=PlayerDataManager.instance.my;

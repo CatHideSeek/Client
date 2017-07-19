@@ -22,7 +22,7 @@ public class TagController : MonoBehaviour
         if (player != null && player.user.isPlayer && UIActionButton.instance.tagPress)
         {
             //태그 딜레이가 실행중이지 않은가? , 태그 공격이 가능한 유저인가? , 태그가 충돌하고 있는가
-            if (!isDelayTag && player.user.CheckTag() && !col.GetComponent<TagController>().player.user.CheckTag() && col.CompareTag("Tag"))
+            if (!isDelayTag && player.user.CheckTag() && !col.GetComponent<TagController>().player.user.CheckTag() && col.CompareTag("Tag") && !col.GetComponent<TagController>().player.clear)
             {
                 NetworkManager.instance.SendChildTag(player.user.name, col.GetComponent<TagController>().player.user.name);
                 player.PlayTagUser();

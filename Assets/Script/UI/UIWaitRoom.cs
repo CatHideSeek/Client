@@ -66,6 +66,9 @@ public class UIWaitRoom : MonoBehaviour
 
     public void OnExitRoom()
     {
+        if (PlayerDataManager.instance.my.isHost)
+            NetworkManager.instance.SendReHost();
+
         NetworkManager.instance.SendExit();
     }
 

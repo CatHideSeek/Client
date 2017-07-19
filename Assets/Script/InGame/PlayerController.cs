@@ -5,7 +5,7 @@ using UnityEngine;
 /// <summary>
 /// 인게임 내에서 유저를 컨트롤 하는 클래스입니다.
 /// </summary>
-[RequireComponent(typeof(Rigidbody),typeof(CapsuleCollider),typeof(AudioSource))]
+[RequireComponent(typeof(Rigidbody), typeof(CapsuleCollider), typeof(AudioSource))]
 public class PlayerController : MonoBehaviour
 {
     public bool clear = false;
@@ -18,6 +18,8 @@ public class PlayerController : MonoBehaviour
     Rigidbody ri;
     Renderer renderer;
     AudioSource audioBGS;
+    [SerializeField]
+    Animator ani;
 
     public TagController tagController;
 
@@ -37,7 +39,6 @@ public class PlayerController : MonoBehaviour
     public GameObject model;
     public GameObject realModel;
     public GameObject[] changeObjs;
-    public GameObject spotLight;
 
     [SerializeField]
     float movLerpTime = 0.1f, rotLerpTime = 5f;
@@ -85,6 +86,7 @@ public class PlayerController : MonoBehaviour
     {
         realModel = Instantiate(catModel[id], transform.position + catModel[id].transform.position, Quaternion.identity);
         realModel.transform.parent = model.transform;
+        ani = realModel.GetComponent<Animator>();
         createdModel = true;
     }
 
@@ -110,8 +112,6 @@ public class PlayerController : MonoBehaviour
                 Jump();
             }
 #endif
-            if (!spotLight.activeSelf)
-                spotLight.SetActive(true);
 
         }
 
@@ -197,6 +197,13 @@ public class PlayerController : MonoBehaviour
         if (!user.isPlayer && currentPos != tr.position)
         {
             tr.position = Vector3.Lerp(tr.position, currentPos, Time.deltaTime * movLerpTime);
+            if (ani != null)
+                ani.SetBool("Run", true);
+        }
+        else
+        {
+            if (!user.isPlayer && ani != null)
+                ani.SetBool("Run", false);
         }
 
         if (!user.isPlayer && currentRot != tr.rotation)
@@ -209,10 +216,10 @@ public class PlayerController : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (clear|| (GameManager.instance != null && GameManager.instance.isEnd))
+        if (clear || (GameManager.instance != null && GameManager.instance.isEnd))
             return;
 
-        if (ri.velocity.y<1&&ri.velocity.y>-1)
+        if (ri.velocity.y < 1 && ri.velocity.y > -1)
             jumpCnt = 0;
 
         if (user.isPlayer && (h != 0 || v != 0 || ri.velocity.y != 0) && (PlayerDataManager.instance.modelType == 2 || user.FindState((int)User.State.Change) == -1))
@@ -244,6 +251,8 @@ public class PlayerController : MonoBehaviour
         {
             CameraController.instance.target = tr;
         }
+        else
+            ri.isKinematic = true;
 
         user = u;
 
@@ -291,7 +300,8 @@ public class PlayerController : MonoBehaviour
         StartCoroutine("JumpDelay");
     }
 
-    IEnumerator JumpDelay() {
+    IEnumerator JumpDelay()
+    {
         yield return new WaitForSeconds(0.3f);
         groundCheck = true;
     }
@@ -313,6 +323,14 @@ public class PlayerController : MonoBehaviour
 
         ri.velocity = new Vector3(0, ri.velocity.y, 0);
         ri.velocity = new Vector3(h * movSpeed, ri.velocity.y, v * movSpeed);
+
+        if ((Mathf.Abs(h) + Mathf.Abs(v)) != 0 && ani != null)
+        {
+            ani.SetBool("Run", true);
+        }
+        else if(ani != null)
+            ani.SetBool("Run", false);
+
         timeStamp += Time.deltaTime;
         if (timeStamp > timeMaxStamp)
         {
@@ -332,7 +350,7 @@ public class PlayerController : MonoBehaviour
         {
             oldPos = tr.position;
             //이동 하였다고 socket 메세지 전송
-            NetworkManager.instance.SendPosition(oldPos, ri.velocity,false);
+            NetworkManager.instance.SendPosition(oldPos, ri.velocity, false);
         }
     }
 
@@ -357,9 +375,12 @@ public class PlayerController : MonoBehaviour
     public void SetPosition(Vector3 pos, Vector3 vel, bool isDirect)
     {
         if (isDirect)
-            tr.position = pos;
+        {
+            tr.position = pos + Vector3.up * 2f;
+        }
         else
             currentPos = pos;
+
     }
 
 
@@ -418,15 +439,19 @@ public class PlayerController : MonoBehaviour
             }
             Destroy(col.gameObject);
         }
+        else if (col.CompareTag("Fall") && user.isPlayer)
+        {
+            tr.position = GameManager.instance.spawnPos + new Vector3(Random.Range(-1f, 1f), 0, Random.Range(-1f, 1f));
+            NetworkManager.instance.SendPosition(tr.position, Vector3.zero, true);
+        }
     }
 
     void OnTriggerStay(Collider col)
     {
-        if (user.isPlayer && UIActionButton.instance.tagPress)
+        if (user.isPlayer && UIActionButton.instance.tagPress && !user.GetTeam())
         {
             if (col.CompareTag("Portal"))
             {
-                print("탈출");
                 if (GameManager.instance.portal.isOpen)
                 {
                     print("탈출");
@@ -436,7 +461,6 @@ public class PlayerController : MonoBehaviour
                 }
                 else if (user.isKeyHave)
                 {
-                    GameManager.instance.portal.Open();
                     NetworkManager.instance.SendOpen(user.name);
                 }
             }
@@ -455,14 +479,17 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    public void PlayTagUser() {
+    public void PlayTagUser()
+    {
         audioBGS.PlayOneShot(SoundManager.instance.tagBGS);
     }
 
 
-    void GroundCheck() {
+    void GroundCheck()
+    {
         RaycastHit hit;
-        if (Physics.Raycast(tr.position, -tr.up, out hit, 0.5f)) {
+        if (Physics.Raycast(tr.position, -tr.up, out hit, 0.5f))
+        {
             jumped = false;
             groundCheck = false;
         }

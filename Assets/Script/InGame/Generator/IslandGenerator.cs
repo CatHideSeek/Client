@@ -95,7 +95,7 @@ public class IslandGenerator : MonoBehaviour
             }
         }
 
-        Combine();
+        //Combine();
 
 		if (GameManager.instance.portalIsland == id)
 			CreatePortal ();
