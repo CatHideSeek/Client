@@ -672,7 +672,7 @@ public class NetworkManager : MonoBehaviour
 
     public void SendReMap()
     {
-        //Debug.Log("SendReMap()");
+        Debug.Log("SendReMap()");
         JSONObject json = new JSONObject(JSONObject.Type.OBJECT);
 
         json.AddField("name", playerData.my.name);

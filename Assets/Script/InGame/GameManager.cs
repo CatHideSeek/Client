@@ -129,12 +129,9 @@ public class GameManager : MonoBehaviour
         {
             manWin = checkPlayerWin();
         }
-        else if (checkPlayer() == 0) {
-            manWin = true;
-        }
         else//유저가 모두 잡히거나, 모두  탈출
         {
-            manWin = GameManager.instance.isEscape;
+                manWin = GameManager.instance.isEscape;
         }
 
 
@@ -185,4 +182,16 @@ public class GameManager : MonoBehaviour
         return s;
     }
 
+    private int checkTager()
+    {
+        int s = 0;
+
+        GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
+        for (int i = 0; i < players.Length; i++)
+        {
+            if (players[i].GetComponent<PlayerController>().user.GetTeam())
+                s++;
+        }
+        return s;
+    }
 }

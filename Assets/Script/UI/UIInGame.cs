@@ -24,6 +24,7 @@ public class UIInGame : MonoBehaviour
 	public Text resultText;
 	public Text tagerText;
 	public Text hiderText;
+    public Text keyText;
 
     void Awake()
     {
@@ -40,6 +41,10 @@ public class UIInGame : MonoBehaviour
 
     public void SetHost() {
         PlayerDataManager.instance.my.isHost = true;
+    }
+
+    public void SetKeyValue(int current) {
+        keyText.text = current + " / 3";
     }
 
     //테스트 용 시작 버튼입니다. 언젠가 지워질꺼에요.

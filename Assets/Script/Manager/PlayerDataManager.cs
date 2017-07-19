@@ -153,6 +153,7 @@ public class PlayerDataManager : MonoBehaviour {
     {
 		my.keyCount+=1;
         print("열쇠 소지갯수: " + my.keyCount);
+        UIInGame.instance.SetKeyValue(my.keyCount);
         NetworkManager.instance.SendGetKeyPart(my.keyCount);
 
         if (my.keyCount + 1 >= 4) {
