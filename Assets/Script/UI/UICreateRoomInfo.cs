@@ -13,6 +13,7 @@ public class UICreateRoomInfo : MonoBehaviour
 
     public void OnCreateRoom()
     {
+        SoundManager.instance.PlayButtonBGS();
         string name = roomNameInput.text;
 
         if (name == "")

@@ -111,6 +111,7 @@ public class NetworkManager : MonoBehaviour
         socket.On("portalCreate", OnPortal);
         socket.On("portalOpen", OnOpen);
         socket.On("portalClose", OnClose);
+        socket.On("escape", OnEscape);
         #endregion
 
         #region etc
@@ -648,6 +649,24 @@ public class NetworkManager : MonoBehaviour
         socket.Emit("map", json);
     }
 
+    public void OnEscape(SocketIOEvent e)
+    {
+        JSONObject json = e.data;
+        string name = json.GetField("name").str;
+
+        UIInGame.instance.ViewNotice(name + "(이)가 탈출에 성공하였습니다");
+        enterRoom.FindUserByName(name).controller.clear = true;
+        GameManager.instance.isEscape = true;
+    }
+
+    public void SendEscape(string name)
+    {
+        JSONObject json = new JSONObject(JSONObject.Type.OBJECT);
+        json.AddField("name", name);
+
+        socket.Emit("escape", json);
+    }
+
     public void OnReMap(SocketIOEvent e)
     {
         JSONObject json = e.data;
@@ -700,21 +719,11 @@ public class NetworkManager : MonoBehaviour
 
         //GameManager.instance.spawnPos = GameManager.instance.spawnList[Random.Range(0, GameManager.instance.spawnList.Count)];
         //playerData.my.controller.gameObject.transform.position = GameManager.instance.spawnPos;
-
-        //StartCoroutine("CombineBlock");
+        
 
         MapGenerator.instance.transform.Rotate(new Vector3(0, 45, 0));
 
         SendLoading();
-    }
-
-    IEnumerator CombineBlock()
-    {
-        for (int i = 0; i < MapGenerator.instance.islandNum; i++)
-        {
-            GameObject.Find("Island " + i).transform.GetComponent<IslandGenerator>().Combine();
-            yield return new WaitForSeconds(0.5f);
-        }
     }
 
     /// <summary>

@@ -62,6 +62,7 @@ public class UILobby : MonoBehaviour
 
     public void OnroomList()
     {
+        SoundManager.instance.PlayButtonBGS();
         isOpenRoomList = !isOpenRoomList;
         if (isOpenRoomList)
         {
@@ -121,6 +122,11 @@ public class UILobby : MonoBehaviour
 
     public void SetWrongPw() {
         wrongPw.SetActive(true);
+    }
+
+    public void PlayBGS()
+    {
+        SoundManager.instance.PlayButtonBGS();
     }
 
 }

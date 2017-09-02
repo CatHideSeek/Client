@@ -68,18 +68,22 @@ public class UIInGame : MonoBehaviour
     /// <param name="message">메세지</param>
     public void ViewNotice(string message) {
 		Debug.Log ("sdfdsfds");
+        SoundManager.instance.PlayNoticeBGS();
         noticeText.text = message;
         StartCoroutine("WaitNotice");
     }
 
-	public void ViewUserState(string message){
-		us.GetComponent<StateAlarm> ().PushAlarm (message);
+	public void ViewUserState(string message)
+    {
+        SoundManager.instance.PlayNoticeBGS();
+        us.GetComponent<StateAlarm> ().PushAlarm (message);
 		StartCoroutine("WaitUserState");
 	}
 
 	public void ViewGameState(string message)
-	{
-		gs.GetComponent<StateAlarm> ().PushAlarm (message);
+    {
+        SoundManager.instance.PlayNoticeBGS();
+        gs.GetComponent<StateAlarm> ().PushAlarm (message);
 		StartCoroutine("WaitGameState");
 	}
 
@@ -128,14 +132,14 @@ public class UIInGame : MonoBehaviour
 		else
 			resultText.text="Hider";
 
-		GameObject[] ps = GameObject.FindGameObjectsWithTag ("Player");
-		for (int i = 0; i < ps.Length; i++) {
-			User u = ps [i].GetComponent<PlayerController> ().user;
-			if (u.GetTeam ())
-				tagerText.text += "\n"+u.name;
-			else
-				hiderText.text+= "\n"+u.name;
-		}
+
+        foreach(User u in NetworkManager.instance.enterRoom.userList)
+        {
+            if (u.GetTeam())
+                tagerText.text += "\n" + u.name;
+            else
+                hiderText.text += "\n" + u.name;
+        }
 		
 		result.SetActive(true);
 	}

@@ -16,13 +16,16 @@ public class UITitle : MonoBehaviour
 
     public void OnJoin()
     {
+        SoundManager.instance.PlayButtonBGS();
         if (nickInput.text != "")
             NetworkManager.instance.SendRegister(nickInput.text);
     }
 
     void Start() {
+        SoundManager.instance.PlayTitleBGM();
         StartCoroutine(TitleAnimation());
     }
+    
 
     IEnumerator TitleAnimation() {
         float times = 0;

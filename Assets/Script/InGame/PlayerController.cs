@@ -460,9 +460,9 @@ public class PlayerController : MonoBehaviour
                 if (GameManager.instance.portal.isOpen)
                 {
                     print("탈출");
-                    UIInGame.instance.ViewNotice(user.name + "(이)가 탈출에 성공하였습니다");
                     clear = true;
-                    GameManager.instance.isEscape = true;
+                    NetworkManager.instance.SendEscape(user.name);
+                    
                 }
                 else if (user.isKeyHave)
                 {

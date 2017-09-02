@@ -107,6 +107,7 @@ public class GameManager : MonoBehaviour
 		{
             UIInGame.instance.ViewGameState("포탈이 생성되었습니다.");            
 			portalObject.SetActive(true);
+            portal.transform.rotation = Quaternion.identity;
 			isPortalSet = true;
 		}
 
@@ -125,7 +126,7 @@ public class GameManager : MonoBehaviour
 		isEnd = true;
 		bool manWin;
 
-        if (currentTime == 0)//시간이 다되서 끝낫을때
+        if (currentTime <= 0)//시간이 다되서 끝낫을때
         {
             manWin = checkPlayerWin();
         }
@@ -160,6 +161,7 @@ public class GameManager : MonoBehaviour
 			else
 				l++;
 		}
+
 		if (w >= l && w > 0)
 			return true;
 		else

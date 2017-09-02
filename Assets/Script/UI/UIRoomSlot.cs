@@ -92,7 +92,9 @@ public class UIRoomSlot : MonoBehaviour {
 
 
 
-    public void OnEnterRoom() {
+    public void OnEnterRoom()
+    {
+        SoundManager.instance.PlayButtonBGS();
         if (roomData.pw != -1) {
             GameObject.FindWithTag("UIManager").GetComponent<UILobby>().SetPwInput(roomData);
         }

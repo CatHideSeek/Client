@@ -15,17 +15,24 @@ public class UIWaitRoom : MonoBehaviour
         roomInfo.SetData(room);
         if (PlayerDataManager.instance.my.isHost)
         {
-            readyText.text = "시작\n" + room.readyPlayers + "/" + room.maxPlayers;
+            if (NetworkManager.instance.enterRoom.readyPlayers >= 2 && NetworkManager.instance.enterRoom.readyPlayers == NetworkManager.instance.enterRoom.countPlayers)
+                readyText.text = "시작\n" + room.readyPlayers + "/" + room.maxPlayers;
+            else
+                readyText.text = "대기\n" + room.readyPlayers + "/" + room.maxPlayers;
         }
         else {
             readyText.text = "준비\n" + room.readyPlayers + "/" + room.maxPlayers;
         }
     }
 
-    public void UpdateReadyText(Room room) {
+    public void UpdateReadyText(Room room)
+    {
         if (PlayerDataManager.instance.my.isHost)
         {
-            readyText.text = "시작\n" + room.readyPlayers + "/" + room.maxPlayers;
+            if (NetworkManager.instance.enterRoom.readyPlayers >= 2 && NetworkManager.instance.enterRoom.readyPlayers == NetworkManager.instance.enterRoom.countPlayers)
+                readyText.text = "시작\n" + room.readyPlayers + "/" + room.maxPlayers;
+            else
+                readyText.text = "대기\n" + room.readyPlayers + "/" + room.maxPlayers;
         }
         else {
             readyText.text = "준비\n" + room.readyPlayers + "/" + room.maxPlayers;
@@ -66,6 +73,7 @@ public class UIWaitRoom : MonoBehaviour
 
     public void OnExitRoom()
     {
+        SoundManager.instance.PlayButtonBGS();
         if (PlayerDataManager.instance.my.isHost)
             NetworkManager.instance.SendReHost();
 
@@ -74,15 +82,18 @@ public class UIWaitRoom : MonoBehaviour
 
     public void OnReadyOrStart()
     {
+        SoundManager.instance.PlayButtonBGS();
         if (PlayerDataManager.instance.my.isHost)
         {
-            if (NetworkManager.instance.enterRoom.readyPlayers == NetworkManager.instance.enterRoom.maxPlayers)
+            if (NetworkManager.instance.enterRoom.readyPlayers >= 2 && NetworkManager.instance.enterRoom.readyPlayers == NetworkManager.instance.enterRoom.countPlayers)
                 NetworkManager.instance.SendStart();
         }
         else {
             NetworkManager.instance.SendReady(!(PlayerDataManager.instance.my.isReady));
         }
     }
+
+
 
 
 }
