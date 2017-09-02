@@ -9,6 +9,7 @@ using UnityEngine.UI;
 public class UITitle : MonoBehaviour
 {
 
+    public PortalController portal;
 
     public InputField nickInput;
     public GameObject nameError;
@@ -19,6 +20,26 @@ public class UITitle : MonoBehaviour
             NetworkManager.instance.SendRegister(nickInput.text);
     }
 
+    void Start() {
+        StartCoroutine(TitleAnimation());
+    }
+
+    IEnumerator TitleAnimation() {
+        float times = 0;
+        while (true) {
+            if ((int)times == 10)
+            {
+                portal.Open();
+            }
+            else if ((int)times == 20) {
+                portal.CloseScrue();
+                times = 0;
+            }
+
+            times += Time.deltaTime;
+            yield return null;
+        }
+    }
 
 
 

@@ -29,7 +29,7 @@ public class PlayerController : MonoBehaviour
     public float movSpeed = 5f, rotSpeed = 10f, jumpPower = 6f, opaSpeed = 8f;
     float oriMSpd, oriRSpd;
 
-    Vector3 oldPos, currentPos;
+    Vector3 oldPos, currentPos, currentVel;
     Quaternion oldRot, currentRot;
     float hideAlpha = 1;
 
@@ -192,11 +192,11 @@ public class PlayerController : MonoBehaviour
         #endregion
 
         #region Sync
-        //syncTime += Time.deltaTime;
+        syncTime += Time.deltaTime;
 
         if (!user.isPlayer && currentPos != tr.position)
         {
-            tr.position = Vector3.Lerp(tr.position, currentPos, Time.deltaTime * movLerpTime);
+            tr.position = Vector3.Lerp(tr.position,currentPos + ((currentVel * syncTime) + (0.5f * currentVel * syncTime * syncTime)),Time.smoothDeltaTime * movLerpTime);//Vector3.Lerp(tr.position, currentPos, Time.deltaTime * movLerpTime);
             if (ani != null)
                 ani.SetBool("Run", true);
         }
@@ -224,8 +224,6 @@ public class PlayerController : MonoBehaviour
 
         if (user.isPlayer && (h != 0 || v != 0 || ri.velocity.y != 0) && (PlayerDataManager.instance.modelType == 2 || user.FindState((int)User.State.Change) == -1))
             Move();
-        //else if (h == 0 && v == 0)
-        //    ri.velocity = new Vector3(0, ri.velocity.y, 0);
 
         if (groundCheck)
             GroundCheck();
@@ -348,9 +346,9 @@ public class PlayerController : MonoBehaviour
         //이동 하였는지 체크 합니다.
         if (oldPos != tr.position)
         {
-            oldPos = tr.position;
             //이동 하였다고 socket 메세지 전송
             NetworkManager.instance.SendPosition(oldPos, ri.velocity, false);
+            oldPos = tr.position;
         }
     }
 
@@ -378,8 +376,15 @@ public class PlayerController : MonoBehaviour
         {
             tr.position = pos + Vector3.up * 2f;
         }
-        else
+        else {
             currentPos = pos;
+            currentVel = vel;
+        }
+
+        syncTime = 0;
+        syncDelay = Time.time - lastSyncTime;
+        lastSyncTime = Time.time;
+
 
     }
 
