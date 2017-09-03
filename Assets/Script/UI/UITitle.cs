@@ -13,6 +13,7 @@ public class UITitle : MonoBehaviour
 
     public InputField nickInput;
     public GameObject nameError;
+    public Animator ani;
 
     public void OnJoin()
     {
@@ -30,11 +31,12 @@ public class UITitle : MonoBehaviour
     IEnumerator TitleAnimation() {
         float times = 0;
         while (true) {
-            if ((int)times == 10)
+            if ((int)times == 5)
             {
                 portal.Open();
+                ani.SetTrigger("On");
             }
-            else if ((int)times == 20) {
+            else if ((int)times == 15) {
                 portal.CloseScrue();
                 times = 0;
             }

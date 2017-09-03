@@ -27,7 +27,7 @@
 
 #endregion
 //Socket 데이터 값이 궁금할때 해제하세요.
-//#define SOCKET_IO_DEBUG			// Uncomment this for debug
+#define SOCKET_IO_DEBUG			// Uncomment this for debug
 using System;
 using System.Collections;
 using System.Collections.Generic;

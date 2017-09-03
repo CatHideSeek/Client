@@ -26,12 +26,12 @@ SpriteAtlas:
       enableTightPacking: 0
     packedHash:
       serializedVersion: 2
-      Hash: 6f7347bff64a4fafbebdd57444ae4d78
+      Hash: 6c1504e2bdfede1eea0dff1ecc72f99a
     variantMultiplier: 1
     bindAsDefault: 1
     finalFormat: 47
-    hashString: 6f7347bff64a4fafbebdd57444ae4d78
-    totalSpriteSurfaceArea: 2151639
+    hashString: 6c1504e2bdfede1eea0dff1ecc72f99a
+    totalSpriteSurfaceArea: 2192815
     packables:
     - {fileID: 102900000, guid: a8fab4c9d39faa947acb62d0050da64c, type: 3}
     packedSpriteRenderDataKeys:
@@ -50,7 +50,9 @@ SpriteAtlas:
     - 01dfab3dc4562fa458c522e8036370ac: 21300000
     - 482f43bb5ef65af49b0c7ea0fe7ff63d: 21300000
     - e5ffd6f64938a7b46be9a84e11662fe4: 21300000
+    - 311d876d7adfd20418006739c0b9fe40: 21300000
     - 37c57b1c1efbbdc43a793760fa48faa5: 21300000
+    - 53bd36a0d0af9334ea33dc841968e9f5: 21300000
     - f122710e9f547a34e9dc84735eb77f3b: 21300000
     - e72e1b8a7b27ce542b41fd324969c236: 21300000
     - ccbc781cbb49d264c9daab364faff4b1: 21300000
@@ -93,7 +95,9 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 01dfab3dc4562fa458c522e8036370ac, type: 3}
   - {fileID: 21300000, guid: 482f43bb5ef65af49b0c7ea0fe7ff63d, type: 3}
   - {fileID: 21300000, guid: e5ffd6f64938a7b46be9a84e11662fe4, type: 3}
+  - {fileID: 21300000, guid: 311d876d7adfd20418006739c0b9fe40, type: 3}
   - {fileID: 21300000, guid: 37c57b1c1efbbdc43a793760fa48faa5, type: 3}
+  - {fileID: 21300000, guid: 53bd36a0d0af9334ea33dc841968e9f5, type: 3}
   - {fileID: 21300000, guid: f122710e9f547a34e9dc84735eb77f3b, type: 3}
   - {fileID: 21300000, guid: e72e1b8a7b27ce542b41fd324969c236, type: 3}
   - {fileID: 21300000, guid: ccbc781cbb49d264c9daab364faff4b1, type: 3}
@@ -135,7 +139,9 @@ SpriteAtlas:
   - game notice3
   - game notice2
   - game notice
+  - Of The Storm
   - Joystick in
+  - CAT
   - Read button 1
   - time
   - jump

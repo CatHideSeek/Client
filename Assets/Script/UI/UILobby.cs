@@ -8,7 +8,7 @@ using UnityEngine.UI;
 /// </summary>
 public class UILobby : MonoBehaviour
 {
-    
+
     public Animator rommListAni, ChatLogAni, ChatInputAni;
 
     public Text roomListText;
@@ -26,6 +26,10 @@ public class UILobby : MonoBehaviour
 
     public GameObject pwInput, wrongPw;
 
+    public Text noticeContext, noticeUserName;
+
+    public GameObject noticeAdder;
+
 
     public void CreateRoomList()
     {
@@ -39,7 +43,7 @@ public class UILobby : MonoBehaviour
             {
                 GameObject g = Instantiate(roomSlot);
                 roomSlotList.Add(g);
-                g.GetComponent<UIRoomSlot>().SetData((i-2) + 1, NetworkManager.instance.roomList[i]);
+                g.GetComponent<UIRoomSlot>().SetData((i - 2) + 1, NetworkManager.instance.roomList[i]);
                 RectTransform tr = g.GetComponent<RectTransform>();
                 tr.SetParent(roomScrollView);
                 tr.localPosition = startPos + new Vector2(marginPos.x, marginPos.y * (i - 2));
@@ -115,18 +119,43 @@ public class UILobby : MonoBehaviour
         scrollChat = StartCoroutine(ScrollChatLog(chatLog.transform.parent.parent.GetChild(1).GetComponent<Scrollbar>(), 0));
     }
 
-    public void SetPwInput(Room room) {
+    public void SetPwInput(Room room)
+    {
         pwInput.SetActive(true);
         pwInput.GetComponent<UIPWInput>().SetRoomData(room);
     }
 
-    public void SetWrongPw() {
+    public void SetWrongPw()
+    {
         wrongPw.SetActive(true);
     }
 
     public void PlayBGS()
     {
         SoundManager.instance.PlayButtonBGS();
+    }
+
+    public void SendNotice(InputField input)
+    {
+        if (input.text.Length < 1)
+        {
+            return;
+        }
+
+        PlayBGS();
+
+        string data = input.text.Replace("\n", "[br]");
+
+        NetworkManager.instance.SendNoticeData(data, PlayerDataManager.instance.my.name);
+        input.text = "";
+        noticeAdder.SetActive(false);
+    }
+
+    public void SetNotice(string context, string userName)
+    {
+        string data = context.Replace("[br]", "\n");
+        noticeContext.text = data;
+        noticeUserName.text = userName;
     }
 
 }

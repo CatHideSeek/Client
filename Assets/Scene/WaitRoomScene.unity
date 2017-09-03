@@ -1009,7 +1009,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 467084292}
   m_HandleRect: {fileID: 467084291}
   m_Direction: 2
-  m_Value: 0
+  m_Value: 1
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -1329,6 +1329,7 @@ MonoBehaviour:
   roomInfo: {fileID: 1298162819}
   chatLog: {fileID: 2026728728}
   readyText: {fileID: 1490530487}
+  isReady: 0
 --- !u!4 &498134659
 Transform:
   m_ObjectHideFlags: 0
@@ -4632,14 +4633,14 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1408826357}
   m_TextComponent: {fileID: 1282808383}
   m_Placeholder: {fileID: 1606449438}
-  m_ContentType: 0
+  m_ContentType: 9
   m_InputType: 0
   m_AsteriskChar: 42
-  m_KeyboardType: 0
+  m_KeyboardType: 6
   m_LineType: 0
   m_HideMobileInput: 0
   m_CharacterValidation: 0
-  m_CharacterLimit: 11
+  m_CharacterLimit: 15
   m_OnEndEdit:
     m_PersistentCalls:
       m_Calls:

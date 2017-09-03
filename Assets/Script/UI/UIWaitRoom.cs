@@ -10,6 +10,9 @@ public class UIWaitRoom : MonoBehaviour
 
     public Text chatLog, readyText;
 
+    [SerializeField]
+    bool isReady = false;
+
     public void SetRoomInfo(Room room)
     {
         roomInfo.SetData(room);
@@ -27,6 +30,7 @@ public class UIWaitRoom : MonoBehaviour
 
     public void UpdateReadyText(Room room)
     {
+        roomInfo.SetData(room);
         if (PlayerDataManager.instance.my.isHost)
         {
             if (NetworkManager.instance.enterRoom.readyPlayers >= 2 && NetworkManager.instance.enterRoom.readyPlayers == NetworkManager.instance.enterRoom.countPlayers)
@@ -88,7 +92,12 @@ public class UIWaitRoom : MonoBehaviour
             if (NetworkManager.instance.enterRoom.readyPlayers >= 2 && NetworkManager.instance.enterRoom.readyPlayers == NetworkManager.instance.enterRoom.countPlayers)
                 NetworkManager.instance.SendStart();
         }
-        else {
+        else
+        {
+            if (isReady)
+                return;
+
+            isReady = !(PlayerDataManager.instance.my.isReady);
             NetworkManager.instance.SendReady(!(PlayerDataManager.instance.my.isReady));
         }
     }

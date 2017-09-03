@@ -54,11 +54,13 @@ public class MapGenerator : MonoBehaviour
 
     public void InitMap ()
 	{
-		Debug.Log ("InitMap()");
 		if (!PlayerDataManager.instance.my.isHost)
 			return;
-		
-		for (int i = 0; i < islandNum; i++) {
+
+
+        Debug.Log("InitMap()");
+
+        for (int i = 0; i < islandNum; i++) {
 			IslandPos temp;
 			if (i == 0)
 				temp = new IslandPos (0, 0);

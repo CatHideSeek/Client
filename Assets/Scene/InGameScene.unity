@@ -1887,38 +1887,13 @@ Prefab:
       objectReference: {fileID: 1984108575}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 2d05afc396a955246ae0fa96e243ff0c, type: 2}
-  m_RootGameObject: {fileID: 884121749}
   m_IsPrefabParent: 0
---- !u!114 &686579558
+--- !u!114 &686579558 stripped
 MonoBehaviour:
-  m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 114020652133895082, guid: 2d05afc396a955246ae0fa96e243ff0c,
     type: 2}
   m_PrefabInternal: {fileID: 686579557}
-  m_GameObject: {fileID: 884121749}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 938d97ef690d65645b7252514e69edfc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  timer: {fileID: 2055189233}
-  canvas: {fileID: 119808406}
-  notice: {fileID: 36087223}
-  noticeText: {fileID: 760180125}
-  noticeTime: 2
-  us: {fileID: 730928706}
-  gs: {fileID: 2082110350}
-  goodIcon: {fileID: 21300000, guid: 3ac08f053d2b31e45853ce9f0438709b, type: 3}
-  happyIcon: {fileID: 21300000, guid: bc6f0b33d83675c4c8deac22f8db871e, type: 3}
-  sadIcon: {fileID: 21300000, guid: 9b81d431d5d1a6d4995a978c152107af, type: 3}
-  angryIcon: {fileID: 21300000, guid: 378a94e05094fae47b042fa2e2f417b1, type: 3}
-  confuseIcon: {fileID: 21300000, guid: 08b34e79c9352ef4da3c1e1b0263f432, type: 3}
-  result: {fileID: 2107479591}
-  loseResult: {fileID: 21300000, guid: 9f006f70fcc9fc549b70c0488038bdf8, type: 3}
-  resultText: {fileID: 717488692}
-  tagerText: {fileID: 790773317}
-  hiderText: {fileID: 214605387}
-  keyText: {fileID: 1984108575}
 --- !u!1 &717488690
 GameObject:
   m_ObjectHideFlags: 0
@@ -2433,112 +2408,6 @@ CanvasRenderer:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 796453405}
---- !u!1 &884121749
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 1830226848610134, guid: 2d05afc396a955246ae0fa96e243ff0c,
-    type: 2}
-  m_PrefabInternal: {fileID: 686579557}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 884121750}
-  - component: {fileID: 686579558}
-  m_Layer: 0
-  m_Name: UIManager
-  m_TagString: UIManager
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &884121750
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 4137947571940552, guid: 2d05afc396a955246ae0fa96e243ff0c,
-    type: 2}
-  m_PrefabInternal: {fileID: 686579557}
-  m_GameObject: {fileID: 884121749}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 428.6744, y: 252.02716, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 4
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1096939200
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 1532587721865006, guid: fb8609c349de0514f92cf5d09d9577d3,
-    type: 2}
-  m_PrefabInternal: {fileID: 1304132455}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 1096939202}
-  - component: {fileID: 1096939201}
-  m_Layer: 0
-  m_Name: GameManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1096939201
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 114609482048856908, guid: fb8609c349de0514f92cf5d09d9577d3,
-    type: 2}
-  m_PrefabInternal: {fileID: 1304132455}
-  m_GameObject: {fileID: 1096939200}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 39ea6a3d070993649b2c32d4c7cb88cc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  currentTime: 130
-  portalOpenTime: 60
-  isPlay: 0
-  isPortalSet: 0
-  isEnd: 0
-  isModelReady: 0
-  mapGenerator: {fileID: 1334592819}
-  playerObject: {fileID: 1932510785880068, guid: 695379ea1f6687f478d7e7ca174ed894,
-    type: 2}
-  portalObject: {fileID: 0}
-  blockObject:
-  - {fileID: 1395497045116030, guid: fe088c247792191469334569148d79ff, type: 2}
-  - {fileID: 1141972190610884, guid: e3bcaeb573b2b194cbd8c9ca1dca1045, type: 2}
-  - {fileID: 1041495944622926, guid: 801da0ac44b6d514ca1d34939fd2f786, type: 2}
-  - {fileID: 1735334390636838, guid: db9b84d95acd101489a255c15411c65c, type: 2}
-  - {fileID: 1464252070164838, guid: 7a95c2ea73911304d946f276ae85a06c, type: 2}
-  - {fileID: 1774656343919980, guid: c697ca284281bf448a5d251c8b054e2a, type: 2}
-  - {fileID: 1444718667494898, guid: ab5b4986565fae64c9c7ea72e6d651ec, type: 2}
-  - {fileID: 1395536798503200, guid: 83a1eb2d599572846bdc8469c0913e26, type: 2}
-  - {fileID: 1863826951380676, guid: 46a18275d82f60f4fafb641de95e5e6d, type: 2}
-  - {fileID: 1446727227719564, guid: 14fc7b00d147f3549990ea36a2de0740, type: 2}
-  - {fileID: 1751667094498104, guid: 0e733cd64c77dfa4ba6f5c016a66a768, type: 2}
-  - {fileID: 1947490419554472, guid: cb8931e92168cdc4983e7a5d1c887264, type: 2}
-  - {fileID: 1922235960335858, guid: 895d90bece1183d4e81480e32aee50f7, type: 2}
-  - {fileID: 1941417054992194, guid: ea04225dbd05872438d220079826da33, type: 2}
-  spawnPos: {x: 0, y: 0, z: 0}
-  map: {fileID: 0}
-  spawnList: []
-  portal: {fileID: 0}
-  keySpawnerNum: 4
-  portalIsland: -1
-  isEscape: 0
---- !u!4 &1096939202
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 4097961502574106, guid: fb8609c349de0514f92cf5d09d9577d3,
-    type: 2}
-  m_PrefabInternal: {fileID: 1304132455}
-  m_GameObject: {fileID: 1096939200}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 10, z: -10}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1174851670
 GameObject:
   m_ObjectHideFlags: 0
@@ -2971,7 +2840,6 @@ Prefab:
         type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: fb8609c349de0514f92cf5d09d9577d3, type: 2}
-  m_RootGameObject: {fileID: 1096939200}
   m_IsPrefabParent: 0
 --- !u!1 &1324927879
 GameObject:
@@ -4639,7 +4507,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2000547778}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -30, z: 0}
+  m_LocalPosition: {x: 0, y: -10, z: 0}
   m_LocalScale: {x: 500, y: 1, z: 500}
   m_Children: []
   m_Father: {fileID: 0}

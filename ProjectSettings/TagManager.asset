@@ -15,6 +15,7 @@ TagManager:
   - UIManager
   - Canvas
   - Fall
+  - Notice
   layers:
   - Default
   - TransparentFX

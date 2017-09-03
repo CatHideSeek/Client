@@ -74,6 +74,8 @@ public class NetworkManager : MonoBehaviour
         socket.On("lobbyStart", OnRoomStart);
         socket.On("lobbyDelet", OnRoomDelet);
 
+        socket.On("notice", OnNoticeData);
+
         socket.On("waitRoomEnter", OnWaitRoomEnter);
         socket.On("waitRoomJoin", OnWaitRoomJoin);
         socket.On("reHost", OnReHost);
@@ -239,7 +241,7 @@ public class NetworkManager : MonoBehaviour
             playerData.SetCatModel(r);//고양이 종류를 정해줍니다.
 
         }
-        SendPosition(playerData.my.controller.transform.position, Vector3.zero, true);//방금 입장한 사람을 위해 현재좌표를 전송
+        SendPosition(playerData.my.controller.transform.position, Vector3.zero, 0, 0, true);//방금 입장한 사람을 위해 현재좌표를 전송
         SendModelType(playerData.modelType);//방금 입장한 사람을 위해 내 모델타입을 전송
 
     }
@@ -252,6 +254,28 @@ public class NetworkManager : MonoBehaviour
         socket.Emit("lobbyEnter", json);
     }
 
+    public void OnNoticeData(SocketIOEvent e)
+    {
+        JSONObject json = e.data;
+
+        print("set notice");
+
+        string name = json.GetField("userName").str;
+        string context = json.GetField("context").str;
+
+        GameObject.FindGameObjectWithTag("UIManager").GetComponent<UILobby>().SetNotice(context, name);
+    }
+
+    public void SendNoticeData(string context, string userName)
+    {
+
+        JSONObject json = new JSONObject(JSONObject.Type.OBJECT);
+
+        json.AddField("context", context);
+        json.AddField("userName", userName);
+
+        socket.Emit("notice", json);
+    }
 
     public void OnRoomList(SocketIOEvent e)
     {
@@ -331,6 +355,8 @@ public class NetworkManager : MonoBehaviour
         }
 
         enterRoom.AddUser(user);
+        print(user.name + " is add count at waitroomjoin");
+        enterRoom.UpdateCountPlayer(1);
 
 
         GameObject g = Instantiate(playerObject, Vector3.zero + new Vector3(Random.Range(-1f, 1f), 0, Random.Range(-1f, 1f)), Quaternion.identity);
@@ -348,10 +374,10 @@ public class NetworkManager : MonoBehaviour
             playerData.SetCatModel(r);//고양이 종류를 정해줍니다.
         }
 
-        SendPosition(playerData.my.controller.transform.position, Vector3.zero, true);//방금 입장한 사람을 위해 현재좌표를 전송
+        SendPosition(playerData.my.controller.transform.position, Vector3.zero, 0, 0, true);//방금 입장한 사람을 위해 현재좌표를 전송
         SendModelType(playerData.modelType);//방금 입장한 사람을 위해 내 모델타입을 전송
         enterRoom.UpdateUI();
-        GameObject.FindWithTag("UIManager").GetComponent<UIWaitRoom>().UpdateReadyText(enterRoom);
+        GameObject.FindWithTag("UIManager").GetComponent<UIWaitRoom>().SetRoomInfo(enterRoom);
     }
 
     public void SendWaitRoomJoin()
@@ -464,15 +490,22 @@ public class NetworkManager : MonoBehaviour
 
     public void OnLoading(SocketIOEvent e)
     {
-        //Debug.Log ("OnLoading()");
+        Debug.Log("OnLoading()");
         JSONObject json = e.data;
+
 
         enterRoom.loadingPlayers = (int)(json.GetField("load").f);
 
-        if (playerData.my.isHost && enterRoom.loadingPlayers == enterRoom.maxPlayers)
+        print(enterRoom.loadingPlayers + " on loading");
+
+        if (playerData.my.isHost && enterRoom.loadingPlayers == enterRoom.countPlayers)
         {
-            //print("SendPlay()");
-            SendPlay();
+            print("SendMap()");
+            //SendPlay();
+            // 생성된 맵 데이터를 모두에게 전송
+            enterRoom.loadingPlayers = 0;
+            print(enterRoom.loadingPlayers + " is send map");
+            SendMap();
         }
     }
 
@@ -494,7 +527,7 @@ public class NetworkManager : MonoBehaviour
         string socketID = json.GetField("socketID").str;
         bool isHost = json.GetField("isHost").b;
 
-        //print ("Join : "+name);
+        print("Join : " + name);
 
         User user = new User(name, socketID);
         user.isHost = isHost;
@@ -520,33 +553,12 @@ public class NetworkManager : MonoBehaviour
                 user.controller.arrow.SetActive(true);
             GameManager.instance.isModelReady = true;
 
+            SendLoading();
         }
 
-        if (PlayerDataManager.instance.my.isHost)
-        {
-            if (!PlayerDataManager.instance.my.name.Equals(user.name))
-            {
-                SendSpawnPos(user.name, GameManager.instance.spawnPos.y);
-                foreach (IslandInfo info in GameManager.instance.islandList)
-                {
-                    SendGenerator(user.name, info.x, info.y, info.id);//생성기 먼저 생성해야됨
-                }
 
-                for (int i = 0; i < GameManager.instance.blockList.Count; i++)
-                {
-                    SendBlock(user.name, GameManager.instance.blockList[i].pos, GameManager.instance.blockList[i].id, GameManager.instance.blockList[i].parent, false);
-                    if (i == GameManager.instance.blockList.Count - 1)
-                        SendBlock(user.name, GameManager.instance.blockList[i].pos, GameManager.instance.blockList[i].id, GameManager.instance.blockList[i].parent, true);
-                }
-                //SendInitEnd(user.name);
-            }
-            if (!isMapLoaded)
-            {
-                SendLoading();
-                isMapLoaded = true;
-            }
-        }
-        SendPosition(playerData.my.controller.transform.position, Vector3.zero, true);
+        //로딩이 완료됨 을 알림
+        SendPosition(playerData.my.controller.transform.position, Vector3.zero, 0, 0, true);
         SendModelType(playerData.modelType);
 
     }
@@ -573,72 +585,64 @@ public class NetworkManager : MonoBehaviour
 
         //print("OnbLOCK");
 
-        string targetName = json.GetField("target").str;
 
-        //print(targetName +" : if "+ PlayerDataManager.instance.my.name.Equals(targetName));
+        float x = json.GetField("bx").f;
+        float y = json.GetField("by").f;
+        float z = json.GetField("bz").f;
+        int id = (int)json.GetField("bid").f;
+        int parent = (int)json.GetField("parent").f;
+        bool isFinal = json.GetField("isFinal").b;
 
-        if (targetName.Equals(Define.ALL_Target))
-            targetName = PlayerDataManager.instance.my.name;
+        print("is final " + isFinal);
 
-        //처음 들어온 유저에게만 맵을 생성하게 하기 위해
-        if (PlayerDataManager.instance.my.name.Equals(targetName))
+        GameObject block;
+        if (id == 13)
+            GameManager.instance.spawnList.Add(new Vector3(x, y, z));
+        if (id == 12)
         {
-            float x = json.GetField("bx").f;
-            float y = json.GetField("by").f;
-            float z = json.GetField("bz").f;
-            int id = (int)json.GetField("bid").f;
-            int parent = (int)json.GetField("parent").f;
-            bool isFinal = json.GetField("isFinal").b;
-
-            print("is final "+ isFinal);
-
-            GameObject block;
-            if (id == 13)
-                GameManager.instance.spawnList.Add(new Vector3(x, y, z));
-            if (id == 12)
-            {
-                block = Instantiate(GameManager.instance.blockObject[id], new Vector3(x, y, z), Quaternion.Euler(-90, 0, 0));
-                GameManager.instance.portalObject = block;
-                GameManager.instance.portal = block.GetComponent<PortalController>();
-            }
-            else
-            {
-                block = Instantiate(GameManager.instance.blockObject[id], new Vector3(x, y, z), GameManager.instance.blockObject[id].transform.rotation);
-            }
-
-            if (id == 6 || id == 7)
-                block.transform.parent = MapGenerator.instance.transform;
-            else
-            {
-                Transform parentIsland = GameObject.Find("Island " + parent).transform;
-                block.transform.parent = parentIsland;
-                if (id >= 0 && id <= 3)
-                    parentIsland.GetComponent<IslandGenerator>().blocks.Add(block);
-
-                if (id == 11)
-                    block.GetComponent<Spawner>().s = parent % 3;
-            }
-
-            if (isFinal)
-                SendInitEnd(targetName);
-
-            //오브젝트를 받아와서 배치함(id값은 0~3:땅, 4: 나무, 5: 수풀, 6~7: 다리, 8:키스포너)
+            block = Instantiate(GameManager.instance.blockObject[id], new Vector3(x, y, z), Quaternion.Euler(-90, 0, 0));
+            GameManager.instance.portalObject = block;
+            GameManager.instance.portal = block.GetComponent<PortalController>();
         }
+        else
+        {
+            block = Instantiate(GameManager.instance.blockObject[id], new Vector3(x, y, z), GameManager.instance.blockObject[id].transform.rotation);
+        }
+
+        if (id == 6 || id == 7)
+            block.transform.parent = MapGenerator.instance.transform;
+        else
+        {
+            Transform parentIsland = GameObject.Find("Island " + parent).transform;
+            block.transform.parent = parentIsland;
+            if (id >= 0 && id <= 3)
+                parentIsland.GetComponent<IslandGenerator>().blocks.Add(block);
+
+            if (id == 11)
+                block.GetComponent<Spawner>().s = parent % 3;
+        }
+
+        if (isFinal)
+        {
+            MapGenerator.instance.transform.Rotate(new Vector3(0, 45, 0));
+            SendInitEnd();
+        }
+
+        //오브젝트를 받아와서 배치함(id값은 0~3:땅, 4: 나무, 5: 수풀, 6~7: 다리, 8:키스포너)
+
     }
 
 
     /// <summary>
     /// 블럭의 좌표를 다른 클라이언트에게 보냅니다.
     /// </summary>
-    /// <param name="targetName">유저 이름</param>
     /// <param name="pos">위치 Vector3</param>
     /// <param name="id">블럭 종류</param>
     /// <param name="parent">부모</param>
-    public void SendBlock(string targetName, Vector3 pos, int id, int parent, bool isFinal)
+    public void SendBlock(Vector3 pos, int id, int parent, bool isFinal)
     {
         JSONObject json = new JSONObject(JSONObject.Type.OBJECT);
 
-        json.AddField("target", targetName);
         json.AddField("bx", pos.x);
         json.AddField("by", pos.y);
         json.AddField("bz", pos.z);
@@ -672,31 +676,33 @@ public class NetworkManager : MonoBehaviour
         JSONObject json = e.data;
 
         string name = json.GetField("name").str;
+
+    }
+
+    //heresend
+
+    public void SendMap()
+    {
         if (PlayerDataManager.instance.my.isHost)
         {
-            SendSpawnPos(name, GameManager.instance.spawnPos.y);
+            Debug.Log("SendMap()");
+
+            SendSpawnPos(GameManager.instance.spawnPos.y);
             foreach (IslandInfo info in GameManager.instance.islandList)
             {
-                SendGenerator(name, info.x, info.y, info.id);//생성기 먼저 생성해야됨
+                SendGenerator(info.x, info.y, info.id);//생성기 먼저 생성해야됨
             }
             //바꿔야됨
             for (int i = 0; i < GameManager.instance.blockList.Count; i++)
             {
-                SendBlock(name, GameManager.instance.blockList[i].pos, GameManager.instance.blockList[i].id, GameManager.instance.blockList[i].parent, false);
+                SendBlock(GameManager.instance.blockList[i].pos, GameManager.instance.blockList[i].id, GameManager.instance.blockList[i].parent, false);
                 if (i == GameManager.instance.blockList.Count - 1)
-                    SendBlock(name, GameManager.instance.blockList[i].pos, GameManager.instance.blockList[i].id, GameManager.instance.blockList[i].parent, true);
+                    SendBlock(GameManager.instance.blockList[i].pos, GameManager.instance.blockList[i].id, GameManager.instance.blockList[i].parent, true);
             }
+
+            SendInitEnd();
         }
-    }
 
-    public void SendReMap()
-    {
-        Debug.Log("SendReMap()");
-        JSONObject json = new JSONObject(JSONObject.Type.OBJECT);
-
-        json.AddField("name", playerData.my.name);
-
-        socket.Emit("remap", json);
     }
 
     public void OnInitEnd(SocketIOEvent e)
@@ -705,35 +711,28 @@ public class NetworkManager : MonoBehaviour
 
         print("initEnd");
 
-        //방장이 아니고 맵이 없어요? 재 호출하세요.
-        if (!playerData.my.isHost && !isMapLoaded)
+        if (PlayerDataManager.instance.my.isHost)
         {
-            SendReMap();
-            return;
+            enterRoom.loadingPlayers++;
+
+            print(enterRoom.loadingPlayers + "in initend");
+
+            if (enterRoom.loadingPlayers == enterRoom.countPlayers)
+            {
+                SendPlay();
+            }
         }
 
-        if (!PlayerDataManager.instance.my.name.Equals(json.GetField("target").str))
-            return;
-
-        print("is not retrun");
-
-        //GameManager.instance.spawnPos = GameManager.instance.spawnList[Random.Range(0, GameManager.instance.spawnList.Count)];
-        //playerData.my.controller.gameObject.transform.position = GameManager.instance.spawnPos;
-        
-
-        MapGenerator.instance.transform.Rotate(new Vector3(0, 45, 0));
-
-        SendLoading();
     }
 
     /// <summary>
     /// 맵생성이 끝낫음을 알려준다
     /// </summary>
-    public void SendInitEnd(string targetName)
+    public void SendInitEnd()
     {
         print("SendInitEnd()");
         JSONObject json = new JSONObject(JSONObject.Type.OBJECT);
-        json.AddField("target", targetName);
+        json.AddField("target", 1);
         socket.Emit("initEnd", json);
     }
 
@@ -742,11 +741,6 @@ public class NetworkManager : MonoBehaviour
         JSONObject json = e.data;
 
         //print("OnGenerator ");
-
-        if (!PlayerDataManager.instance.my.name.Equals(json.GetField("target").str))
-            return;
-
-        isMapLoaded = true;
 
         int x = (int)json.GetField("x").f;
         int y = (int)json.GetField("y").f;
@@ -760,11 +754,10 @@ public class NetworkManager : MonoBehaviour
     /// </summary>
     /// <param name="pos"></param>
     /// <param name="id"></param>
-    public void SendGenerator(string targetName, int x, int y, int id)
+    public void SendGenerator(int x, int y, int id)
     {
         JSONObject json = new JSONObject(JSONObject.Type.OBJECT);
 
-        json.AddField("target", targetName);
         json.AddField("x", x);
         json.AddField("y", y);
         json.AddField("id", id);
@@ -845,24 +838,20 @@ public class NetworkManager : MonoBehaviour
     {
         JSONObject json = e.data;
 
-        if (PlayerDataManager.instance.my.name.Equals(json.GetField("target").str) && !PlayerDataManager.instance.my.isHost)
-        {
-            GameManager.instance.spawnPos.y = json.GetField("sy").f;
-            PlayerDataManager.instance.my.controller.transform.position = GameManager.instance.spawnPos + new Vector3(Random.Range(-1f, 1f), 0, Random.Range(-1f, 1f));
-        }
+        GameManager.instance.spawnPos.y = json.GetField("sy").f;
+        PlayerDataManager.instance.my.controller.transform.position = GameManager.instance.spawnPos + new Vector3(Random.Range(-1f, 1f), 0, Random.Range(-1f, 1f));
+
     }
 
 
     /// <summary>
     /// 스폰좌표를 다른 클라이언트에게 보냅니다.
     /// </summary>
-    /// <param name="target">타겟</param>
     /// <param name="y">y 좌표</param>
-    public void SendSpawnPos(string target, float y)
+    public void SendSpawnPos(float y)
     {
         JSONObject json = new JSONObject(JSONObject.Type.OBJECT);
 
-        json.AddField("target", target);
         json.AddField("sy", y);
         //print("SendSpawnPos");
 
@@ -874,7 +863,9 @@ public class NetworkManager : MonoBehaviour
 
         LitJson.JsonData json = LitJson.JsonMapper.ToObject(e.data.ToString());
 
+        enterRoom.UpdateCountPlayer(enterRoom.userList.Count);
         enterRoom.userList.Clear();
+
 
         //print("userlist is work");
 
@@ -1049,13 +1040,17 @@ public class NetworkManager : MonoBehaviour
         float ry = json.GetField("ry").f;
         float rz = json.GetField("rz").f;
 
+
+        float h = json.GetField("h").f;
+        float v = json.GetField("v").f;
+
         bool isDirect = json.GetField("isDirect").b;
 
         User user = enterRoom.FindUserByName(name);
 
         if (user != null)
         {
-            user.controller.SetPosition(new Vector3(x, y, z), new Vector3(rx, ry, rz), isDirect);
+            user.controller.SetPosition(new Vector3(x, y, z), new Vector3(rx, ry, rz), h, v, isDirect);
         }
 
     }
@@ -1064,7 +1059,7 @@ public class NetworkManager : MonoBehaviour
     /// 움직인 좌표를 다른 클라이언트에게 보냅니다.
     /// </summary>
     /// <param name="pos">위치 Vector3</param>
-    public void SendPosition(Vector3 pos, Vector3 vel, bool isDirect)
+    public void SendPosition(Vector3 pos, Vector3 vel, float h, float v, bool isDirect)
     {
         JSONObject json = new JSONObject(JSONObject.Type.OBJECT);
 
@@ -1077,6 +1072,11 @@ public class NetworkManager : MonoBehaviour
         json.AddField("rx", vel.x);
         json.AddField("ry", vel.y);
         json.AddField("rz", vel.z);
+
+
+        json.AddField("h", h);
+        json.AddField("v", v);
+
 
         json.AddField("isDirect", isDirect);
 
@@ -1323,7 +1323,6 @@ public class NetworkManager : MonoBehaviour
         //포탈 오픈!
 
         UIInGame.instance.ViewGameState(name + " (이)가 포탈을 열었습니다. 어서 들어가세요!");
-        GameManager.instance.portal.isOpen = true;
         GameManager.instance.portal.Open();
 
 
@@ -1346,6 +1345,7 @@ public class NetworkManager : MonoBehaviour
     {
         JSONObject json = e.data;
         //포탈 닫힘!
+        GameManager.instance.portal.Close();
         UIInGame.instance.ViewGameState("포탈이 닫혔습니다. 마지막까지 살아남으세요.");
     }
 

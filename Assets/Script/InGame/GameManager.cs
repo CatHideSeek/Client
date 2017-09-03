@@ -107,7 +107,8 @@ public class GameManager : MonoBehaviour
 		{
             UIInGame.instance.ViewGameState("포탈이 생성되었습니다.");            
 			portalObject.SetActive(true);
-            portal.transform.rotation = Quaternion.identity;
+            portal.transform.parent = null;
+            portal.transform.rotation = Quaternion.Euler(0,180,0);
 			isPortalSet = true;
 		}
 

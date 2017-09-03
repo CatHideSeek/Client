@@ -148,7 +148,6 @@ public class Room
     public void AddUser(User user)
     {
         userList.Add(user);
-        UpdateCountPlayer(1);
     }
 
     /// <summary>
@@ -178,7 +177,7 @@ public class Room
     /// </summary>
     public void SetFirstBoss()
     {
-        int rand = Random.Range(0, maxPlayers);
+        int rand = Random.Range(0, countPlayers);
         NetworkManager.instance.SendRootTag(userList[rand].name);
         UIInGame.instance.ViewNotice(userList[rand].name + " (이)가 첫 술래가 되었습니다.");
     }

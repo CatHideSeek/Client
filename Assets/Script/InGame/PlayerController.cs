@@ -194,21 +194,15 @@ public class PlayerController : MonoBehaviour
         #region Sync
         syncTime += Time.deltaTime;
 
-        if (!user.isPlayer && currentPos != tr.position)
+        if (Mathf.Abs(h) > 0 || Mathf.Abs(v) > 0)
         {
-            tr.position = Vector3.Lerp(tr.position,currentPos + ((currentVel * syncTime) + (0.5f * currentVel * syncTime * syncTime)),Time.smoothDeltaTime * movLerpTime);//Vector3.Lerp(tr.position, currentPos, Time.deltaTime * movLerpTime);
             if (ani != null)
                 ani.SetBool("Run", true);
         }
         else
         {
-            if (!user.isPlayer && ani != null)
+            if (ani != null)
                 ani.SetBool("Run", false);
-        }
-
-        if (!user.isPlayer && currentRot != tr.rotation)
-        {
-            tr.rotation = Quaternion.Lerp(tr.rotation, currentRot, Time.deltaTime * rotLerpTime);
         }
 
         #endregion
@@ -222,7 +216,7 @@ public class PlayerController : MonoBehaviour
         if (ri.velocity.y < 1 && ri.velocity.y > -1)
             jumpCnt = 0;
 
-        if (user.isPlayer && (h != 0 || v != 0 || ri.velocity.y != 0) && (PlayerDataManager.instance.modelType == 2 || user.FindState((int)User.State.Change) == -1))
+        if ((PlayerDataManager.instance.modelType == 2 || user.FindState((int)User.State.Change) == -1))
             Move();
 
         if (groundCheck)
@@ -289,6 +283,9 @@ public class PlayerController : MonoBehaviour
 
     public void Jump()
     {
+        if (user.FindState((int)User.State.Change) != -1)
+            return;
+
         if (jumped)
             return;
 
@@ -309,32 +306,28 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     void Move()
     {
-
-        Vector3 targetDir = Vector3.zero;
-        Vector3 pos = new Vector3(h, 0, v).normalized;
-
-        if (pos.sqrMagnitude > 0.1f)
-            targetDir = pos.normalized;
-
-        if (targetDir != Vector3.zero)
-            tr.rotation = Quaternion.Slerp(tr.rotation, Quaternion.LookRotation(targetDir), Time.deltaTime * rotSpeed);
-
-        ri.velocity = new Vector3(0, ri.velocity.y, 0);
-        ri.velocity = new Vector3(h * movSpeed, ri.velocity.y, v * movSpeed);
-
-        if ((Mathf.Abs(h) + Mathf.Abs(v)) != 0 && ani != null)
+        if (user.isPlayer)
         {
-            ani.SetBool("Run", true);
-        }
-        else if(ani != null)
-            ani.SetBool("Run", false);
 
-        timeStamp += Time.deltaTime;
-        if (timeStamp > timeMaxStamp)
-        {
+            Vector3 targetDir = Vector3.zero;
+            Vector3 pos = new Vector3(h, 0, v).normalized;
+
+            if (pos.sqrMagnitude > 0.1f)
+                targetDir = pos.normalized;
+
+            if (targetDir != Vector3.zero)
+                tr.rotation = Quaternion.Slerp(tr.rotation, Quaternion.LookRotation(targetDir), Time.deltaTime * rotSpeed);
+
+            ri.velocity = new Vector3(0, ri.velocity.y, 0);
+            ri.velocity = new Vector3(h * movSpeed, ri.velocity.y, v * movSpeed);
+
+
             CheckPosition();
             CheckRotation();
-            timeStamp = 0;
+        }
+        else {
+            tr.position = Vector3.Lerp(tr.position, currentPos + ((currentVel * syncTime) + (0.5f * currentVel * syncTime * syncTime)), Time.deltaTime * movLerpTime);
+            tr.rotation = Quaternion.LerpUnclamped(tr.rotation,currentRot, Time.deltaTime * rotLerpTime);
         }
     }
 
@@ -347,7 +340,7 @@ public class PlayerController : MonoBehaviour
         if (oldPos != tr.position)
         {
             //이동 하였다고 socket 메세지 전송
-            NetworkManager.instance.SendPosition(oldPos, ri.velocity, false);
+            NetworkManager.instance.SendPosition(oldPos, ri.velocity, h, v, false);
             oldPos = tr.position;
         }
     }
@@ -360,9 +353,9 @@ public class PlayerController : MonoBehaviour
         //회전 하였는지 체크합니다.
         if (oldRot != tr.rotation)
         {
-            oldRot = tr.rotation;
             //회전 하였다고 socket 메세지 전송
             NetworkManager.instance.SendRotation(oldRot);
+            oldRot = tr.rotation;
         }
     }
 
@@ -370,7 +363,7 @@ public class PlayerController : MonoBehaviour
     /// 다른 플레이어의 위치를 세팅합니다.
     /// </summary>
     /// <param name="pos">위치 Vector3</param>
-    public void SetPosition(Vector3 pos, Vector3 vel, bool isDirect)
+    public void SetPosition(Vector3 pos, Vector3 vel, float h, float v, bool isDirect)
     {
         if (isDirect)
         {
@@ -381,11 +374,11 @@ public class PlayerController : MonoBehaviour
             currentVel = vel;
         }
 
+        SetAxis(h, v);
+
         syncTime = 0;
         syncDelay = Time.time - lastSyncTime;
         lastSyncTime = Time.time;
-
-
     }
 
 
@@ -447,7 +440,11 @@ public class PlayerController : MonoBehaviour
         else if (col.CompareTag("Fall") && user.isPlayer)
         {
             tr.position = GameManager.instance.spawnPos + new Vector3(Random.Range(-1f, 1f), 0, Random.Range(-1f, 1f));
-            NetworkManager.instance.SendPosition(tr.position, Vector3.zero, true);
+            NetworkManager.instance.SendPosition(tr.position, Vector3.zero, 0, 0, true);
+        }
+        else if (col.CompareTag("Notice") && user.isPlayer)
+        {
+            GameObject.FindGameObjectWithTag("UIManager").GetComponent<UILobby>().noticeAdder.SetActive(true);
         }
     }
 
@@ -462,7 +459,7 @@ public class PlayerController : MonoBehaviour
                     print("탈출");
                     clear = true;
                     NetworkManager.instance.SendEscape(user.name);
-                    
+
                 }
                 else if (user.isKeyHave)
                 {
